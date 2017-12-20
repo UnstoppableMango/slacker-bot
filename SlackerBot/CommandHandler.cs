@@ -47,7 +47,7 @@ namespace SlackerBot
                     await context.Channel.SendMessageAsync("It's \"Chrus\", friend");
                 } else if (msg.Content.Contains("Izaak")
                       || msg.Content.Contains("izaak")) {
-                    await context.Channel.SendMessageAsync("It's \"Greg\", friend");
+                    await context.Channel.SendMessageAsync("It's \"The Greg\", friend");
                 } else if (msg.Content.Contains("Stephanie")
                       || msg.Content.Contains("stephanie")
                       || msg.Content.Contains("Steph")
