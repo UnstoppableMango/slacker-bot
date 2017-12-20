@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackerBot", "SlackerBot\SlackerBot.csproj", "{8E4E92FE-7A02-4B77-99E7-1A114FFA4395}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E4E92FE-7A02-4B77-99E7-1A114FFA4395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4E92FE-7A02-4B77-99E7-1A114FFA4395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4E92FE-7A02-4B77-99E7-1A114FFA4395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4E92FE-7A02-4B77-99E7-1A114FFA4395}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E04B80F-FADC-4B11-8FC6-395953A09E20}
+	EndGlobalSection
+EndGlobal
