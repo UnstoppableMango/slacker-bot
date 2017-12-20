@@ -34,6 +34,25 @@ namespace SlackerBot
                     || msg.Content.Contains("Jacob")
                     || msg.Content.Contains("jacob")) {
                     await context.Channel.SendMessageAsync("It's \"Jakcbo\", friend");
+                } else if (msg.Content.Contains("Haley")
+                     || msg.Content.Contains("haley")) {
+                    await context.Channel.SendMessageAsync("It's \"Helee\", friend");
+                } else if (msg.Content.Contains("Kansas")
+                     || msg.Content.Contains("kansas")
+                     || msg.Content.Contains("Joe")
+                     || msg.Content.Contains("joe")) {
+                    await context.Channel.SendMessageAsync("It's \"Mr. Angry\", friend");
+                } else if (msg.Content.Contains("Chris")
+                     || msg.Content.Contains("chris")) {
+                    await context.Channel.SendMessageAsync("It's \"Chrus\", friend");
+                } else if (msg.Content.Contains("Izaak")
+                      || msg.Content.Contains("izaak")) {
+                    await context.Channel.SendMessageAsync("It's \"Greg\", friend");
+                } else if (msg.Content.Contains("Stephanie")
+                      || msg.Content.Contains("stephanie")
+                      || msg.Content.Contains("Steph")
+                      || msg.Content.Contains("steph")) {
+                    await context.Channel.SendMessageAsync("It's \"freshman\", friend");
                 }
             }
         }

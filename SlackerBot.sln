@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackerBot", "SlackerBot\SlackerBot.csproj", "{8E4E92FE-7A02-4B77-99E7-1A114FFA4395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlackerBot", "SlackerBot\SlackerBot.csproj", "{8E4E92FE-7A02-4B77-99E7-1A114FFA4395}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9545F4C4-65EA-4971-8E8B-0D642B2B1402}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
