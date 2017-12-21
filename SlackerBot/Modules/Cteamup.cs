@@ -22,7 +22,6 @@ namespace SlackerBot.Modules
                 int factor = 0;
                 getFactor(ref factor);
                 int spot = 0;
-                contents.RemoveAt(0);
 
                 while (contents.Count >= 0)
                 {
