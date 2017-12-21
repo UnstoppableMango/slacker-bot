@@ -23,7 +23,7 @@ namespace SlackerBot
             if (arg is SocketUserMessage msg) {
                 if (msg.Channel.Name.Contains("bot-testing-room")) {
                     var context = new SocketCommandContext(_client, msg);
-
+                    LanguageFilter filter = new LanguageFilter();
                     var argPos = 0;
                     if (msg.HasCharPrefix('!', ref argPos)) {
                         var result = await _service.ExecuteAsync(context, argPos);
@@ -54,6 +54,10 @@ namespace SlackerBot
                           || msg.Content.Contains("Steph")
                           || msg.Content.Contains("steph")) {
                         await context.Channel.SendMessageAsync("It's \"freshman\", friend");
+                    }
+                    if(!filter.CheckMessage(msg))
+                    {
+                        await context.Message.DeleteAsync(null);
                     }
                 }
             }
