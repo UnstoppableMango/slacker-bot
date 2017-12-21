@@ -10,11 +10,11 @@ namespace SlackerBot.Modules
     {
         //Attempts to put listed names onto Teams
         [Command("TeamUp")]
-        public async Task Teamup(IMessage msg)
+        public async Task Teamup(params string[] names)
         {
             try
             {
-                List<string> contents = new List<string>(msg.Content.Split(" "));
+                List<string> contents = new List<string>(names);
 
 
                 string Team1 = "Team 1: ";
