@@ -15,5 +15,12 @@ namespace SlackerBot.Modules
         public async Task TestScope() {
             await Context.Channel.SendMessageAsync(Context.Message.Content.TrimStart('!'));
         }
+
+
+        [Command("?Test")]
+        public async Task Tuphelp()
+        {
+            await Context.Channel.SendMessageAsync("Tells you if shits workin yo");
+        }
     }
 }

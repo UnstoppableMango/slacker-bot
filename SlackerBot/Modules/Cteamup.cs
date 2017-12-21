@@ -22,7 +22,7 @@ namespace SlackerBot.Modules
                 getFactor(ref factor);
                 int spot = 0;
 
-                while (contents.Count >= 0)
+                while (contents.Count > 0)
                 {
                     spot = factor % contents.Count;
                     Team1 += contents[spot] + " ";
@@ -46,7 +46,7 @@ namespace SlackerBot.Modules
 
 
         //The help text for command
-        [Command("TeamUpHelp")]
+        [Command("?TeamUp")]
         public async Task Tuphelp()
         {
             await Context.Channel.SendMessageAsync("To use the team up feature: type in the players names. Sepparate Names with a <Space>.");
@@ -54,7 +54,7 @@ namespace SlackerBot.Modules
 
         private void getFactor(ref int factor)
         {
-            factor  += (System.DateTime.Now.Second * System.DateTime.Now.Day) / System.DateTime.Now.Year;
+            factor  += (System.DateTime.Now.Second * System.DateTime.Now.Day);
         }
     }
 }

@@ -40,5 +40,11 @@ namespace SlackerBot.Modules
             }
             await Context.Channel.SendMessageAsync(msg);
         }
+
+        [Command("?Day")]
+        public async Task Tuphelp()
+        {
+            await Context.Channel.SendMessageAsync("Tells you the day mah dude");
+        }
     }
 }

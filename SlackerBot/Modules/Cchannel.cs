@@ -20,6 +20,12 @@ namespace SlackerBot.Modules
 
             await Context.Channel.SendMessageAsync(msg);
         }
+
+        [Command("?Channel")]
+        public async Task Tuphelp()
+        {
+            await Context.Channel.SendMessageAsync("Gives you some links to all the slackers channels!");
+        }
     }
 } 
  
