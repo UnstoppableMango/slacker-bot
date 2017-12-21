@@ -1,4 +1,5 @@
 ﻿using Discord.Commands;
+using System;
 using System.Threading.Tasks;
 
 namespace SlackerBot.Modules
@@ -8,9 +9,9 @@ namespace SlackerBot.Modules
         [Command("Day")]
         public async Task Daymsg()
         {
-            string msg = "";
-            System.DateTime day = new System.DateTime();
-            switch (day.DayOfWeek)
+            var msg = "";
+            var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+            switch (TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone).DayOfWeek)
             {
                 case System.DayOfWeek.Sunday:
                     msg = "https://www.youtube.com/watch?v=iVCSx0S9Upg";
