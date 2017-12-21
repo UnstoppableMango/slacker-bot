@@ -15,8 +15,10 @@ namespace SlackerBot
             foreach (var mod in _textModules) {
                 var type = mod.GetType();
                 foreach (var method in type.GetMethods()) {
-                    foreach (ProcessTextAttribute attr in method.GetCustomAttributes(false)) {
-                        _attributes.Add(attr, mod);
+                    foreach (var attr in method.GetCustomAttributes(false)) {
+                        if (attr is ProcessTextAttribute pattr) {
+                            _attributes.Add(pattr, mod);
+                        }
                     }
                 }
             }

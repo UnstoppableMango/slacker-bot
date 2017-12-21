@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 
 namespace SlackerBot.Modules
 {
-    public class DefaultLanguageProcessor : ModuleBase<SocketCommandContext>
+    public class DefaultLanguageProcessor : TextModuleBase<SocketCommandContext>
     {
+        [ProcessText]
         public async Task ProcessLanguage(string msg) {
             if (msg.Contains("Jake")
                     || msg.Contains("jake")
