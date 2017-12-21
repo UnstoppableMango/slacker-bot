@@ -11,11 +11,15 @@ namespace SlackerBot
 {
     class LanguageFilter
     {
+        String[] KeyWords = new String[] {"asdf", "School"};
         //Checks message for key words, returns true if all clear
         public bool CheckMessage(SocketUserMessage msg)
         {
-            if (msg.Content.Contains("asdf"))
-                return false;
+            for (int i = 0; i < KeyWords.Length; i++)
+            {
+                if (msg.Content.Contains("asdf"))
+                    return false;
+            }
             return true;
         }
     }

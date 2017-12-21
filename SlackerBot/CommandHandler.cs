@@ -58,6 +58,7 @@ namespace SlackerBot
                     if(!filter.CheckMessage(msg))
                     {
                         await context.Message.DeleteAsync(null);
+                        await context.Channel.SendMessageAsync("Watch it pal...");
                     }
                 }
             }
