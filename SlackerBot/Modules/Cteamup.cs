@@ -16,7 +16,6 @@ namespace SlackerBot.Modules
             {
                 List<string> contents = new List<string>(names);
 
-
                 string Team1 = "Team 1: ";
                 string Team2 = "Team 2: ";
                 int factor = 0;
@@ -28,16 +27,16 @@ namespace SlackerBot.Modules
                     spot = factor % contents.Count;
                     Team1 += contents[spot] + " ";
                     contents.RemoveAt(spot);
-                    if (contents.Count >= 0)
+                    if (contents.Count > 0)
                     {
                         getFactor(ref factor);
                         spot = factor % contents.Count;
                         Team2 += contents[spot] + " ";
                         contents.RemoveAt(spot);
                     }
-                    await Context.Channel.SendMessageAsync(Team1);
-                    await Context.Channel.SendMessageAsync(Team2);
                 }
+                await Context.Channel.SendMessageAsync(Team1);
+                await Context.Channel.SendMessageAsync(Team2);
             }
             catch(Exception e)
             {
