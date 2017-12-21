@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SlackerBot.Modules
 {
-    class Cteamup : ModuleBase<SocketCommandContext>
+    public class Cteamup : ModuleBase<SocketCommandContext>
     {
         //Attempts to put listed names onto Teams
         [Command("TeamUp")]
@@ -45,6 +45,8 @@ namespace SlackerBot.Modules
             }
         }
 
+
+        //The help text for command
         [Command("TeamUpHelp")]
         public async Task Tuphelp()
         {
