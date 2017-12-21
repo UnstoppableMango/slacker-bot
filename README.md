@@ -11,3 +11,5 @@ Uses .NET Core 2.0
 [Startup Tutorial](https://www.youtube.com/watch?v=egq26JwyJkc)
 
 [Bot Permissions](https://discordapp.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags)
+
+[Discord.NET API](https://discord.foxbot.me/docs/)
