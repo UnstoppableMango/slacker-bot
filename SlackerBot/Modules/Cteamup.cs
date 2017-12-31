@@ -22,7 +22,7 @@ namespace SlackerBot.Modules
                 getFactor(ref factor);
                 int spot = 0;
 
-                while (contents.Count >= 0)
+                while (contents.Count > 0)
                 {
                     spot = factor % contents.Count;
                     Team1 += contents[spot] + " ";

@@ -5,6 +5,14 @@ namespace SlackerBot.Modules
 {
     public class DefaultLanguageProcessor : TextModuleBase<SocketCommandContext>
     {
+        public override bool RunIf(string msg) {
+            return true;
+        }
+
+        public async override Task Execute() {
+            await ProcessLanguage(Context.Message.Content);
+        }
+
         [ProcessText]
         public async Task ProcessLanguage(string msg) {
             if (msg.Contains("Jake")
