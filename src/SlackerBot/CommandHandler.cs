@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using System;
+using Discord.Commands;
 using Discord.WebSocket;
 using SlackerBot.Settings;
 using System.Collections;
@@ -24,7 +25,8 @@ namespace SlackerBot
             _client = client;
             _client.MessageReceived += _client_MessageReceived;
             _commandService = service;
-            _commandService.AddModulesAsync(Assembly.GetEntryAssembly());
+            // TODO: Add service provider as arg. Or something. Idk it's been a while
+            // _commandService.AddModulesAsync(Assembly.GetEntryAssembly());
             _textService = textService;
             _settings = settings;
         }
@@ -42,7 +44,8 @@ namespace SlackerBot
 
                 var argPos = 0;
                 if (msg.HasCharPrefix('!', ref argPos)) {
-                    var result = await _commandService.ExecuteAsync(context, argPos);
+                    // TODO: Don't pass null for the service provider
+                    var result = await _commandService.ExecuteAsync(context, argPos, null, MultiMatchHandling.Best);
                     if (!result.IsSuccess && result.Error != CommandError.UnknownCommand) {
                         // Failed usage of command, we want to respond
                         await context.Channel.SendMessageAsync(result.ErrorReason);

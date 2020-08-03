@@ -24,9 +24,9 @@ namespace SlackerBot
             }
         }
 
-        public async Task<IResult> ExecuteAsync(SocketCommandContext context) {
+        public Task<IResult> ExecuteAsync(SocketCommandContext context) {
             var result = ExecuteResult.FromSuccess();
-            return result;
+            return Task.FromResult<IResult>(result);
         }
     }
 }
