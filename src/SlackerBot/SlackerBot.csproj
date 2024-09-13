@@ -5,7 +5,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="2.4.0" />
+    <PackageReference Include="Discord.Net" Version="3.16.0" />
     <PackageReference Include="SimpleInjector" Version="5.4.2" />
   </ItemGroup>
   
