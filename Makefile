@@ -12,7 +12,7 @@ load: bin/stream-image.sh
 	${CURDIR}/$< | $(PODMAN) load
 
 up: load
-	$(PODMAN) compose up
+	$(PODMAN) compose up --force-recreate
 
 format fmt:
 	nix fmt

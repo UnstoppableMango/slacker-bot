@@ -49,7 +49,7 @@
             created = "now";
 
             contents = [
-              pkgs.dockerTools.caCertificates
+              pkgs.cacert
               (pkgs.buildEnv {
                 name = "image-root";
                 paths = [ slacker-bot ];

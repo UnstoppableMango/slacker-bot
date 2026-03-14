@@ -32,9 +32,7 @@ func main() {
 	}
 
 	log.Info("GetGuild",
-		"id", rg.ID,
-		"name", rg.Name,
-		"banner", rg.Banner,
-		"description", rg.Description,
+		"guild", rg.Name,
+		"url", *rg.IconURL(),
 	)
 }
