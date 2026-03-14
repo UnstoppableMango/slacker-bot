@@ -17,6 +17,9 @@ up: load
 format fmt:
 	nix fmt
 
+check:
+	nix flake check
+
 tidy: go.sum gomod2nix.toml
 
 update:

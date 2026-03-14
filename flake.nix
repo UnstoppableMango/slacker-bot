@@ -91,6 +91,7 @@
             actionlint.enable = true;
             nixfmt.enable = true;
             jsonfmt.enable = true;
+            yamllint.enable = true;
           };
         };
     };
