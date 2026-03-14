@@ -52,6 +52,30 @@ func (b Backup) Write(ctx context.Context, r rest.Rest, fsys fs.FS) error {
 		return fmt.Errorf("persisting splash: %w", err)
 	}
 
+	members, err := r.GetMembers(b.GuildId, 10, snowflake.ID(0))
+	if err != nil {
+		return fmt.Errorf("get members: %w", err)
+	}
+
+	log.Info("Got members", "count", len(members))
+	for _, m := range members {
+		if err = tryPersist(ctx, m.User.AvatarURL(), fsys); err != nil {
+			return fmt.Errorf("persisting avatar for user %s: %w", m.User.Username, err)
+		}
+		if err = tryPersist(ctx, m.User.BannerURL(), fsys); err != nil {
+			return fmt.Errorf("persisting banner for user %s: %w", m.User.Username, err)
+		}
+		if err = tryPersist(ctx, m.User.AvatarDecorationURL(), fsys); err != nil {
+			return fmt.Errorf("persisting display avatar for user %s: %w", m.User.Username, err)
+		}
+		if err = tryPersist(ctx, new(m.User.DefaultAvatarURL()), fsys); err != nil {
+			return fmt.Errorf("persisting default avatar for user %s: %w", m.User.Username, err)
+		}
+		if err = tryPersist(ctx, m.User.AvatarURL(), fsys); err != nil {
+			return fmt.Errorf("persisting avatar for user %s: %w", m.User.Username, err)
+		}
+	}
+
 	return nil
 }
 

@@ -8,6 +8,9 @@ GO_SRC != $(FIND) . -path '*.go' -printf '%P\n'
 build: bin/slacker-bot
 docker: bin/image.tar.gz
 
+run:
+	$(GO) run .
+
 load: bin/stream-image.sh
 	${CURDIR}/$< | $(PODMAN) load
 

@@ -39,6 +39,7 @@
             pname = "slacker-bot";
             inherit version;
 
+            go = pkgs.go_1_26;
             src = lib.cleanSource ./.;
             modules = ./gomod2nix.toml;
           };
@@ -70,7 +71,7 @@
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
               gnumake
-              go
+              go_1_26
               gomod2nix
               nixfmt
               podman
@@ -80,7 +81,7 @@
             ];
 
             FIND = "${pkgs.uutils-findutils}/bin/find";
-            GO = "${pkgs.go}/bin/go";
+            GO = "${pkgs.go_1_26}/bin/go";
             GOMOD2NIX = "${gomod2nix}/bin/gomod2nix";
             PODMAN = "${pkgs.podman}/bin/podman";
 
