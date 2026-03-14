@@ -34,17 +34,37 @@
         let
           inherit (inputs'.gomod2nix.legacyPackages) gomod2nix buildGoApplication;
 
+          version = "0.0.1";
           slacker-bot = buildGoApplication {
             pname = "slacker-bot";
-            version = "0.0.1";
-            src = lib.cleanSource ./.;
+            inherit version;
 
+            src = lib.cleanSource ./.;
             modules = ./gomod2nix.toml;
+          };
+
+          ctr = pkgs.dockerTools.streamLayeredImage {
+            name = "slacker-bot";
+            tag = version;
+            created = "now";
+
+            contents = [
+              pkgs.dockerTools.caCertificates
+              (pkgs.buildEnv {
+                name = "image-root";
+                paths = [ slacker-bot ];
+                pathsToLink = [ "/bin" ];
+              })
+            ];
+
+            config = {
+              Entrypoint = [ "/bin/slacker-bot" ];
+            };
           };
         in
         {
           packages = {
-            inherit slacker-bot;
+            inherit slacker-bot ctr;
             default = slacker-bot;
           };
 
@@ -53,17 +73,24 @@
               gnumake
               go
               gomod2nix
-              nixfmt
+              podman
+              podman-compose
+              skopeo
               uutils-findutils
             ];
 
             FIND = "${pkgs.uutils-findutils}/bin/find";
             GO = "${pkgs.go}/bin/go";
-            NIXFMT = "${pkgs.nixfmt}/bin/nixfmt";
+            GOMOD2NIX = "${gomod2nix}/bin/gomod2nix";
+            PODMAN = "${pkgs.podman}/bin/podman";
+
+            PODMAN_COMPOSE_WARNING_LOGS = "false";
           };
 
-          treefmt = {
-            programs.nixfmt.enable = true;
+          treefmt.programs = {
+            actionlint.enable = true;
+            nixfmt.enable = true;
+            jsonfmt.enable = true;
           };
         };
     };

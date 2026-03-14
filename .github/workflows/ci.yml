@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6.0.2
+
+      - uses: cachix/install-nix-action@v31.9.1
+        with:
+          github_access_token: ${{ github.token }}
+
+      - run: nix flake check
+
+  container:
+    name: Docker
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v6.0.2
+
+      - uses: redhat-actions/podman-install@main
+        with:
+          github-token: ${{ github.token }}
+
+      - uses: cachix/install-nix-action@v31.9.1
+        with:
+          github_access_token: ${{ github.token }}
+
+      - uses: cachix/cachix-action@v16
+        with:
+          name: unstoppablemango
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - run: nix build .#ctr
+      - run: podman load --input result
+
+      - id: meta
+        uses: docker/metadata-action@v5.10.0
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+
+      - run: |
+          TAGS="$(echo '${{ steps.meta.outputs.tags }}' | tr '\n' ' ')"
+          echo "TAGS=$TAGS" >> "$GITHUB_ENV"
+
+      - run: |
+          VERSION="$(nix run .#version)"
+          podman image tag "fenced:${VERSION}" ${{ env.TAGS }}
+
+      - uses: redhat-actions/podman-login@v1
+        if: github.ref_name == 'main'
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+
+      - if: github.ref_name == 'main'
+        run: podman push ${{ env.TAGS }}
+
+  clean:
+    name: Clean
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v6.0.2
+
+      - run: make deps
+      - run: git diff --exit-code
