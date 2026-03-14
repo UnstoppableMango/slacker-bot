@@ -89,8 +89,9 @@
 
           treefmt.programs = {
             actionlint.enable = true;
-            nixfmt.enable = true;
+            gofmt.enable = true;
             jsonfmt.enable = true;
+            nixfmt.enable = true;
             yamllint.enable = true;
           };
         };
