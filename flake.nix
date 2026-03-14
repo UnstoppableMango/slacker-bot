@@ -46,7 +46,6 @@
           ctr = pkgs.dockerTools.streamLayeredImage {
             name = "slacker-bot";
             tag = version;
-            created = "now";
 
             contents = [
               pkgs.cacert
@@ -73,6 +72,7 @@
               gnumake
               go
               gomod2nix
+              nixfmt
               podman
               podman-compose
               skopeo

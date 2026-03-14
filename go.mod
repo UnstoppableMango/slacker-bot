@@ -6,7 +6,9 @@ require (
 	github.com/charmbracelet/log v1.0.0
 	github.com/disgoorg/disgo v0.19.2
 	github.com/disgoorg/snowflake/v2 v2.0.3
+	github.com/google/uuid v1.6.0
 	github.com/unmango/go v0.15.1
+	github.com/unstoppablemango/ihfs v0.0.1
 )
 
 require (

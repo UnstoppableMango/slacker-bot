@@ -22,6 +22,9 @@ check:
 
 tidy: go.sum gomod2nix.toml
 
+import:
+	$(GOMOD2NIX) import
+
 update:
 	nix flake update
 	$(GO) get -u ./...

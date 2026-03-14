@@ -53,6 +53,10 @@ schema = 3
     version = 'v0.6.1'
     hash = 'sha256-+gUGmdR/QOsB9qKESLrsbq6tK2VssNT/kDbRFpgrZL4='
 
+  [mod.'github.com/google/uuid']
+    version = 'v1.6.0'
+    hash = 'sha256-VWl9sqUzdOuhW0KzQlv0gwwUQClYkmZwSydHG2sALYw='
+
   [mod.'github.com/gorilla/websocket']
     version = 'v1.5.3'
     hash = 'sha256-vTIGEFMEi+30ZdO6ffMNJ/kId6pZs5bbyqov8xe9BM0='
@@ -88,6 +92,10 @@ schema = 3
   [mod.'github.com/unmango/go']
     version = 'v0.15.1'
     hash = 'sha256-iaw6AuhEYu7LdLQnOL6Zmu9kp41nRwaz+lpeZ5ihRww='
+
+  [mod.'github.com/unstoppablemango/ihfs']
+    version = 'v0.0.1'
+    hash = 'sha256-R38Gnl5xzWnIJN3GmL50HblOO/avd120OKYZo5/j7N0='
 
   [mod.'github.com/xo/terminfo']
     version = 'v0.0.0-20220910002029-abceb7e1c41e'

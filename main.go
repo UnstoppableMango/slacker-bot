@@ -8,31 +8,28 @@ import (
 	"github.com/charmbracelet/log"
 	"github.com/disgoorg/disgo"
 	"github.com/disgoorg/disgo/bot"
-	"github.com/disgoorg/disgo/rest"
 	"github.com/disgoorg/snowflake/v2"
 	"github.com/unmango/go/cli"
+	"github.com/unstoppablemango/ihfs/osfs"
+	"github.com/unstoppablemango/slacker-bot/pkg/backup"
 )
 
+var logger = log.New(os.Stdout)
+
 func main() {
-	log := log.New(os.Stdout)
 	client, err := disgo.New(os.Getenv("DISCORD_BOT_TOKEN"),
-		bot.WithLogger(slog.New(log)),
+		bot.WithLogger(slog.New(logger)),
 	)
 	if err != nil {
 		cli.Fail(err)
 	}
 
-	ctx := context.Background()
+	ctx := log.WithContext(context.Background(), logger)
 	id := snowflake.GetEnv("DISCORD_GUILD_ID")
-	log.Infof("GUILD_ID: %s", id)
+	fsys := osfs.New()
+	b := backup.New(id)
 
-	rg, err := client.Rest.GetGuild(id, false, rest.WithCtx(ctx))
-	if err != nil {
-		cli.Fail("GetGuild:", err)
+	if err := b.Write(ctx, client.Rest, fsys); err != nil {
+		cli.Fail(err)
 	}
-
-	log.Info("GetGuild",
-		"guild", rg.Name,
-		"url", *rg.IconURL(),
-	)
 }
