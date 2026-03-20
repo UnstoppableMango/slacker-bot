@@ -4,14 +4,13 @@
 // 	protoc        (unknown)
 // source: dev/unmango/discord/backup/v1alpha1/backup.proto
 
-package gen
+package discord
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -24,14 +23,16 @@ const (
 
 // BackupMetadata holds information about a backup snapshot itself.
 type BackupMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BackupId      *string                `protobuf:"bytes,1,opt,name=backup_id,json=backupId" json:"backup_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt" json:"created_at,omitempty"`
-	GuildId       *string                `protobuf:"bytes,3,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
-	SchemaVersion *string                `protobuf:"bytes,4,opt,name=schema_version,json=schemaVersion" json:"schema_version,omitempty"`
-	ToolVersion   *string                `protobuf:"bytes,5,opt,name=tool_version,json=toolVersion" json:"tool_version,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_BackupId      *string                `protobuf:"bytes,1,opt,name=backup_id,json=backupId"`
+	xxx_hidden_CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt"`
+	xxx_hidden_GuildId       *string                `protobuf:"bytes,3,opt,name=guild_id,json=guildId"`
+	xxx_hidden_SchemaVersion *string                `protobuf:"bytes,4,opt,name=schema_version,json=schemaVersion"`
+	xxx_hidden_ToolVersion   *string                `protobuf:"bytes,5,opt,name=tool_version,json=toolVersion"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *BackupMetadata) Reset() {
@@ -59,64 +60,188 @@ func (x *BackupMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BackupMetadata.ProtoReflect.Descriptor instead.
-func (*BackupMetadata) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *BackupMetadata) GetBackupId() string {
-	if x != nil && x.BackupId != nil {
-		return *x.BackupId
+	if x != nil {
+		if x.xxx_hidden_BackupId != nil {
+			return *x.xxx_hidden_BackupId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *BackupMetadata) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.xxx_hidden_CreatedAt
 	}
 	return nil
 }
 
 func (x *BackupMetadata) GetGuildId() string {
-	if x != nil && x.GuildId != nil {
-		return *x.GuildId
+	if x != nil {
+		if x.xxx_hidden_GuildId != nil {
+			return *x.xxx_hidden_GuildId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *BackupMetadata) GetSchemaVersion() string {
-	if x != nil && x.SchemaVersion != nil {
-		return *x.SchemaVersion
+	if x != nil {
+		if x.xxx_hidden_SchemaVersion != nil {
+			return *x.xxx_hidden_SchemaVersion
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *BackupMetadata) GetToolVersion() string {
-	if x != nil && x.ToolVersion != nil {
-		return *x.ToolVersion
+	if x != nil {
+		if x.xxx_hidden_ToolVersion != nil {
+			return *x.xxx_hidden_ToolVersion
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *BackupMetadata) SetBackupId(v string) {
+	x.xxx_hidden_BackupId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+}
+
+func (x *BackupMetadata) SetCreatedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreatedAt = v
+}
+
+func (x *BackupMetadata) SetGuildId(v string) {
+	x.xxx_hidden_GuildId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+}
+
+func (x *BackupMetadata) SetSchemaVersion(v string) {
+	x.xxx_hidden_SchemaVersion = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *BackupMetadata) SetToolVersion(v string) {
+	x.xxx_hidden_ToolVersion = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+}
+
+func (x *BackupMetadata) HasBackupId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *BackupMetadata) HasCreatedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreatedAt != nil
+}
+
+func (x *BackupMetadata) HasGuildId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *BackupMetadata) HasSchemaVersion() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *BackupMetadata) HasToolVersion() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *BackupMetadata) ClearBackupId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_BackupId = nil
+}
+
+func (x *BackupMetadata) ClearCreatedAt() {
+	x.xxx_hidden_CreatedAt = nil
+}
+
+func (x *BackupMetadata) ClearGuildId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_GuildId = nil
+}
+
+func (x *BackupMetadata) ClearSchemaVersion() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_SchemaVersion = nil
+}
+
+func (x *BackupMetadata) ClearToolVersion() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_ToolVersion = nil
+}
+
+type BackupMetadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	BackupId      *string
+	CreatedAt     *timestamppb.Timestamp
+	GuildId       *string
+	SchemaVersion *string
+	ToolVersion   *string
+}
+
+func (b0 BackupMetadata_builder) Build() *BackupMetadata {
+	m0 := &BackupMetadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.BackupId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		x.xxx_hidden_BackupId = b.BackupId
+	}
+	x.xxx_hidden_CreatedAt = b.CreatedAt
+	if b.GuildId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		x.xxx_hidden_GuildId = b.GuildId
+	}
+	if b.SchemaVersion != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		x.xxx_hidden_SchemaVersion = b.SchemaVersion
+	}
+	if b.ToolVersion != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_ToolVersion = b.ToolVersion
+	}
+	return m0
+}
+
 // ServerBackup is a complete snapshot of a Discord guild.
 type ServerBackup struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Metadata        *BackupMetadata        `protobuf:"bytes,1,opt,name=metadata" json:"metadata,omitempty"`
-	Guild           *Guild                 `protobuf:"bytes,2,opt,name=guild" json:"guild,omitempty"`
-	Channels        []*Channel             `protobuf:"bytes,3,rep,name=channels" json:"channels,omitempty"`
-	Roles           []*Role                `protobuf:"bytes,4,rep,name=roles" json:"roles,omitempty"`
-	Members         []*Member              `protobuf:"bytes,5,rep,name=members" json:"members,omitempty"`
-	Users           []*User                `protobuf:"bytes,6,rep,name=users" json:"users,omitempty"` // deduplicated roster; all other messages reference by user_id
-	Emojis          []*Emoji               `protobuf:"bytes,7,rep,name=emojis" json:"emojis,omitempty"`
-	Stickers        []*Sticker             `protobuf:"bytes,8,rep,name=stickers" json:"stickers,omitempty"`
-	Webhooks        []*Webhook             `protobuf:"bytes,9,rep,name=webhooks" json:"webhooks,omitempty"`
-	ScheduledEvents []*ScheduledEvent      `protobuf:"bytes,10,rep,name=scheduled_events,json=scheduledEvents" json:"scheduled_events,omitempty"`
-	AutoModRules    []*AutoModRule         `protobuf:"bytes,11,rep,name=auto_mod_rules,json=autoModRules" json:"auto_mod_rules,omitempty"`
-	Invites         []*Invite              `protobuf:"bytes,12,rep,name=invites" json:"invites,omitempty"`
-	ChannelMessages []*ChannelMessages     `protobuf:"bytes,13,rep,name=channel_messages,json=channelMessages" json:"channel_messages,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Metadata        *BackupMetadata        `protobuf:"bytes,1,opt,name=metadata"`
+	xxx_hidden_Guild           *Guild                 `protobuf:"bytes,2,opt,name=guild"`
+	xxx_hidden_Channels        *[]*Channel            `protobuf:"bytes,3,rep,name=channels"`
+	xxx_hidden_Roles           *[]*Role               `protobuf:"bytes,4,rep,name=roles"`
+	xxx_hidden_Members         *[]*Member             `protobuf:"bytes,5,rep,name=members"`
+	xxx_hidden_Users           *[]*User               `protobuf:"bytes,6,rep,name=users"`
+	xxx_hidden_Emojis          *[]*Emoji              `protobuf:"bytes,7,rep,name=emojis"`
+	xxx_hidden_Stickers        *[]*Sticker            `protobuf:"bytes,8,rep,name=stickers"`
+	xxx_hidden_Webhooks        *[]*Webhook            `protobuf:"bytes,9,rep,name=webhooks"`
+	xxx_hidden_ScheduledEvents *[]*ScheduledEvent     `protobuf:"bytes,10,rep,name=scheduled_events,json=scheduledEvents"`
+	xxx_hidden_AutoModRules    *[]*AutoModRule        `protobuf:"bytes,11,rep,name=auto_mod_rules,json=autoModRules"`
+	xxx_hidden_Invites         *[]*Invite             `protobuf:"bytes,12,rep,name=invites"`
+	xxx_hidden_ChannelMessages *[]*ChannelMessages    `protobuf:"bytes,13,rep,name=channel_messages,json=channelMessages"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ServerBackup) Reset() {
@@ -144,100 +269,229 @@ func (x *ServerBackup) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ServerBackup.ProtoReflect.Descriptor instead.
-func (*ServerBackup) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ServerBackup) GetMetadata() *BackupMetadata {
 	if x != nil {
-		return x.Metadata
+		return x.xxx_hidden_Metadata
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetGuild() *Guild {
 	if x != nil {
-		return x.Guild
+		return x.xxx_hidden_Guild
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetChannels() []*Channel {
 	if x != nil {
-		return x.Channels
+		if x.xxx_hidden_Channels != nil {
+			return *x.xxx_hidden_Channels
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetRoles() []*Role {
 	if x != nil {
-		return x.Roles
+		if x.xxx_hidden_Roles != nil {
+			return *x.xxx_hidden_Roles
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetMembers() []*Member {
 	if x != nil {
-		return x.Members
+		if x.xxx_hidden_Members != nil {
+			return *x.xxx_hidden_Members
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetUsers() []*User {
 	if x != nil {
-		return x.Users
+		if x.xxx_hidden_Users != nil {
+			return *x.xxx_hidden_Users
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetEmojis() []*Emoji {
 	if x != nil {
-		return x.Emojis
+		if x.xxx_hidden_Emojis != nil {
+			return *x.xxx_hidden_Emojis
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetStickers() []*Sticker {
 	if x != nil {
-		return x.Stickers
+		if x.xxx_hidden_Stickers != nil {
+			return *x.xxx_hidden_Stickers
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetWebhooks() []*Webhook {
 	if x != nil {
-		return x.Webhooks
+		if x.xxx_hidden_Webhooks != nil {
+			return *x.xxx_hidden_Webhooks
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetScheduledEvents() []*ScheduledEvent {
 	if x != nil {
-		return x.ScheduledEvents
+		if x.xxx_hidden_ScheduledEvents != nil {
+			return *x.xxx_hidden_ScheduledEvents
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetAutoModRules() []*AutoModRule {
 	if x != nil {
-		return x.AutoModRules
+		if x.xxx_hidden_AutoModRules != nil {
+			return *x.xxx_hidden_AutoModRules
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetInvites() []*Invite {
 	if x != nil {
-		return x.Invites
+		if x.xxx_hidden_Invites != nil {
+			return *x.xxx_hidden_Invites
+		}
 	}
 	return nil
 }
 
 func (x *ServerBackup) GetChannelMessages() []*ChannelMessages {
 	if x != nil {
-		return x.ChannelMessages
+		if x.xxx_hidden_ChannelMessages != nil {
+			return *x.xxx_hidden_ChannelMessages
+		}
 	}
 	return nil
+}
+
+func (x *ServerBackup) SetMetadata(v *BackupMetadata) {
+	x.xxx_hidden_Metadata = v
+}
+
+func (x *ServerBackup) SetGuild(v *Guild) {
+	x.xxx_hidden_Guild = v
+}
+
+func (x *ServerBackup) SetChannels(v []*Channel) {
+	x.xxx_hidden_Channels = &v
+}
+
+func (x *ServerBackup) SetRoles(v []*Role) {
+	x.xxx_hidden_Roles = &v
+}
+
+func (x *ServerBackup) SetMembers(v []*Member) {
+	x.xxx_hidden_Members = &v
+}
+
+func (x *ServerBackup) SetUsers(v []*User) {
+	x.xxx_hidden_Users = &v
+}
+
+func (x *ServerBackup) SetEmojis(v []*Emoji) {
+	x.xxx_hidden_Emojis = &v
+}
+
+func (x *ServerBackup) SetStickers(v []*Sticker) {
+	x.xxx_hidden_Stickers = &v
+}
+
+func (x *ServerBackup) SetWebhooks(v []*Webhook) {
+	x.xxx_hidden_Webhooks = &v
+}
+
+func (x *ServerBackup) SetScheduledEvents(v []*ScheduledEvent) {
+	x.xxx_hidden_ScheduledEvents = &v
+}
+
+func (x *ServerBackup) SetAutoModRules(v []*AutoModRule) {
+	x.xxx_hidden_AutoModRules = &v
+}
+
+func (x *ServerBackup) SetInvites(v []*Invite) {
+	x.xxx_hidden_Invites = &v
+}
+
+func (x *ServerBackup) SetChannelMessages(v []*ChannelMessages) {
+	x.xxx_hidden_ChannelMessages = &v
+}
+
+func (x *ServerBackup) HasMetadata() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Metadata != nil
+}
+
+func (x *ServerBackup) HasGuild() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Guild != nil
+}
+
+func (x *ServerBackup) ClearMetadata() {
+	x.xxx_hidden_Metadata = nil
+}
+
+func (x *ServerBackup) ClearGuild() {
+	x.xxx_hidden_Guild = nil
+}
+
+type ServerBackup_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Metadata        *BackupMetadata
+	Guild           *Guild
+	Channels        []*Channel
+	Roles           []*Role
+	Members         []*Member
+	Users           []*User
+	Emojis          []*Emoji
+	Stickers        []*Sticker
+	Webhooks        []*Webhook
+	ScheduledEvents []*ScheduledEvent
+	AutoModRules    []*AutoModRule
+	Invites         []*Invite
+	ChannelMessages []*ChannelMessages
+}
+
+func (b0 ServerBackup_builder) Build() *ServerBackup {
+	m0 := &ServerBackup{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Metadata = b.Metadata
+	x.xxx_hidden_Guild = b.Guild
+	x.xxx_hidden_Channels = &b.Channels
+	x.xxx_hidden_Roles = &b.Roles
+	x.xxx_hidden_Members = &b.Members
+	x.xxx_hidden_Users = &b.Users
+	x.xxx_hidden_Emojis = &b.Emojis
+	x.xxx_hidden_Stickers = &b.Stickers
+	x.xxx_hidden_Webhooks = &b.Webhooks
+	x.xxx_hidden_ScheduledEvents = &b.ScheduledEvents
+	x.xxx_hidden_AutoModRules = &b.AutoModRules
+	x.xxx_hidden_Invites = &b.Invites
+	x.xxx_hidden_ChannelMessages = &b.ChannelMessages
+	return m0
 }
 
 var File_dev_unmango_discord_backup_v1alpha1_backup_proto protoreflect.FileDescriptor
@@ -266,20 +520,8 @@ const file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDesc = "" +
 	" \x03(\v23.dev.unmango.discord.backup.v1alpha1.ScheduledEventR\x0fscheduledEvents\x12V\n" +
 	"\x0eauto_mod_rules\x18\v \x03(\v20.dev.unmango.discord.backup.v1alpha1.AutoModRuleR\fautoModRules\x12E\n" +
 	"\ainvites\x18\f \x03(\v2+.dev.unmango.discord.backup.v1alpha1.InviteR\ainvites\x12_\n" +
-	"\x10channel_messages\x18\r \x03(\v24.dev.unmango.discord.backup.v1alpha1.ChannelMessagesR\x0fchannelMessagesB\x94\x02\n" +
-	"'com.dev.unmango.discord.backup.v1alpha1B\vBackupProtoP\x01Z+github.com/UnstoppableMango/slacker-bot/gen\xa2\x02\x04DUDB\xaa\x02#Dev.Unmango.Discord.Backup.V1alpha1\xca\x02#Dev\\Unmango\\Discord\\Backup\\V1alpha1\xe2\x02/Dev\\Unmango\\Discord\\Backup\\V1alpha1\\GPBMetadata\xea\x02'Dev::Unmango::Discord::Backup::V1alpha1b\beditionsp\xe8\a"
-
-var (
-	file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescOnce sync.Once
-	file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescData []byte
-)
-
-func file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescGZIP() []byte {
-	file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescOnce.Do(func() {
-		file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDesc), len(file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDesc)))
-	})
-	return file_dev_unmango_discord_backup_v1alpha1_backup_proto_rawDescData
-}
+	"\x10channel_messages\x18\r \x03(\v24.dev.unmango.discord.backup.v1alpha1.ChannelMessagesR\x0fchannelMessagesB\xa8\x02\n" +
+	"'com.dev.unmango.discord.backup.v1alpha1B\vBackupProtoP\x01Z?github.com/UnstoppableMango/slacker-bot/gen/dev/unmango/discord\xa2\x02\x04DUDB\xaa\x02#Dev.Unmango.Discord.Backup.V1alpha1\xca\x02#Dev\\Unmango\\Discord\\Backup\\V1alpha1\xe2\x02/Dev\\Unmango\\Discord\\Backup\\V1alpha1\\GPBMetadata\xea\x02'Dev::Unmango::Discord::Backup::V1alpha1b\beditionsp\xe8\a"
 
 var file_dev_unmango_discord_backup_v1alpha1_backup_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_dev_unmango_discord_backup_v1alpha1_backup_proto_goTypes = []any{

@@ -4,14 +4,13 @@
 // 	protoc        (unknown)
 // source: dev/unmango/discord/backup/v1alpha1/types.proto
 
-package gen
+package discord
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -100,11 +99,6 @@ func (x ChannelType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ChannelType.Descriptor instead.
-func (ChannelType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{0}
-}
-
 // VerificationLevel represents the verification level required for a guild.
 type VerificationLevel int32
 
@@ -159,11 +153,6 @@ func (x VerificationLevel) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use VerificationLevel.Descriptor instead.
-func (VerificationLevel) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{1}
-}
-
 // ExplicitContentFilter represents the explicit content filter level for a guild.
 type ExplicitContentFilter int32
 
@@ -212,11 +201,6 @@ func (x ExplicitContentFilter) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExplicitContentFilter.Descriptor instead.
-func (ExplicitContentFilter) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{2}
-}
-
 // DefaultMessageNotifications represents the default notification level for a guild.
 type DefaultMessageNotifications int32
 
@@ -260,11 +244,6 @@ func (DefaultMessageNotifications) Type() protoreflect.EnumType {
 
 func (x DefaultMessageNotifications) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use DefaultMessageNotifications.Descriptor instead.
-func (DefaultMessageNotifications) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{3}
 }
 
 // NsfwLevel represents the NSFW level of a guild.
@@ -318,11 +297,6 @@ func (x NsfwLevel) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use NsfwLevel.Descriptor instead.
-func (NsfwLevel) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{4}
-}
-
 // PremiumTier represents the guild's Nitro boost tier.
 type PremiumTier int32
 
@@ -374,11 +348,6 @@ func (x PremiumTier) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use PremiumTier.Descriptor instead.
-func (PremiumTier) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{5}
-}
-
 // OverwriteType represents the type of a permission overwrite target.
 type OverwriteType int32
 
@@ -422,11 +391,6 @@ func (OverwriteType) Type() protoreflect.EnumType {
 
 func (x OverwriteType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use OverwriteType.Descriptor instead.
-func (OverwriteType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{6}
 }
 
 // ForumLayout represents the layout of a forum channel.
@@ -477,11 +441,6 @@ func (x ForumLayout) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ForumLayout.Descriptor instead.
-func (ForumLayout) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{7}
-}
-
 // SortOrder represents the sort order of a forum or media channel.
 type SortOrder int32
 
@@ -525,11 +484,6 @@ func (SortOrder) Type() protoreflect.EnumType {
 
 func (x SortOrder) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use SortOrder.Descriptor instead.
-func (SortOrder) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{8}
 }
 
 // VideoQualityMode represents the video quality mode of a voice channel.
@@ -577,11 +531,6 @@ func (x VideoQualityMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use VideoQualityMode.Descriptor instead.
-func (VideoQualityMode) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{9}
-}
-
 // PrivacyLevel represents the privacy level of a scheduled event or stage instance.
 type PrivacyLevel int32
 
@@ -625,11 +574,6 @@ func (PrivacyLevel) Type() protoreflect.EnumType {
 
 func (x PrivacyLevel) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use PrivacyLevel.Descriptor instead.
-func (PrivacyLevel) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{10}
 }
 
 // ScheduledEventStatus represents the status of a scheduled event.
@@ -683,11 +627,6 @@ func (x ScheduledEventStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ScheduledEventStatus.Descriptor instead.
-func (ScheduledEventStatus) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{11}
-}
-
 // ScheduledEventEntityType represents the entity type of a scheduled event.
 type ScheduledEventEntityType int32
 
@@ -736,11 +675,6 @@ func (x ScheduledEventEntityType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ScheduledEventEntityType.Descriptor instead.
-func (ScheduledEventEntityType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{12}
-}
-
 // AutoModEventType represents the event type that triggers an auto-moderation rule.
 type AutoModEventType int32
 
@@ -784,11 +718,6 @@ func (AutoModEventType) Type() protoreflect.EnumType {
 
 func (x AutoModEventType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use AutoModEventType.Descriptor instead.
-func (AutoModEventType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{13}
 }
 
 // AutoModTriggerType represents what triggers an auto-moderation rule.
@@ -845,11 +774,6 @@ func (x AutoModTriggerType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use AutoModTriggerType.Descriptor instead.
-func (AutoModTriggerType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{14}
-}
-
 // AutoModActionType represents the action taken by an auto-moderation rule.
 type AutoModActionType int32
 
@@ -899,11 +823,6 @@ func (AutoModActionType) Type() protoreflect.EnumType {
 
 func (x AutoModActionType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use AutoModActionType.Descriptor instead.
-func (AutoModActionType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{15}
 }
 
 // StickerFormatType represents the format of a sticker.
@@ -957,11 +876,6 @@ func (x StickerFormatType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use StickerFormatType.Descriptor instead.
-func (StickerFormatType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{16}
-}
-
 // WebhookType represents the type of a webhook.
 type WebhookType int32
 
@@ -1008,11 +922,6 @@ func (WebhookType) Type() protoreflect.EnumType {
 
 func (x WebhookType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use WebhookType.Descriptor instead.
-func (WebhookType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{17}
 }
 
 // MessageType represents the type of a message.
@@ -1129,11 +1038,6 @@ func (x MessageType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use MessageType.Descriptor instead.
-func (MessageType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{18}
-}
-
 // EmbedType represents the type of a message embed.
 type EmbedType int32
 
@@ -1194,20 +1098,17 @@ func (x EmbedType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use EmbedType.Descriptor instead.
-func (EmbedType) EnumDescriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{19}
-}
-
 // PermissionOverwrite represents a role or member permission overwrite on a channel.
 type PermissionOverwrite struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Type          *OverwriteType         `protobuf:"varint,2,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.OverwriteType" json:"type,omitempty"`
-	Allow         *int64                 `protobuf:"varint,3,opt,name=allow" json:"allow,omitempty"` // bitmask of allowed permissions
-	Deny          *int64                 `protobuf:"varint,4,opt,name=deny" json:"deny,omitempty"`   // bitmask of denied permissions
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Type        OverwriteType          `protobuf:"varint,2,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.OverwriteType"`
+	xxx_hidden_Allow       int64                  `protobuf:"varint,3,opt,name=allow"`
+	xxx_hidden_Deny        int64                  `protobuf:"varint,4,opt,name=deny"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *PermissionOverwrite) Reset() {
@@ -1235,49 +1136,151 @@ func (x *PermissionOverwrite) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PermissionOverwrite.ProtoReflect.Descriptor instead.
-func (*PermissionOverwrite) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *PermissionOverwrite) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *PermissionOverwrite) GetType() OverwriteType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
+			return x.xxx_hidden_Type
+		}
 	}
 	return OverwriteType_OVERWRITE_TYPE_UNSPECIFIED
 }
 
 func (x *PermissionOverwrite) GetAllow() int64 {
-	if x != nil && x.Allow != nil {
-		return *x.Allow
+	if x != nil {
+		return x.xxx_hidden_Allow
 	}
 	return 0
 }
 
 func (x *PermissionOverwrite) GetDeny() int64 {
-	if x != nil && x.Deny != nil {
-		return *x.Deny
+	if x != nil {
+		return x.xxx_hidden_Deny
 	}
 	return 0
 }
 
+func (x *PermissionOverwrite) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *PermissionOverwrite) SetType(v OverwriteType) {
+	x.xxx_hidden_Type = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *PermissionOverwrite) SetAllow(v int64) {
+	x.xxx_hidden_Allow = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *PermissionOverwrite) SetDeny(v int64) {
+	x.xxx_hidden_Deny = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *PermissionOverwrite) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *PermissionOverwrite) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *PermissionOverwrite) HasAllow() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *PermissionOverwrite) HasDeny() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *PermissionOverwrite) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *PermissionOverwrite) ClearType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Type = OverwriteType_OVERWRITE_TYPE_UNSPECIFIED
+}
+
+func (x *PermissionOverwrite) ClearAllow() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Allow = 0
+}
+
+func (x *PermissionOverwrite) ClearDeny() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Deny = 0
+}
+
+type PermissionOverwrite_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id    *string
+	Type  *OverwriteType
+	Allow *int64
+	Deny  *int64
+}
+
+func (b0 PermissionOverwrite_builder) Build() *PermissionOverwrite {
+	m0 := &PermissionOverwrite{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.Type != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_Type = *b.Type
+	}
+	if b.Allow != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Allow = *b.Allow
+	}
+	if b.Deny != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Deny = *b.Deny
+	}
+	return m0
+}
+
 // ForumTag represents a tag that can be applied to threads in a forum channel.
 type ForumTag struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Moderated     *bool                  `protobuf:"varint,3,opt,name=moderated" json:"moderated,omitempty"`
-	EmojiId       *string                `protobuf:"bytes,4,opt,name=emoji_id,json=emojiId" json:"emoji_id,omitempty"`       // set for custom emoji
-	EmojiName     *string                `protobuf:"bytes,5,opt,name=emoji_name,json=emojiName" json:"emoji_name,omitempty"` // set for unicode emoji
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,2,opt,name=name"`
+	xxx_hidden_Moderated   bool                   `protobuf:"varint,3,opt,name=moderated"`
+	xxx_hidden_EmojiId     *string                `protobuf:"bytes,4,opt,name=emoji_id,json=emojiId"`
+	xxx_hidden_EmojiName   *string                `protobuf:"bytes,5,opt,name=emoji_name,json=emojiName"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ForumTag) Reset() {
@@ -1305,53 +1308,184 @@ func (x *ForumTag) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ForumTag.ProtoReflect.Descriptor instead.
-func (*ForumTag) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ForumTag) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *ForumTag) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *ForumTag) GetModerated() bool {
-	if x != nil && x.Moderated != nil {
-		return *x.Moderated
+	if x != nil {
+		return x.xxx_hidden_Moderated
 	}
 	return false
 }
 
 func (x *ForumTag) GetEmojiId() string {
-	if x != nil && x.EmojiId != nil {
-		return *x.EmojiId
+	if x != nil {
+		if x.xxx_hidden_EmojiId != nil {
+			return *x.xxx_hidden_EmojiId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *ForumTag) GetEmojiName() string {
-	if x != nil && x.EmojiName != nil {
-		return *x.EmojiName
+	if x != nil {
+		if x.xxx_hidden_EmojiName != nil {
+			return *x.xxx_hidden_EmojiName
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *ForumTag) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+}
+
+func (x *ForumTag) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+}
+
+func (x *ForumTag) SetModerated(v bool) {
+	x.xxx_hidden_Moderated = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+}
+
+func (x *ForumTag) SetEmojiId(v string) {
+	x.xxx_hidden_EmojiId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *ForumTag) SetEmojiName(v string) {
+	x.xxx_hidden_EmojiName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+}
+
+func (x *ForumTag) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ForumTag) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ForumTag) HasModerated() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *ForumTag) HasEmojiId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *ForumTag) HasEmojiName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *ForumTag) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *ForumTag) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *ForumTag) ClearModerated() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Moderated = false
+}
+
+func (x *ForumTag) ClearEmojiId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_EmojiId = nil
+}
+
+func (x *ForumTag) ClearEmojiName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_EmojiName = nil
+}
+
+type ForumTag_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id        *string
+	Name      *string
+	Moderated *bool
+	EmojiId   *string
+	EmojiName *string
+}
+
+func (b0 ForumTag_builder) Build() *ForumTag {
+	m0 := &ForumTag{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Moderated != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		x.xxx_hidden_Moderated = *b.Moderated
+	}
+	if b.EmojiId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		x.xxx_hidden_EmojiId = b.EmojiId
+	}
+	if b.EmojiName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_EmojiName = b.EmojiName
+	}
+	return m0
+}
+
 // DefaultReaction represents the default emoji reaction for a forum channel post.
 type DefaultReaction struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	EmojiId       *string                `protobuf:"bytes,1,opt,name=emoji_id,json=emojiId" json:"emoji_id,omitempty"`       // set for custom emoji
-	EmojiName     *string                `protobuf:"bytes,2,opt,name=emoji_name,json=emojiName" json:"emoji_name,omitempty"` // set for unicode emoji
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_EmojiId     *string                `protobuf:"bytes,1,opt,name=emoji_id,json=emojiId"`
+	xxx_hidden_EmojiName   *string                `protobuf:"bytes,2,opt,name=emoji_name,json=emojiName"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *DefaultReaction) Reset() {
@@ -1379,36 +1513,95 @@ func (x *DefaultReaction) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DefaultReaction.ProtoReflect.Descriptor instead.
-func (*DefaultReaction) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *DefaultReaction) GetEmojiId() string {
-	if x != nil && x.EmojiId != nil {
-		return *x.EmojiId
+	if x != nil {
+		if x.xxx_hidden_EmojiId != nil {
+			return *x.xxx_hidden_EmojiId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *DefaultReaction) GetEmojiName() string {
-	if x != nil && x.EmojiName != nil {
-		return *x.EmojiName
+	if x != nil {
+		if x.xxx_hidden_EmojiName != nil {
+			return *x.xxx_hidden_EmojiName
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *DefaultReaction) SetEmojiId(v string) {
+	x.xxx_hidden_EmojiId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *DefaultReaction) SetEmojiName(v string) {
+	x.xxx_hidden_EmojiName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *DefaultReaction) HasEmojiId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *DefaultReaction) HasEmojiName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *DefaultReaction) ClearEmojiId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_EmojiId = nil
+}
+
+func (x *DefaultReaction) ClearEmojiName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_EmojiName = nil
+}
+
+type DefaultReaction_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	EmojiId   *string
+	EmojiName *string
+}
+
+func (b0 DefaultReaction_builder) Build() *DefaultReaction {
+	m0 := &DefaultReaction{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.EmojiId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_EmojiId = b.EmojiId
+	}
+	if b.EmojiName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_EmojiName = b.EmojiName
+	}
+	return m0
+}
+
 // RoleTag holds metadata about special role types.
 type RoleTag struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	BotId                 *string                `protobuf:"bytes,1,opt,name=bot_id,json=botId" json:"bot_id,omitempty"`                                                   // role is managed by this bot
-	IntegrationId         *string                `protobuf:"bytes,2,opt,name=integration_id,json=integrationId" json:"integration_id,omitempty"`                           // role is managed by this integration
-	SubscriptionListingId *string                `protobuf:"bytes,3,opt,name=subscription_listing_id,json=subscriptionListingId" json:"subscription_listing_id,omitempty"` // role is available for purchase
-	PremiumSubscriber     *bool                  `protobuf:"varint,4,opt,name=premium_subscriber,json=premiumSubscriber" json:"premium_subscriber,omitempty"`              // role is the guild's premium subscriber (booster) role
-	AvailableForPurchase  *bool                  `protobuf:"varint,5,opt,name=available_for_purchase,json=availableForPurchase" json:"available_for_purchase,omitempty"`   // role can be purchased
-	GuildConnections      *bool                  `protobuf:"varint,6,opt,name=guild_connections,json=guildConnections" json:"guild_connections,omitempty"`                 // role is a guild's linked role
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_BotId                 *string                `protobuf:"bytes,1,opt,name=bot_id,json=botId"`
+	xxx_hidden_IntegrationId         *string                `protobuf:"bytes,2,opt,name=integration_id,json=integrationId"`
+	xxx_hidden_SubscriptionListingId *string                `protobuf:"bytes,3,opt,name=subscription_listing_id,json=subscriptionListingId"`
+	xxx_hidden_PremiumSubscriber     bool                   `protobuf:"varint,4,opt,name=premium_subscriber,json=premiumSubscriber"`
+	xxx_hidden_AvailableForPurchase  bool                   `protobuf:"varint,5,opt,name=available_for_purchase,json=availableForPurchase"`
+	xxx_hidden_GuildConnections      bool                   `protobuf:"varint,6,opt,name=guild_connections,json=guildConnections"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *RoleTag) Reset() {
@@ -1436,64 +1629,214 @@ func (x *RoleTag) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RoleTag.ProtoReflect.Descriptor instead.
-func (*RoleTag) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *RoleTag) GetBotId() string {
-	if x != nil && x.BotId != nil {
-		return *x.BotId
+	if x != nil {
+		if x.xxx_hidden_BotId != nil {
+			return *x.xxx_hidden_BotId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *RoleTag) GetIntegrationId() string {
-	if x != nil && x.IntegrationId != nil {
-		return *x.IntegrationId
+	if x != nil {
+		if x.xxx_hidden_IntegrationId != nil {
+			return *x.xxx_hidden_IntegrationId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *RoleTag) GetSubscriptionListingId() string {
-	if x != nil && x.SubscriptionListingId != nil {
-		return *x.SubscriptionListingId
+	if x != nil {
+		if x.xxx_hidden_SubscriptionListingId != nil {
+			return *x.xxx_hidden_SubscriptionListingId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *RoleTag) GetPremiumSubscriber() bool {
-	if x != nil && x.PremiumSubscriber != nil {
-		return *x.PremiumSubscriber
+	if x != nil {
+		return x.xxx_hidden_PremiumSubscriber
 	}
 	return false
 }
 
 func (x *RoleTag) GetAvailableForPurchase() bool {
-	if x != nil && x.AvailableForPurchase != nil {
-		return *x.AvailableForPurchase
+	if x != nil {
+		return x.xxx_hidden_AvailableForPurchase
 	}
 	return false
 }
 
 func (x *RoleTag) GetGuildConnections() bool {
-	if x != nil && x.GuildConnections != nil {
-		return *x.GuildConnections
+	if x != nil {
+		return x.xxx_hidden_GuildConnections
 	}
 	return false
 }
 
+func (x *RoleTag) SetBotId(v string) {
+	x.xxx_hidden_BotId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+}
+
+func (x *RoleTag) SetIntegrationId(v string) {
+	x.xxx_hidden_IntegrationId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+}
+
+func (x *RoleTag) SetSubscriptionListingId(v string) {
+	x.xxx_hidden_SubscriptionListingId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+}
+
+func (x *RoleTag) SetPremiumSubscriber(v bool) {
+	x.xxx_hidden_PremiumSubscriber = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+}
+
+func (x *RoleTag) SetAvailableForPurchase(v bool) {
+	x.xxx_hidden_AvailableForPurchase = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+}
+
+func (x *RoleTag) SetGuildConnections(v bool) {
+	x.xxx_hidden_GuildConnections = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+}
+
+func (x *RoleTag) HasBotId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *RoleTag) HasIntegrationId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *RoleTag) HasSubscriptionListingId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *RoleTag) HasPremiumSubscriber() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *RoleTag) HasAvailableForPurchase() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *RoleTag) HasGuildConnections() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *RoleTag) ClearBotId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_BotId = nil
+}
+
+func (x *RoleTag) ClearIntegrationId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_IntegrationId = nil
+}
+
+func (x *RoleTag) ClearSubscriptionListingId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_SubscriptionListingId = nil
+}
+
+func (x *RoleTag) ClearPremiumSubscriber() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_PremiumSubscriber = false
+}
+
+func (x *RoleTag) ClearAvailableForPurchase() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_AvailableForPurchase = false
+}
+
+func (x *RoleTag) ClearGuildConnections() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_GuildConnections = false
+}
+
+type RoleTag_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	BotId                 *string
+	IntegrationId         *string
+	SubscriptionListingId *string
+	PremiumSubscriber     *bool
+	AvailableForPurchase  *bool
+	GuildConnections      *bool
+}
+
+func (b0 RoleTag_builder) Build() *RoleTag {
+	m0 := &RoleTag{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.BotId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		x.xxx_hidden_BotId = b.BotId
+	}
+	if b.IntegrationId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		x.xxx_hidden_IntegrationId = b.IntegrationId
+	}
+	if b.SubscriptionListingId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		x.xxx_hidden_SubscriptionListingId = b.SubscriptionListingId
+	}
+	if b.PremiumSubscriber != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		x.xxx_hidden_PremiumSubscriber = *b.PremiumSubscriber
+	}
+	if b.AvailableForPurchase != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
+		x.xxx_hidden_AvailableForPurchase = *b.AvailableForPurchase
+	}
+	if b.GuildConnections != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		x.xxx_hidden_GuildConnections = *b.GuildConnections
+	}
+	return m0
+}
+
 // ThreadMetadata holds archival and locking state for thread channels.
 type ThreadMetadata struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Archived            *bool                  `protobuf:"varint,1,opt,name=archived" json:"archived,omitempty"`
-	AutoArchiveDuration *int32                 `protobuf:"varint,2,opt,name=auto_archive_duration,json=autoArchiveDuration" json:"auto_archive_duration,omitempty"` // minutes: 60, 1440, 4320, or 10080
-	ArchiveTimestamp    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=archive_timestamp,json=archiveTimestamp" json:"archive_timestamp,omitempty"`
-	Locked              *bool                  `protobuf:"varint,4,opt,name=locked" json:"locked,omitempty"`
-	Invitable           *bool                  `protobuf:"varint,5,opt,name=invitable" json:"invitable,omitempty"` // only present on private threads
-	CreateTimestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=create_timestamp,json=createTimestamp" json:"create_timestamp,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Archived            bool                   `protobuf:"varint,1,opt,name=archived"`
+	xxx_hidden_AutoArchiveDuration int32                  `protobuf:"varint,2,opt,name=auto_archive_duration,json=autoArchiveDuration"`
+	xxx_hidden_ArchiveTimestamp    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=archive_timestamp,json=archiveTimestamp"`
+	xxx_hidden_Locked              bool                   `protobuf:"varint,4,opt,name=locked"`
+	xxx_hidden_Invitable           bool                   `protobuf:"varint,5,opt,name=invitable"`
+	xxx_hidden_CreateTimestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=create_timestamp,json=createTimestamp"`
+	XXX_raceDetectHookData         protoimpl.RaceDetectHookData
+	XXX_presence                   [1]uint32
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *ThreadMetadata) Reset() {
@@ -1521,51 +1864,180 @@ func (x *ThreadMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ThreadMetadata.ProtoReflect.Descriptor instead.
-func (*ThreadMetadata) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *ThreadMetadata) GetArchived() bool {
-	if x != nil && x.Archived != nil {
-		return *x.Archived
+	if x != nil {
+		return x.xxx_hidden_Archived
 	}
 	return false
 }
 
 func (x *ThreadMetadata) GetAutoArchiveDuration() int32 {
-	if x != nil && x.AutoArchiveDuration != nil {
-		return *x.AutoArchiveDuration
+	if x != nil {
+		return x.xxx_hidden_AutoArchiveDuration
 	}
 	return 0
 }
 
 func (x *ThreadMetadata) GetArchiveTimestamp() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ArchiveTimestamp
+		return x.xxx_hidden_ArchiveTimestamp
 	}
 	return nil
 }
 
 func (x *ThreadMetadata) GetLocked() bool {
-	if x != nil && x.Locked != nil {
-		return *x.Locked
+	if x != nil {
+		return x.xxx_hidden_Locked
 	}
 	return false
 }
 
 func (x *ThreadMetadata) GetInvitable() bool {
-	if x != nil && x.Invitable != nil {
-		return *x.Invitable
+	if x != nil {
+		return x.xxx_hidden_Invitable
 	}
 	return false
 }
 
 func (x *ThreadMetadata) GetCreateTimestamp() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreateTimestamp
+		return x.xxx_hidden_CreateTimestamp
 	}
 	return nil
+}
+
+func (x *ThreadMetadata) SetArchived(v bool) {
+	x.xxx_hidden_Archived = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+}
+
+func (x *ThreadMetadata) SetAutoArchiveDuration(v int32) {
+	x.xxx_hidden_AutoArchiveDuration = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+}
+
+func (x *ThreadMetadata) SetArchiveTimestamp(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ArchiveTimestamp = v
+}
+
+func (x *ThreadMetadata) SetLocked(v bool) {
+	x.xxx_hidden_Locked = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+}
+
+func (x *ThreadMetadata) SetInvitable(v bool) {
+	x.xxx_hidden_Invitable = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+}
+
+func (x *ThreadMetadata) SetCreateTimestamp(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreateTimestamp = v
+}
+
+func (x *ThreadMetadata) HasArchived() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ThreadMetadata) HasAutoArchiveDuration() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ThreadMetadata) HasArchiveTimestamp() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ArchiveTimestamp != nil
+}
+
+func (x *ThreadMetadata) HasLocked() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *ThreadMetadata) HasInvitable() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *ThreadMetadata) HasCreateTimestamp() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreateTimestamp != nil
+}
+
+func (x *ThreadMetadata) ClearArchived() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Archived = false
+}
+
+func (x *ThreadMetadata) ClearAutoArchiveDuration() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_AutoArchiveDuration = 0
+}
+
+func (x *ThreadMetadata) ClearArchiveTimestamp() {
+	x.xxx_hidden_ArchiveTimestamp = nil
+}
+
+func (x *ThreadMetadata) ClearLocked() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Locked = false
+}
+
+func (x *ThreadMetadata) ClearInvitable() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_Invitable = false
+}
+
+func (x *ThreadMetadata) ClearCreateTimestamp() {
+	x.xxx_hidden_CreateTimestamp = nil
+}
+
+type ThreadMetadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Archived            *bool
+	AutoArchiveDuration *int32
+	ArchiveTimestamp    *timestamppb.Timestamp
+	Locked              *bool
+	Invitable           *bool
+	CreateTimestamp     *timestamppb.Timestamp
+}
+
+func (b0 ThreadMetadata_builder) Build() *ThreadMetadata {
+	m0 := &ThreadMetadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Archived != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		x.xxx_hidden_Archived = *b.Archived
+	}
+	if b.AutoArchiveDuration != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		x.xxx_hidden_AutoArchiveDuration = *b.AutoArchiveDuration
+	}
+	x.xxx_hidden_ArchiveTimestamp = b.ArchiveTimestamp
+	if b.Locked != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		x.xxx_hidden_Locked = *b.Locked
+	}
+	if b.Invitable != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
+		x.xxx_hidden_Invitable = *b.Invitable
+	}
+	x.xxx_hidden_CreateTimestamp = b.CreateTimestamp
+	return m0
 }
 
 var File_dev_unmango_discord_backup_v1alpha1_types_proto protoreflect.FileDescriptor
@@ -1743,21 +2215,9 @@ const file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDesc = "" +
 	"\x0fEMBED_TYPE_GIFV\x10\x04\x12\x16\n" +
 	"\x12EMBED_TYPE_ARTICLE\x10\x05\x12\x13\n" +
 	"\x0fEMBED_TYPE_LINK\x10\x06\x12\x1a\n" +
-	"\x16EMBED_TYPE_POLL_RESULT\x10\aB\x93\x02\n" +
+	"\x16EMBED_TYPE_POLL_RESULT\x10\aB\xa7\x02\n" +
 	"'com.dev.unmango.discord.backup.v1alpha1B\n" +
-	"TypesProtoP\x01Z+github.com/UnstoppableMango/slacker-bot/gen\xa2\x02\x04DUDB\xaa\x02#Dev.Unmango.Discord.Backup.V1alpha1\xca\x02#Dev\\Unmango\\Discord\\Backup\\V1alpha1\xe2\x02/Dev\\Unmango\\Discord\\Backup\\V1alpha1\\GPBMetadata\xea\x02'Dev::Unmango::Discord::Backup::V1alpha1b\beditionsp\xe8\a"
-
-var (
-	file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescOnce sync.Once
-	file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescData []byte
-)
-
-func file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescGZIP() []byte {
-	file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescOnce.Do(func() {
-		file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDesc), len(file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDesc)))
-	})
-	return file_dev_unmango_discord_backup_v1alpha1_types_proto_rawDescData
-}
+	"TypesProtoP\x01Z?github.com/UnstoppableMango/slacker-bot/gen/dev/unmango/discord\xa2\x02\x04DUDB\xaa\x02#Dev.Unmango.Discord.Backup.V1alpha1\xca\x02#Dev\\Unmango\\Discord\\Backup\\V1alpha1\xe2\x02/Dev\\Unmango\\Discord\\Backup\\V1alpha1\\GPBMetadata\xea\x02'Dev::Unmango::Discord::Backup::V1alpha1b\beditionsp\xe8\a"
 
 var file_dev_unmango_discord_backup_v1alpha1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 20)
 var file_dev_unmango_discord_backup_v1alpha1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 5)

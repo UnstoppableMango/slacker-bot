@@ -4,14 +4,13 @@
 // 	protoc        (unknown)
 // source: dev/unmango/discord/backup/v1alpha1/message.proto
 
-package gen
+package discord
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -24,22 +23,24 @@ const (
 
 // Attachment represents a file attached to a message.
 type Attachment struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Filename      *string                `protobuf:"bytes,2,opt,name=filename" json:"filename,omitempty"`
-	Description   *string                `protobuf:"bytes,3,opt,name=description" json:"description,omitempty"`
-	ContentType   *string                `protobuf:"bytes,4,opt,name=content_type,json=contentType" json:"content_type,omitempty"`
-	Size          *int64                 `protobuf:"varint,5,opt,name=size" json:"size,omitempty"` // bytes
-	Url           *string                `protobuf:"bytes,6,opt,name=url" json:"url,omitempty"`
-	ProxyUrl      *string                `protobuf:"bytes,7,opt,name=proxy_url,json=proxyUrl" json:"proxy_url,omitempty"`
-	Height        *int32                 `protobuf:"varint,8,opt,name=height" json:"height,omitempty"`
-	Width         *int32                 `protobuf:"varint,9,opt,name=width" json:"width,omitempty"`
-	Ephemeral     *bool                  `protobuf:"varint,10,opt,name=ephemeral" json:"ephemeral,omitempty"`
-	DurationSecs  *float32               `protobuf:"fixed32,11,opt,name=duration_secs,json=durationSecs" json:"duration_secs,omitempty"`
-	Waveform      *string                `protobuf:"bytes,12,opt,name=waveform" json:"waveform,omitempty"` // base64-encoded waveform for voice messages
-	Flags         *int64                 `protobuf:"varint,13,opt,name=flags" json:"flags,omitempty"`      // bitmask
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id           *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Filename     *string                `protobuf:"bytes,2,opt,name=filename"`
+	xxx_hidden_Description  *string                `protobuf:"bytes,3,opt,name=description"`
+	xxx_hidden_ContentType  *string                `protobuf:"bytes,4,opt,name=content_type,json=contentType"`
+	xxx_hidden_Size         int64                  `protobuf:"varint,5,opt,name=size"`
+	xxx_hidden_Url          *string                `protobuf:"bytes,6,opt,name=url"`
+	xxx_hidden_ProxyUrl     *string                `protobuf:"bytes,7,opt,name=proxy_url,json=proxyUrl"`
+	xxx_hidden_Height       int32                  `protobuf:"varint,8,opt,name=height"`
+	xxx_hidden_Width        int32                  `protobuf:"varint,9,opt,name=width"`
+	xxx_hidden_Ephemeral    bool                   `protobuf:"varint,10,opt,name=ephemeral"`
+	xxx_hidden_DurationSecs float32                `protobuf:"fixed32,11,opt,name=duration_secs,json=durationSecs"`
+	xxx_hidden_Waveform     *string                `protobuf:"bytes,12,opt,name=waveform"`
+	xxx_hidden_Flags        int64                  `protobuf:"varint,13,opt,name=flags"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *Attachment) Reset() {
@@ -67,110 +68,426 @@ func (x *Attachment) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Attachment.ProtoReflect.Descriptor instead.
-func (*Attachment) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *Attachment) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Attachment) GetFilename() string {
-	if x != nil && x.Filename != nil {
-		return *x.Filename
+	if x != nil {
+		if x.xxx_hidden_Filename != nil {
+			return *x.xxx_hidden_Filename
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Attachment) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		if x.xxx_hidden_Description != nil {
+			return *x.xxx_hidden_Description
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Attachment) GetContentType() string {
-	if x != nil && x.ContentType != nil {
-		return *x.ContentType
+	if x != nil {
+		if x.xxx_hidden_ContentType != nil {
+			return *x.xxx_hidden_ContentType
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Attachment) GetSize() int64 {
-	if x != nil && x.Size != nil {
-		return *x.Size
+	if x != nil {
+		return x.xxx_hidden_Size
 	}
 	return 0
 }
 
 func (x *Attachment) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		if x.xxx_hidden_Url != nil {
+			return *x.xxx_hidden_Url
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Attachment) GetProxyUrl() string {
-	if x != nil && x.ProxyUrl != nil {
-		return *x.ProxyUrl
+	if x != nil {
+		if x.xxx_hidden_ProxyUrl != nil {
+			return *x.xxx_hidden_ProxyUrl
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Attachment) GetHeight() int32 {
-	if x != nil && x.Height != nil {
-		return *x.Height
+	if x != nil {
+		return x.xxx_hidden_Height
 	}
 	return 0
 }
 
 func (x *Attachment) GetWidth() int32 {
-	if x != nil && x.Width != nil {
-		return *x.Width
+	if x != nil {
+		return x.xxx_hidden_Width
 	}
 	return 0
 }
 
 func (x *Attachment) GetEphemeral() bool {
-	if x != nil && x.Ephemeral != nil {
-		return *x.Ephemeral
+	if x != nil {
+		return x.xxx_hidden_Ephemeral
 	}
 	return false
 }
 
 func (x *Attachment) GetDurationSecs() float32 {
-	if x != nil && x.DurationSecs != nil {
-		return *x.DurationSecs
+	if x != nil {
+		return x.xxx_hidden_DurationSecs
 	}
 	return 0
 }
 
 func (x *Attachment) GetWaveform() string {
-	if x != nil && x.Waveform != nil {
-		return *x.Waveform
+	if x != nil {
+		if x.xxx_hidden_Waveform != nil {
+			return *x.xxx_hidden_Waveform
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Attachment) GetFlags() int64 {
-	if x != nil && x.Flags != nil {
-		return *x.Flags
+	if x != nil {
+		return x.xxx_hidden_Flags
 	}
 	return 0
 }
 
+func (x *Attachment) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 13)
+}
+
+func (x *Attachment) SetFilename(v string) {
+	x.xxx_hidden_Filename = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 13)
+}
+
+func (x *Attachment) SetDescription(v string) {
+	x.xxx_hidden_Description = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 13)
+}
+
+func (x *Attachment) SetContentType(v string) {
+	x.xxx_hidden_ContentType = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 13)
+}
+
+func (x *Attachment) SetSize(v int64) {
+	x.xxx_hidden_Size = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 13)
+}
+
+func (x *Attachment) SetUrl(v string) {
+	x.xxx_hidden_Url = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 13)
+}
+
+func (x *Attachment) SetProxyUrl(v string) {
+	x.xxx_hidden_ProxyUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 13)
+}
+
+func (x *Attachment) SetHeight(v int32) {
+	x.xxx_hidden_Height = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 13)
+}
+
+func (x *Attachment) SetWidth(v int32) {
+	x.xxx_hidden_Width = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 13)
+}
+
+func (x *Attachment) SetEphemeral(v bool) {
+	x.xxx_hidden_Ephemeral = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 13)
+}
+
+func (x *Attachment) SetDurationSecs(v float32) {
+	x.xxx_hidden_DurationSecs = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 13)
+}
+
+func (x *Attachment) SetWaveform(v string) {
+	x.xxx_hidden_Waveform = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 13)
+}
+
+func (x *Attachment) SetFlags(v int64) {
+	x.xxx_hidden_Flags = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 13)
+}
+
+func (x *Attachment) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Attachment) HasFilename() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Attachment) HasDescription() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Attachment) HasContentType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *Attachment) HasSize() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *Attachment) HasUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *Attachment) HasProxyUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *Attachment) HasHeight() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
+func (x *Attachment) HasWidth() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
+}
+
+func (x *Attachment) HasEphemeral() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 9)
+}
+
+func (x *Attachment) HasDurationSecs() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 10)
+}
+
+func (x *Attachment) HasWaveform() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 11)
+}
+
+func (x *Attachment) HasFlags() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 12)
+}
+
+func (x *Attachment) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *Attachment) ClearFilename() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Filename = nil
+}
+
+func (x *Attachment) ClearDescription() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Description = nil
+}
+
+func (x *Attachment) ClearContentType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_ContentType = nil
+}
+
+func (x *Attachment) ClearSize() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_Size = 0
+}
+
+func (x *Attachment) ClearUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_Url = nil
+}
+
+func (x *Attachment) ClearProxyUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_ProxyUrl = nil
+}
+
+func (x *Attachment) ClearHeight() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_Height = 0
+}
+
+func (x *Attachment) ClearWidth() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 8)
+	x.xxx_hidden_Width = 0
+}
+
+func (x *Attachment) ClearEphemeral() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 9)
+	x.xxx_hidden_Ephemeral = false
+}
+
+func (x *Attachment) ClearDurationSecs() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 10)
+	x.xxx_hidden_DurationSecs = 0
+}
+
+func (x *Attachment) ClearWaveform() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 11)
+	x.xxx_hidden_Waveform = nil
+}
+
+func (x *Attachment) ClearFlags() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 12)
+	x.xxx_hidden_Flags = 0
+}
+
+type Attachment_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id           *string
+	Filename     *string
+	Description  *string
+	ContentType  *string
+	Size         *int64
+	Url          *string
+	ProxyUrl     *string
+	Height       *int32
+	Width        *int32
+	Ephemeral    *bool
+	DurationSecs *float32
+	Waveform     *string
+	Flags        *int64
+}
+
+func (b0 Attachment_builder) Build() *Attachment {
+	m0 := &Attachment{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 13)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.Filename != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 13)
+		x.xxx_hidden_Filename = b.Filename
+	}
+	if b.Description != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 13)
+		x.xxx_hidden_Description = b.Description
+	}
+	if b.ContentType != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 13)
+		x.xxx_hidden_ContentType = b.ContentType
+	}
+	if b.Size != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 13)
+		x.xxx_hidden_Size = *b.Size
+	}
+	if b.Url != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 13)
+		x.xxx_hidden_Url = b.Url
+	}
+	if b.ProxyUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 13)
+		x.xxx_hidden_ProxyUrl = b.ProxyUrl
+	}
+	if b.Height != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 13)
+		x.xxx_hidden_Height = *b.Height
+	}
+	if b.Width != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 13)
+		x.xxx_hidden_Width = *b.Width
+	}
+	if b.Ephemeral != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 13)
+		x.xxx_hidden_Ephemeral = *b.Ephemeral
+	}
+	if b.DurationSecs != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 13)
+		x.xxx_hidden_DurationSecs = *b.DurationSecs
+	}
+	if b.Waveform != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 13)
+		x.xxx_hidden_Waveform = b.Waveform
+	}
+	if b.Flags != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 13)
+		x.xxx_hidden_Flags = *b.Flags
+	}
+	return m0
+}
+
 // EmbedFooter represents the footer of a message embed.
 type EmbedFooter struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Text          *string                `protobuf:"bytes,1,opt,name=text" json:"text,omitempty"`
-	IconUrl       *string                `protobuf:"bytes,2,opt,name=icon_url,json=iconUrl" json:"icon_url,omitempty"`
-	ProxyIconUrl  *string                `protobuf:"bytes,3,opt,name=proxy_icon_url,json=proxyIconUrl" json:"proxy_icon_url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Text         *string                `protobuf:"bytes,1,opt,name=text"`
+	xxx_hidden_IconUrl      *string                `protobuf:"bytes,2,opt,name=icon_url,json=iconUrl"`
+	xxx_hidden_ProxyIconUrl *string                `protobuf:"bytes,3,opt,name=proxy_icon_url,json=proxyIconUrl"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *EmbedFooter) Reset() {
@@ -198,41 +515,125 @@ func (x *EmbedFooter) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmbedFooter.ProtoReflect.Descriptor instead.
-func (*EmbedFooter) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *EmbedFooter) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		if x.xxx_hidden_Text != nil {
+			return *x.xxx_hidden_Text
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedFooter) GetIconUrl() string {
-	if x != nil && x.IconUrl != nil {
-		return *x.IconUrl
+	if x != nil {
+		if x.xxx_hidden_IconUrl != nil {
+			return *x.xxx_hidden_IconUrl
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedFooter) GetProxyIconUrl() string {
-	if x != nil && x.ProxyIconUrl != nil {
-		return *x.ProxyIconUrl
+	if x != nil {
+		if x.xxx_hidden_ProxyIconUrl != nil {
+			return *x.xxx_hidden_ProxyIconUrl
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *EmbedFooter) SetText(v string) {
+	x.xxx_hidden_Text = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *EmbedFooter) SetIconUrl(v string) {
+	x.xxx_hidden_IconUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *EmbedFooter) SetProxyIconUrl(v string) {
+	x.xxx_hidden_ProxyIconUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *EmbedFooter) HasText() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *EmbedFooter) HasIconUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *EmbedFooter) HasProxyIconUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *EmbedFooter) ClearText() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Text = nil
+}
+
+func (x *EmbedFooter) ClearIconUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_IconUrl = nil
+}
+
+func (x *EmbedFooter) ClearProxyIconUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_ProxyIconUrl = nil
+}
+
+type EmbedFooter_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Text         *string
+	IconUrl      *string
+	ProxyIconUrl *string
+}
+
+func (b0 EmbedFooter_builder) Build() *EmbedFooter {
+	m0 := &EmbedFooter{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Text != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Text = b.Text
+	}
+	if b.IconUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_IconUrl = b.IconUrl
+	}
+	if b.ProxyIconUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_ProxyIconUrl = b.ProxyIconUrl
+	}
+	return m0
+}
+
 // EmbedImage represents the image of a message embed.
 type EmbedImage struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           *string                `protobuf:"bytes,1,opt,name=url" json:"url,omitempty"`
-	ProxyUrl      *string                `protobuf:"bytes,2,opt,name=proxy_url,json=proxyUrl" json:"proxy_url,omitempty"`
-	Height        *int32                 `protobuf:"varint,3,opt,name=height" json:"height,omitempty"`
-	Width         *int32                 `protobuf:"varint,4,opt,name=width" json:"width,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Url         *string                `protobuf:"bytes,1,opt,name=url"`
+	xxx_hidden_ProxyUrl    *string                `protobuf:"bytes,2,opt,name=proxy_url,json=proxyUrl"`
+	xxx_hidden_Height      int32                  `protobuf:"varint,3,opt,name=height"`
+	xxx_hidden_Width       int32                  `protobuf:"varint,4,opt,name=width"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *EmbedImage) Reset() {
@@ -260,48 +661,151 @@ func (x *EmbedImage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmbedImage.ProtoReflect.Descriptor instead.
-func (*EmbedImage) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *EmbedImage) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		if x.xxx_hidden_Url != nil {
+			return *x.xxx_hidden_Url
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedImage) GetProxyUrl() string {
-	if x != nil && x.ProxyUrl != nil {
-		return *x.ProxyUrl
+	if x != nil {
+		if x.xxx_hidden_ProxyUrl != nil {
+			return *x.xxx_hidden_ProxyUrl
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedImage) GetHeight() int32 {
-	if x != nil && x.Height != nil {
-		return *x.Height
+	if x != nil {
+		return x.xxx_hidden_Height
 	}
 	return 0
 }
 
 func (x *EmbedImage) GetWidth() int32 {
-	if x != nil && x.Width != nil {
-		return *x.Width
+	if x != nil {
+		return x.xxx_hidden_Width
 	}
 	return 0
 }
 
+func (x *EmbedImage) SetUrl(v string) {
+	x.xxx_hidden_Url = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *EmbedImage) SetProxyUrl(v string) {
+	x.xxx_hidden_ProxyUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *EmbedImage) SetHeight(v int32) {
+	x.xxx_hidden_Height = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *EmbedImage) SetWidth(v int32) {
+	x.xxx_hidden_Width = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *EmbedImage) HasUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *EmbedImage) HasProxyUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *EmbedImage) HasHeight() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *EmbedImage) HasWidth() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *EmbedImage) ClearUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Url = nil
+}
+
+func (x *EmbedImage) ClearProxyUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ProxyUrl = nil
+}
+
+func (x *EmbedImage) ClearHeight() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Height = 0
+}
+
+func (x *EmbedImage) ClearWidth() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Width = 0
+}
+
+type EmbedImage_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Url      *string
+	ProxyUrl *string
+	Height   *int32
+	Width    *int32
+}
+
+func (b0 EmbedImage_builder) Build() *EmbedImage {
+	m0 := &EmbedImage{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Url != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Url = b.Url
+	}
+	if b.ProxyUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_ProxyUrl = b.ProxyUrl
+	}
+	if b.Height != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Height = *b.Height
+	}
+	if b.Width != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Width = *b.Width
+	}
+	return m0
+}
+
 // EmbedThumbnail represents the thumbnail of a message embed.
 type EmbedThumbnail struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           *string                `protobuf:"bytes,1,opt,name=url" json:"url,omitempty"`
-	ProxyUrl      *string                `protobuf:"bytes,2,opt,name=proxy_url,json=proxyUrl" json:"proxy_url,omitempty"`
-	Height        *int32                 `protobuf:"varint,3,opt,name=height" json:"height,omitempty"`
-	Width         *int32                 `protobuf:"varint,4,opt,name=width" json:"width,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Url         *string                `protobuf:"bytes,1,opt,name=url"`
+	xxx_hidden_ProxyUrl    *string                `protobuf:"bytes,2,opt,name=proxy_url,json=proxyUrl"`
+	xxx_hidden_Height      int32                  `protobuf:"varint,3,opt,name=height"`
+	xxx_hidden_Width       int32                  `protobuf:"varint,4,opt,name=width"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *EmbedThumbnail) Reset() {
@@ -329,48 +833,151 @@ func (x *EmbedThumbnail) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmbedThumbnail.ProtoReflect.Descriptor instead.
-func (*EmbedThumbnail) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *EmbedThumbnail) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		if x.xxx_hidden_Url != nil {
+			return *x.xxx_hidden_Url
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedThumbnail) GetProxyUrl() string {
-	if x != nil && x.ProxyUrl != nil {
-		return *x.ProxyUrl
+	if x != nil {
+		if x.xxx_hidden_ProxyUrl != nil {
+			return *x.xxx_hidden_ProxyUrl
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedThumbnail) GetHeight() int32 {
-	if x != nil && x.Height != nil {
-		return *x.Height
+	if x != nil {
+		return x.xxx_hidden_Height
 	}
 	return 0
 }
 
 func (x *EmbedThumbnail) GetWidth() int32 {
-	if x != nil && x.Width != nil {
-		return *x.Width
+	if x != nil {
+		return x.xxx_hidden_Width
 	}
 	return 0
 }
 
+func (x *EmbedThumbnail) SetUrl(v string) {
+	x.xxx_hidden_Url = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *EmbedThumbnail) SetProxyUrl(v string) {
+	x.xxx_hidden_ProxyUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *EmbedThumbnail) SetHeight(v int32) {
+	x.xxx_hidden_Height = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *EmbedThumbnail) SetWidth(v int32) {
+	x.xxx_hidden_Width = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *EmbedThumbnail) HasUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *EmbedThumbnail) HasProxyUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *EmbedThumbnail) HasHeight() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *EmbedThumbnail) HasWidth() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *EmbedThumbnail) ClearUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Url = nil
+}
+
+func (x *EmbedThumbnail) ClearProxyUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ProxyUrl = nil
+}
+
+func (x *EmbedThumbnail) ClearHeight() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Height = 0
+}
+
+func (x *EmbedThumbnail) ClearWidth() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Width = 0
+}
+
+type EmbedThumbnail_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Url      *string
+	ProxyUrl *string
+	Height   *int32
+	Width    *int32
+}
+
+func (b0 EmbedThumbnail_builder) Build() *EmbedThumbnail {
+	m0 := &EmbedThumbnail{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Url != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Url = b.Url
+	}
+	if b.ProxyUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_ProxyUrl = b.ProxyUrl
+	}
+	if b.Height != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Height = *b.Height
+	}
+	if b.Width != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Width = *b.Width
+	}
+	return m0
+}
+
 // EmbedVideo represents the video of a message embed.
 type EmbedVideo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           *string                `protobuf:"bytes,1,opt,name=url" json:"url,omitempty"`
-	ProxyUrl      *string                `protobuf:"bytes,2,opt,name=proxy_url,json=proxyUrl" json:"proxy_url,omitempty"`
-	Height        *int32                 `protobuf:"varint,3,opt,name=height" json:"height,omitempty"`
-	Width         *int32                 `protobuf:"varint,4,opt,name=width" json:"width,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Url         *string                `protobuf:"bytes,1,opt,name=url"`
+	xxx_hidden_ProxyUrl    *string                `protobuf:"bytes,2,opt,name=proxy_url,json=proxyUrl"`
+	xxx_hidden_Height      int32                  `protobuf:"varint,3,opt,name=height"`
+	xxx_hidden_Width       int32                  `protobuf:"varint,4,opt,name=width"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *EmbedVideo) Reset() {
@@ -398,46 +1005,149 @@ func (x *EmbedVideo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmbedVideo.ProtoReflect.Descriptor instead.
-func (*EmbedVideo) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *EmbedVideo) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		if x.xxx_hidden_Url != nil {
+			return *x.xxx_hidden_Url
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedVideo) GetProxyUrl() string {
-	if x != nil && x.ProxyUrl != nil {
-		return *x.ProxyUrl
+	if x != nil {
+		if x.xxx_hidden_ProxyUrl != nil {
+			return *x.xxx_hidden_ProxyUrl
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedVideo) GetHeight() int32 {
-	if x != nil && x.Height != nil {
-		return *x.Height
+	if x != nil {
+		return x.xxx_hidden_Height
 	}
 	return 0
 }
 
 func (x *EmbedVideo) GetWidth() int32 {
-	if x != nil && x.Width != nil {
-		return *x.Width
+	if x != nil {
+		return x.xxx_hidden_Width
 	}
 	return 0
 }
 
+func (x *EmbedVideo) SetUrl(v string) {
+	x.xxx_hidden_Url = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *EmbedVideo) SetProxyUrl(v string) {
+	x.xxx_hidden_ProxyUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *EmbedVideo) SetHeight(v int32) {
+	x.xxx_hidden_Height = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *EmbedVideo) SetWidth(v int32) {
+	x.xxx_hidden_Width = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *EmbedVideo) HasUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *EmbedVideo) HasProxyUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *EmbedVideo) HasHeight() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *EmbedVideo) HasWidth() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *EmbedVideo) ClearUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Url = nil
+}
+
+func (x *EmbedVideo) ClearProxyUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ProxyUrl = nil
+}
+
+func (x *EmbedVideo) ClearHeight() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Height = 0
+}
+
+func (x *EmbedVideo) ClearWidth() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Width = 0
+}
+
+type EmbedVideo_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Url      *string
+	ProxyUrl *string
+	Height   *int32
+	Width    *int32
+}
+
+func (b0 EmbedVideo_builder) Build() *EmbedVideo {
+	m0 := &EmbedVideo{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Url != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Url = b.Url
+	}
+	if b.ProxyUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_ProxyUrl = b.ProxyUrl
+	}
+	if b.Height != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Height = *b.Height
+	}
+	if b.Width != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Width = *b.Width
+	}
+	return m0
+}
+
 // EmbedProvider represents the provider of a message embed.
 type EmbedProvider struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Url           *string                `protobuf:"bytes,2,opt,name=url" json:"url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Url         *string                `protobuf:"bytes,2,opt,name=url"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *EmbedProvider) Reset() {
@@ -465,34 +1175,93 @@ func (x *EmbedProvider) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmbedProvider.ProtoReflect.Descriptor instead.
-func (*EmbedProvider) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *EmbedProvider) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedProvider) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		if x.xxx_hidden_Url != nil {
+			return *x.xxx_hidden_Url
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *EmbedProvider) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *EmbedProvider) SetUrl(v string) {
+	x.xxx_hidden_Url = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *EmbedProvider) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *EmbedProvider) HasUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *EmbedProvider) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *EmbedProvider) ClearUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Url = nil
+}
+
+type EmbedProvider_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name *string
+	Url  *string
+}
+
+func (b0 EmbedProvider_builder) Build() *EmbedProvider {
+	m0 := &EmbedProvider{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Url != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Url = b.Url
+	}
+	return m0
+}
+
 // EmbedAuthor represents the author of a message embed.
 type EmbedAuthor struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Url           *string                `protobuf:"bytes,2,opt,name=url" json:"url,omitempty"`
-	IconUrl       *string                `protobuf:"bytes,3,opt,name=icon_url,json=iconUrl" json:"icon_url,omitempty"`
-	ProxyIconUrl  *string                `protobuf:"bytes,4,opt,name=proxy_icon_url,json=proxyIconUrl" json:"proxy_icon_url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name         *string                `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Url          *string                `protobuf:"bytes,2,opt,name=url"`
+	xxx_hidden_IconUrl      *string                `protobuf:"bytes,3,opt,name=icon_url,json=iconUrl"`
+	xxx_hidden_ProxyIconUrl *string                `protobuf:"bytes,4,opt,name=proxy_icon_url,json=proxyIconUrl"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *EmbedAuthor) Reset() {
@@ -520,47 +1289,156 @@ func (x *EmbedAuthor) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmbedAuthor.ProtoReflect.Descriptor instead.
-func (*EmbedAuthor) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *EmbedAuthor) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedAuthor) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		if x.xxx_hidden_Url != nil {
+			return *x.xxx_hidden_Url
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedAuthor) GetIconUrl() string {
-	if x != nil && x.IconUrl != nil {
-		return *x.IconUrl
+	if x != nil {
+		if x.xxx_hidden_IconUrl != nil {
+			return *x.xxx_hidden_IconUrl
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedAuthor) GetProxyIconUrl() string {
-	if x != nil && x.ProxyIconUrl != nil {
-		return *x.ProxyIconUrl
+	if x != nil {
+		if x.xxx_hidden_ProxyIconUrl != nil {
+			return *x.xxx_hidden_ProxyIconUrl
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *EmbedAuthor) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *EmbedAuthor) SetUrl(v string) {
+	x.xxx_hidden_Url = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *EmbedAuthor) SetIconUrl(v string) {
+	x.xxx_hidden_IconUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *EmbedAuthor) SetProxyIconUrl(v string) {
+	x.xxx_hidden_ProxyIconUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *EmbedAuthor) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *EmbedAuthor) HasUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *EmbedAuthor) HasIconUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *EmbedAuthor) HasProxyIconUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *EmbedAuthor) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *EmbedAuthor) ClearUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Url = nil
+}
+
+func (x *EmbedAuthor) ClearIconUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_IconUrl = nil
+}
+
+func (x *EmbedAuthor) ClearProxyIconUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_ProxyIconUrl = nil
+}
+
+type EmbedAuthor_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name         *string
+	Url          *string
+	IconUrl      *string
+	ProxyIconUrl *string
+}
+
+func (b0 EmbedAuthor_builder) Build() *EmbedAuthor {
+	m0 := &EmbedAuthor{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Url != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_Url = b.Url
+	}
+	if b.IconUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_IconUrl = b.IconUrl
+	}
+	if b.ProxyIconUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_ProxyIconUrl = b.ProxyIconUrl
+	}
+	return m0
+}
+
 // EmbedField represents a field within a message embed.
 type EmbedField struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Value         *string                `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
-	Inline        *bool                  `protobuf:"varint,3,opt,name=inline" json:"inline,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Value       *string                `protobuf:"bytes,2,opt,name=value"`
+	xxx_hidden_Inline      bool                   `protobuf:"varint,3,opt,name=inline"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *EmbedField) Reset() {
@@ -588,50 +1466,131 @@ func (x *EmbedField) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use EmbedField.ProtoReflect.Descriptor instead.
-func (*EmbedField) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *EmbedField) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedField) GetValue() string {
-	if x != nil && x.Value != nil {
-		return *x.Value
+	if x != nil {
+		if x.xxx_hidden_Value != nil {
+			return *x.xxx_hidden_Value
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *EmbedField) GetInline() bool {
-	if x != nil && x.Inline != nil {
-		return *x.Inline
+	if x != nil {
+		return x.xxx_hidden_Inline
 	}
 	return false
 }
 
+func (x *EmbedField) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *EmbedField) SetValue(v string) {
+	x.xxx_hidden_Value = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *EmbedField) SetInline(v bool) {
+	x.xxx_hidden_Inline = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *EmbedField) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *EmbedField) HasValue() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *EmbedField) HasInline() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *EmbedField) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *EmbedField) ClearValue() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Value = nil
+}
+
+func (x *EmbedField) ClearInline() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Inline = false
+}
+
+type EmbedField_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   *string
+	Value  *string
+	Inline *bool
+}
+
+func (b0 EmbedField_builder) Build() *EmbedField {
+	m0 := &EmbedField{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Value != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Value = b.Value
+	}
+	if b.Inline != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Inline = *b.Inline
+	}
+	return m0
+}
+
 // Embed represents a rich embed attached to a message.
 type Embed struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         *string                `protobuf:"bytes,1,opt,name=title" json:"title,omitempty"`
-	Type          *EmbedType             `protobuf:"varint,2,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.EmbedType" json:"type,omitempty"`
-	Description   *string                `protobuf:"bytes,3,opt,name=description" json:"description,omitempty"`
-	Url           *string                `protobuf:"bytes,4,opt,name=url" json:"url,omitempty"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp" json:"timestamp,omitempty"`
-	Color         *uint32                `protobuf:"varint,6,opt,name=color" json:"color,omitempty"` // RGB color value in low 24 bits
-	Footer        *EmbedFooter           `protobuf:"bytes,7,opt,name=footer" json:"footer,omitempty"`
-	Image         *EmbedImage            `protobuf:"bytes,8,opt,name=image" json:"image,omitempty"`
-	Thumbnail     *EmbedThumbnail        `protobuf:"bytes,9,opt,name=thumbnail" json:"thumbnail,omitempty"`
-	Video         *EmbedVideo            `protobuf:"bytes,10,opt,name=video" json:"video,omitempty"`
-	Provider      *EmbedProvider         `protobuf:"bytes,11,opt,name=provider" json:"provider,omitempty"`
-	Author        *EmbedAuthor           `protobuf:"bytes,12,opt,name=author" json:"author,omitempty"`
-	Fields        []*EmbedField          `protobuf:"bytes,13,rep,name=fields" json:"fields,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Title       *string                `protobuf:"bytes,1,opt,name=title"`
+	xxx_hidden_Type        EmbedType              `protobuf:"varint,2,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.EmbedType"`
+	xxx_hidden_Description *string                `protobuf:"bytes,3,opt,name=description"`
+	xxx_hidden_Url         *string                `protobuf:"bytes,4,opt,name=url"`
+	xxx_hidden_Timestamp   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp"`
+	xxx_hidden_Color       uint32                 `protobuf:"varint,6,opt,name=color"`
+	xxx_hidden_Footer      *EmbedFooter           `protobuf:"bytes,7,opt,name=footer"`
+	xxx_hidden_Image       *EmbedImage            `protobuf:"bytes,8,opt,name=image"`
+	xxx_hidden_Thumbnail   *EmbedThumbnail        `protobuf:"bytes,9,opt,name=thumbnail"`
+	xxx_hidden_Video       *EmbedVideo            `protobuf:"bytes,10,opt,name=video"`
+	xxx_hidden_Provider    *EmbedProvider         `protobuf:"bytes,11,opt,name=provider"`
+	xxx_hidden_Author      *EmbedAuthor           `protobuf:"bytes,12,opt,name=author"`
+	xxx_hidden_Fields      *[]*EmbedField         `protobuf:"bytes,13,rep,name=fields"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Embed) Reset() {
@@ -659,110 +1618,367 @@ func (x *Embed) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Embed.ProtoReflect.Descriptor instead.
-func (*Embed) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *Embed) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		if x.xxx_hidden_Title != nil {
+			return *x.xxx_hidden_Title
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Embed) GetType() EmbedType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
+			return x.xxx_hidden_Type
+		}
 	}
 	return EmbedType_EMBED_TYPE_UNSPECIFIED
 }
 
 func (x *Embed) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		if x.xxx_hidden_Description != nil {
+			return *x.xxx_hidden_Description
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Embed) GetUrl() string {
-	if x != nil && x.Url != nil {
-		return *x.Url
+	if x != nil {
+		if x.xxx_hidden_Url != nil {
+			return *x.xxx_hidden_Url
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Embed) GetTimestamp() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Timestamp
+		return x.xxx_hidden_Timestamp
 	}
 	return nil
 }
 
 func (x *Embed) GetColor() uint32 {
-	if x != nil && x.Color != nil {
-		return *x.Color
+	if x != nil {
+		return x.xxx_hidden_Color
 	}
 	return 0
 }
 
 func (x *Embed) GetFooter() *EmbedFooter {
 	if x != nil {
-		return x.Footer
+		return x.xxx_hidden_Footer
 	}
 	return nil
 }
 
 func (x *Embed) GetImage() *EmbedImage {
 	if x != nil {
-		return x.Image
+		return x.xxx_hidden_Image
 	}
 	return nil
 }
 
 func (x *Embed) GetThumbnail() *EmbedThumbnail {
 	if x != nil {
-		return x.Thumbnail
+		return x.xxx_hidden_Thumbnail
 	}
 	return nil
 }
 
 func (x *Embed) GetVideo() *EmbedVideo {
 	if x != nil {
-		return x.Video
+		return x.xxx_hidden_Video
 	}
 	return nil
 }
 
 func (x *Embed) GetProvider() *EmbedProvider {
 	if x != nil {
-		return x.Provider
+		return x.xxx_hidden_Provider
 	}
 	return nil
 }
 
 func (x *Embed) GetAuthor() *EmbedAuthor {
 	if x != nil {
-		return x.Author
+		return x.xxx_hidden_Author
 	}
 	return nil
 }
 
 func (x *Embed) GetFields() []*EmbedField {
 	if x != nil {
-		return x.Fields
+		if x.xxx_hidden_Fields != nil {
+			return *x.xxx_hidden_Fields
+		}
 	}
 	return nil
 }
 
+func (x *Embed) SetTitle(v string) {
+	x.xxx_hidden_Title = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 13)
+}
+
+func (x *Embed) SetType(v EmbedType) {
+	x.xxx_hidden_Type = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 13)
+}
+
+func (x *Embed) SetDescription(v string) {
+	x.xxx_hidden_Description = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 13)
+}
+
+func (x *Embed) SetUrl(v string) {
+	x.xxx_hidden_Url = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 13)
+}
+
+func (x *Embed) SetTimestamp(v *timestamppb.Timestamp) {
+	x.xxx_hidden_Timestamp = v
+}
+
+func (x *Embed) SetColor(v uint32) {
+	x.xxx_hidden_Color = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 13)
+}
+
+func (x *Embed) SetFooter(v *EmbedFooter) {
+	x.xxx_hidden_Footer = v
+}
+
+func (x *Embed) SetImage(v *EmbedImage) {
+	x.xxx_hidden_Image = v
+}
+
+func (x *Embed) SetThumbnail(v *EmbedThumbnail) {
+	x.xxx_hidden_Thumbnail = v
+}
+
+func (x *Embed) SetVideo(v *EmbedVideo) {
+	x.xxx_hidden_Video = v
+}
+
+func (x *Embed) SetProvider(v *EmbedProvider) {
+	x.xxx_hidden_Provider = v
+}
+
+func (x *Embed) SetAuthor(v *EmbedAuthor) {
+	x.xxx_hidden_Author = v
+}
+
+func (x *Embed) SetFields(v []*EmbedField) {
+	x.xxx_hidden_Fields = &v
+}
+
+func (x *Embed) HasTitle() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Embed) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Embed) HasDescription() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Embed) HasUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *Embed) HasTimestamp() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Timestamp != nil
+}
+
+func (x *Embed) HasColor() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *Embed) HasFooter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Footer != nil
+}
+
+func (x *Embed) HasImage() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Image != nil
+}
+
+func (x *Embed) HasThumbnail() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Thumbnail != nil
+}
+
+func (x *Embed) HasVideo() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Video != nil
+}
+
+func (x *Embed) HasProvider() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Provider != nil
+}
+
+func (x *Embed) HasAuthor() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Author != nil
+}
+
+func (x *Embed) ClearTitle() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Title = nil
+}
+
+func (x *Embed) ClearType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Type = EmbedType_EMBED_TYPE_UNSPECIFIED
+}
+
+func (x *Embed) ClearDescription() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Description = nil
+}
+
+func (x *Embed) ClearUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Url = nil
+}
+
+func (x *Embed) ClearTimestamp() {
+	x.xxx_hidden_Timestamp = nil
+}
+
+func (x *Embed) ClearColor() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_Color = 0
+}
+
+func (x *Embed) ClearFooter() {
+	x.xxx_hidden_Footer = nil
+}
+
+func (x *Embed) ClearImage() {
+	x.xxx_hidden_Image = nil
+}
+
+func (x *Embed) ClearThumbnail() {
+	x.xxx_hidden_Thumbnail = nil
+}
+
+func (x *Embed) ClearVideo() {
+	x.xxx_hidden_Video = nil
+}
+
+func (x *Embed) ClearProvider() {
+	x.xxx_hidden_Provider = nil
+}
+
+func (x *Embed) ClearAuthor() {
+	x.xxx_hidden_Author = nil
+}
+
+type Embed_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Title       *string
+	Type        *EmbedType
+	Description *string
+	Url         *string
+	Timestamp   *timestamppb.Timestamp
+	Color       *uint32
+	Footer      *EmbedFooter
+	Image       *EmbedImage
+	Thumbnail   *EmbedThumbnail
+	Video       *EmbedVideo
+	Provider    *EmbedProvider
+	Author      *EmbedAuthor
+	Fields      []*EmbedField
+}
+
+func (b0 Embed_builder) Build() *Embed {
+	m0 := &Embed{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Title != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 13)
+		x.xxx_hidden_Title = b.Title
+	}
+	if b.Type != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 13)
+		x.xxx_hidden_Type = *b.Type
+	}
+	if b.Description != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 13)
+		x.xxx_hidden_Description = b.Description
+	}
+	if b.Url != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 13)
+		x.xxx_hidden_Url = b.Url
+	}
+	x.xxx_hidden_Timestamp = b.Timestamp
+	if b.Color != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 13)
+		x.xxx_hidden_Color = *b.Color
+	}
+	x.xxx_hidden_Footer = b.Footer
+	x.xxx_hidden_Image = b.Image
+	x.xxx_hidden_Thumbnail = b.Thumbnail
+	x.xxx_hidden_Video = b.Video
+	x.xxx_hidden_Provider = b.Provider
+	x.xxx_hidden_Author = b.Author
+	x.xxx_hidden_Fields = &b.Fields
+	return m0
+}
+
 // ReactionEmoji represents the emoji used in a reaction.
 type ReactionEmoji struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`     // empty for unicode emoji
-	Name          *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"` // unicode character or custom emoji name
-	Animated      *bool                  `protobuf:"varint,3,opt,name=animated" json:"animated,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,2,opt,name=name"`
+	xxx_hidden_Animated    bool                   `protobuf:"varint,3,opt,name=animated"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ReactionEmoji) Reset() {
@@ -790,43 +2006,124 @@ func (x *ReactionEmoji) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReactionEmoji.ProtoReflect.Descriptor instead.
-func (*ReactionEmoji) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *ReactionEmoji) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *ReactionEmoji) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *ReactionEmoji) GetAnimated() bool {
-	if x != nil && x.Animated != nil {
-		return *x.Animated
+	if x != nil {
+		return x.xxx_hidden_Animated
 	}
 	return false
 }
 
+func (x *ReactionEmoji) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *ReactionEmoji) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *ReactionEmoji) SetAnimated(v bool) {
+	x.xxx_hidden_Animated = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *ReactionEmoji) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ReactionEmoji) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ReactionEmoji) HasAnimated() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *ReactionEmoji) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *ReactionEmoji) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *ReactionEmoji) ClearAnimated() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Animated = false
+}
+
+type ReactionEmoji_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id       *string
+	Name     *string
+	Animated *bool
+}
+
+func (b0 ReactionEmoji_builder) Build() *ReactionEmoji {
+	m0 := &ReactionEmoji{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Animated != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Animated = *b.Animated
+	}
+	return m0
+}
+
 // Reaction represents a reaction on a message.
 type Reaction struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Emoji              *ReactionEmoji         `protobuf:"bytes,1,opt,name=emoji" json:"emoji,omitempty"`
-	Count              *int32                 `protobuf:"varint,2,opt,name=count" json:"count,omitempty"`
-	Me                 *bool                  `protobuf:"varint,3,opt,name=me" json:"me,omitempty"`
-	CountDetailsBurst  *int32                 `protobuf:"varint,4,opt,name=count_details_burst,json=countDetailsBurst" json:"count_details_burst,omitempty"`
-	CountDetailsNormal *int32                 `protobuf:"varint,5,opt,name=count_details_normal,json=countDetailsNormal" json:"count_details_normal,omitempty"`
-	BurstColors        []string               `protobuf:"bytes,6,rep,name=burst_colors,json=burstColors" json:"burst_colors,omitempty"` // hex color strings for super-reaction burst colors
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Emoji              *ReactionEmoji         `protobuf:"bytes,1,opt,name=emoji"`
+	xxx_hidden_Count              int32                  `protobuf:"varint,2,opt,name=count"`
+	xxx_hidden_Me                 bool                   `protobuf:"varint,3,opt,name=me"`
+	xxx_hidden_CountDetailsBurst  int32                  `protobuf:"varint,4,opt,name=count_details_burst,json=countDetailsBurst"`
+	xxx_hidden_CountDetailsNormal int32                  `protobuf:"varint,5,opt,name=count_details_normal,json=countDetailsNormal"`
+	xxx_hidden_BurstColors        []string               `protobuf:"bytes,6,rep,name=burst_colors,json=burstColors"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *Reaction) Reset() {
@@ -854,62 +2151,182 @@ func (x *Reaction) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Reaction.ProtoReflect.Descriptor instead.
-func (*Reaction) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *Reaction) GetEmoji() *ReactionEmoji {
 	if x != nil {
-		return x.Emoji
+		return x.xxx_hidden_Emoji
 	}
 	return nil
 }
 
 func (x *Reaction) GetCount() int32 {
-	if x != nil && x.Count != nil {
-		return *x.Count
+	if x != nil {
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
 func (x *Reaction) GetMe() bool {
-	if x != nil && x.Me != nil {
-		return *x.Me
+	if x != nil {
+		return x.xxx_hidden_Me
 	}
 	return false
 }
 
 func (x *Reaction) GetCountDetailsBurst() int32 {
-	if x != nil && x.CountDetailsBurst != nil {
-		return *x.CountDetailsBurst
+	if x != nil {
+		return x.xxx_hidden_CountDetailsBurst
 	}
 	return 0
 }
 
 func (x *Reaction) GetCountDetailsNormal() int32 {
-	if x != nil && x.CountDetailsNormal != nil {
-		return *x.CountDetailsNormal
+	if x != nil {
+		return x.xxx_hidden_CountDetailsNormal
 	}
 	return 0
 }
 
 func (x *Reaction) GetBurstColors() []string {
 	if x != nil {
-		return x.BurstColors
+		return x.xxx_hidden_BurstColors
 	}
 	return nil
 }
 
+func (x *Reaction) SetEmoji(v *ReactionEmoji) {
+	x.xxx_hidden_Emoji = v
+}
+
+func (x *Reaction) SetCount(v int32) {
+	x.xxx_hidden_Count = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+}
+
+func (x *Reaction) SetMe(v bool) {
+	x.xxx_hidden_Me = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+}
+
+func (x *Reaction) SetCountDetailsBurst(v int32) {
+	x.xxx_hidden_CountDetailsBurst = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+}
+
+func (x *Reaction) SetCountDetailsNormal(v int32) {
+	x.xxx_hidden_CountDetailsNormal = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+}
+
+func (x *Reaction) SetBurstColors(v []string) {
+	x.xxx_hidden_BurstColors = v
+}
+
+func (x *Reaction) HasEmoji() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Emoji != nil
+}
+
+func (x *Reaction) HasCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Reaction) HasMe() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Reaction) HasCountDetailsBurst() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *Reaction) HasCountDetailsNormal() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *Reaction) ClearEmoji() {
+	x.xxx_hidden_Emoji = nil
+}
+
+func (x *Reaction) ClearCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Count = 0
+}
+
+func (x *Reaction) ClearMe() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Me = false
+}
+
+func (x *Reaction) ClearCountDetailsBurst() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_CountDetailsBurst = 0
+}
+
+func (x *Reaction) ClearCountDetailsNormal() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_CountDetailsNormal = 0
+}
+
+type Reaction_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Emoji              *ReactionEmoji
+	Count              *int32
+	Me                 *bool
+	CountDetailsBurst  *int32
+	CountDetailsNormal *int32
+	BurstColors        []string
+}
+
+func (b0 Reaction_builder) Build() *Reaction {
+	m0 := &Reaction{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Emoji = b.Emoji
+	if b.Count != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		x.xxx_hidden_Count = *b.Count
+	}
+	if b.Me != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		x.xxx_hidden_Me = *b.Me
+	}
+	if b.CountDetailsBurst != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		x.xxx_hidden_CountDetailsBurst = *b.CountDetailsBurst
+	}
+	if b.CountDetailsNormal != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
+		x.xxx_hidden_CountDetailsNormal = *b.CountDetailsNormal
+	}
+	x.xxx_hidden_BurstColors = b.BurstColors
+	return m0
+}
+
 // MentionChannel represents a channel referenced in a message.
 type MentionChannel struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	GuildId       *string                `protobuf:"bytes,2,opt,name=guild_id,json=guildId" json:"guild_id,omitempty"`
-	Type          *ChannelType           `protobuf:"varint,3,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.ChannelType" json:"type,omitempty"`
-	Name          *string                `protobuf:"bytes,4,opt,name=name" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_GuildId     *string                `protobuf:"bytes,2,opt,name=guild_id,json=guildId"`
+	xxx_hidden_Type        ChannelType            `protobuf:"varint,3,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.ChannelType"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,4,opt,name=name"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *MentionChannel) Reset() {
@@ -937,66 +2354,174 @@ func (x *MentionChannel) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MentionChannel.ProtoReflect.Descriptor instead.
-func (*MentionChannel) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *MentionChannel) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *MentionChannel) GetGuildId() string {
-	if x != nil && x.GuildId != nil {
-		return *x.GuildId
+	if x != nil {
+		if x.xxx_hidden_GuildId != nil {
+			return *x.xxx_hidden_GuildId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *MentionChannel) GetType() ChannelType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 2) {
+			return x.xxx_hidden_Type
+		}
 	}
 	return ChannelType_CHANNEL_TYPE_UNSPECIFIED
 }
 
 func (x *MentionChannel) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *MentionChannel) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *MentionChannel) SetGuildId(v string) {
+	x.xxx_hidden_GuildId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *MentionChannel) SetType(v ChannelType) {
+	x.xxx_hidden_Type = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *MentionChannel) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *MentionChannel) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *MentionChannel) HasGuildId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *MentionChannel) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *MentionChannel) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *MentionChannel) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *MentionChannel) ClearGuildId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_GuildId = nil
+}
+
+func (x *MentionChannel) ClearType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Type = ChannelType_CHANNEL_TYPE_UNSPECIFIED
+}
+
+func (x *MentionChannel) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Name = nil
+}
+
+type MentionChannel_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id      *string
+	GuildId *string
+	Type    *ChannelType
+	Name    *string
+}
+
+func (b0 MentionChannel_builder) Build() *MentionChannel {
+	m0 := &MentionChannel{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.GuildId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_GuildId = b.GuildId
+	}
+	if b.Type != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Type = *b.Type
+	}
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Name = b.Name
+	}
+	return m0
+}
+
 // Message represents a Discord message.
 type Message struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Id                  *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	ChannelId           *string                `protobuf:"bytes,2,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	AuthorId            *string                `protobuf:"bytes,3,opt,name=author_id,json=authorId" json:"author_id,omitempty"`
-	Content             *string                `protobuf:"bytes,4,opt,name=content" json:"content,omitempty"`
-	Timestamp           *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp" json:"timestamp,omitempty"`
-	EditedTimestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=edited_timestamp,json=editedTimestamp" json:"edited_timestamp,omitempty"`
-	Tts                 *bool                  `protobuf:"varint,7,opt,name=tts" json:"tts,omitempty"`
-	MentionEveryone     *bool                  `protobuf:"varint,8,opt,name=mention_everyone,json=mentionEveryone" json:"mention_everyone,omitempty"`
-	MentionUserIds      []string               `protobuf:"bytes,9,rep,name=mention_user_ids,json=mentionUserIds" json:"mention_user_ids,omitempty"`
-	MentionRoleIds      []string               `protobuf:"bytes,10,rep,name=mention_role_ids,json=mentionRoleIds" json:"mention_role_ids,omitempty"`
-	MentionChannels     []*MentionChannel      `protobuf:"bytes,11,rep,name=mention_channels,json=mentionChannels" json:"mention_channels,omitempty"`
-	Attachments         []*Attachment          `protobuf:"bytes,12,rep,name=attachments" json:"attachments,omitempty"`
-	Embeds              []*Embed               `protobuf:"bytes,13,rep,name=embeds" json:"embeds,omitempty"`
-	Reactions           []*Reaction            `protobuf:"bytes,14,rep,name=reactions" json:"reactions,omitempty"`
-	Pinned              *bool                  `protobuf:"varint,15,opt,name=pinned" json:"pinned,omitempty"`
-	Type                *MessageType           `protobuf:"varint,16,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.MessageType" json:"type,omitempty"`
-	WebhookId           *string                `protobuf:"bytes,17,opt,name=webhook_id,json=webhookId" json:"webhook_id,omitempty"`
-	ApplicationId       *string                `protobuf:"bytes,18,opt,name=application_id,json=applicationId" json:"application_id,omitempty"`
-	ReferencedMessageId *string                `protobuf:"bytes,19,opt,name=referenced_message_id,json=referencedMessageId" json:"referenced_message_id,omitempty"`
-	Flags               *int64                 `protobuf:"varint,20,opt,name=flags" json:"flags,omitempty"` // bitmask
-	ThreadId            *string                `protobuf:"bytes,21,opt,name=thread_id,json=threadId" json:"thread_id,omitempty"`
-	Position            *int32                 `protobuf:"varint,22,opt,name=position" json:"position,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id                  *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_ChannelId           *string                `protobuf:"bytes,2,opt,name=channel_id,json=channelId"`
+	xxx_hidden_AuthorId            *string                `protobuf:"bytes,3,opt,name=author_id,json=authorId"`
+	xxx_hidden_Content             *string                `protobuf:"bytes,4,opt,name=content"`
+	xxx_hidden_Timestamp           *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp"`
+	xxx_hidden_EditedTimestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=edited_timestamp,json=editedTimestamp"`
+	xxx_hidden_Tts                 bool                   `protobuf:"varint,7,opt,name=tts"`
+	xxx_hidden_MentionEveryone     bool                   `protobuf:"varint,8,opt,name=mention_everyone,json=mentionEveryone"`
+	xxx_hidden_MentionUserIds      []string               `protobuf:"bytes,9,rep,name=mention_user_ids,json=mentionUserIds"`
+	xxx_hidden_MentionRoleIds      []string               `protobuf:"bytes,10,rep,name=mention_role_ids,json=mentionRoleIds"`
+	xxx_hidden_MentionChannels     *[]*MentionChannel     `protobuf:"bytes,11,rep,name=mention_channels,json=mentionChannels"`
+	xxx_hidden_Attachments         *[]*Attachment         `protobuf:"bytes,12,rep,name=attachments"`
+	xxx_hidden_Embeds              *[]*Embed              `protobuf:"bytes,13,rep,name=embeds"`
+	xxx_hidden_Reactions           *[]*Reaction           `protobuf:"bytes,14,rep,name=reactions"`
+	xxx_hidden_Pinned              bool                   `protobuf:"varint,15,opt,name=pinned"`
+	xxx_hidden_Type                MessageType            `protobuf:"varint,16,opt,name=type,enum=dev.unmango.discord.backup.v1alpha1.MessageType"`
+	xxx_hidden_WebhookId           *string                `protobuf:"bytes,17,opt,name=webhook_id,json=webhookId"`
+	xxx_hidden_ApplicationId       *string                `protobuf:"bytes,18,opt,name=application_id,json=applicationId"`
+	xxx_hidden_ReferencedMessageId *string                `protobuf:"bytes,19,opt,name=referenced_message_id,json=referencedMessageId"`
+	xxx_hidden_Flags               int64                  `protobuf:"varint,20,opt,name=flags"`
+	xxx_hidden_ThreadId            *string                `protobuf:"bytes,21,opt,name=thread_id,json=threadId"`
+	xxx_hidden_Position            int32                  `protobuf:"varint,22,opt,name=position"`
+	XXX_raceDetectHookData         protoimpl.RaceDetectHookData
+	XXX_presence                   [1]uint32
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *Message) Reset() {
@@ -1024,172 +2549,593 @@ func (x *Message) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Message.ProtoReflect.Descriptor instead.
-func (*Message) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *Message) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetChannelId() string {
-	if x != nil && x.ChannelId != nil {
-		return *x.ChannelId
+	if x != nil {
+		if x.xxx_hidden_ChannelId != nil {
+			return *x.xxx_hidden_ChannelId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetAuthorId() string {
-	if x != nil && x.AuthorId != nil {
-		return *x.AuthorId
+	if x != nil {
+		if x.xxx_hidden_AuthorId != nil {
+			return *x.xxx_hidden_AuthorId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetContent() string {
-	if x != nil && x.Content != nil {
-		return *x.Content
+	if x != nil {
+		if x.xxx_hidden_Content != nil {
+			return *x.xxx_hidden_Content
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetTimestamp() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Timestamp
+		return x.xxx_hidden_Timestamp
 	}
 	return nil
 }
 
 func (x *Message) GetEditedTimestamp() *timestamppb.Timestamp {
 	if x != nil {
-		return x.EditedTimestamp
+		return x.xxx_hidden_EditedTimestamp
 	}
 	return nil
 }
 
 func (x *Message) GetTts() bool {
-	if x != nil && x.Tts != nil {
-		return *x.Tts
+	if x != nil {
+		return x.xxx_hidden_Tts
 	}
 	return false
 }
 
 func (x *Message) GetMentionEveryone() bool {
-	if x != nil && x.MentionEveryone != nil {
-		return *x.MentionEveryone
+	if x != nil {
+		return x.xxx_hidden_MentionEveryone
 	}
 	return false
 }
 
 func (x *Message) GetMentionUserIds() []string {
 	if x != nil {
-		return x.MentionUserIds
+		return x.xxx_hidden_MentionUserIds
 	}
 	return nil
 }
 
 func (x *Message) GetMentionRoleIds() []string {
 	if x != nil {
-		return x.MentionRoleIds
+		return x.xxx_hidden_MentionRoleIds
 	}
 	return nil
 }
 
 func (x *Message) GetMentionChannels() []*MentionChannel {
 	if x != nil {
-		return x.MentionChannels
+		if x.xxx_hidden_MentionChannels != nil {
+			return *x.xxx_hidden_MentionChannels
+		}
 	}
 	return nil
 }
 
 func (x *Message) GetAttachments() []*Attachment {
 	if x != nil {
-		return x.Attachments
+		if x.xxx_hidden_Attachments != nil {
+			return *x.xxx_hidden_Attachments
+		}
 	}
 	return nil
 }
 
 func (x *Message) GetEmbeds() []*Embed {
 	if x != nil {
-		return x.Embeds
+		if x.xxx_hidden_Embeds != nil {
+			return *x.xxx_hidden_Embeds
+		}
 	}
 	return nil
 }
 
 func (x *Message) GetReactions() []*Reaction {
 	if x != nil {
-		return x.Reactions
+		if x.xxx_hidden_Reactions != nil {
+			return *x.xxx_hidden_Reactions
+		}
 	}
 	return nil
 }
 
 func (x *Message) GetPinned() bool {
-	if x != nil && x.Pinned != nil {
-		return *x.Pinned
+	if x != nil {
+		return x.xxx_hidden_Pinned
 	}
 	return false
 }
 
 func (x *Message) GetType() MessageType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 15) {
+			return x.xxx_hidden_Type
+		}
 	}
 	return MessageType_MESSAGE_TYPE_UNSPECIFIED
 }
 
 func (x *Message) GetWebhookId() string {
-	if x != nil && x.WebhookId != nil {
-		return *x.WebhookId
+	if x != nil {
+		if x.xxx_hidden_WebhookId != nil {
+			return *x.xxx_hidden_WebhookId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetApplicationId() string {
-	if x != nil && x.ApplicationId != nil {
-		return *x.ApplicationId
+	if x != nil {
+		if x.xxx_hidden_ApplicationId != nil {
+			return *x.xxx_hidden_ApplicationId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetReferencedMessageId() string {
-	if x != nil && x.ReferencedMessageId != nil {
-		return *x.ReferencedMessageId
+	if x != nil {
+		if x.xxx_hidden_ReferencedMessageId != nil {
+			return *x.xxx_hidden_ReferencedMessageId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetFlags() int64 {
-	if x != nil && x.Flags != nil {
-		return *x.Flags
+	if x != nil {
+		return x.xxx_hidden_Flags
 	}
 	return 0
 }
 
 func (x *Message) GetThreadId() string {
-	if x != nil && x.ThreadId != nil {
-		return *x.ThreadId
+	if x != nil {
+		if x.xxx_hidden_ThreadId != nil {
+			return *x.xxx_hidden_ThreadId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *Message) GetPosition() int32 {
-	if x != nil && x.Position != nil {
-		return *x.Position
+	if x != nil {
+		return x.xxx_hidden_Position
 	}
 	return 0
 }
 
+func (x *Message) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 22)
+}
+
+func (x *Message) SetChannelId(v string) {
+	x.xxx_hidden_ChannelId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 22)
+}
+
+func (x *Message) SetAuthorId(v string) {
+	x.xxx_hidden_AuthorId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 22)
+}
+
+func (x *Message) SetContent(v string) {
+	x.xxx_hidden_Content = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 22)
+}
+
+func (x *Message) SetTimestamp(v *timestamppb.Timestamp) {
+	x.xxx_hidden_Timestamp = v
+}
+
+func (x *Message) SetEditedTimestamp(v *timestamppb.Timestamp) {
+	x.xxx_hidden_EditedTimestamp = v
+}
+
+func (x *Message) SetTts(v bool) {
+	x.xxx_hidden_Tts = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 22)
+}
+
+func (x *Message) SetMentionEveryone(v bool) {
+	x.xxx_hidden_MentionEveryone = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 22)
+}
+
+func (x *Message) SetMentionUserIds(v []string) {
+	x.xxx_hidden_MentionUserIds = v
+}
+
+func (x *Message) SetMentionRoleIds(v []string) {
+	x.xxx_hidden_MentionRoleIds = v
+}
+
+func (x *Message) SetMentionChannels(v []*MentionChannel) {
+	x.xxx_hidden_MentionChannels = &v
+}
+
+func (x *Message) SetAttachments(v []*Attachment) {
+	x.xxx_hidden_Attachments = &v
+}
+
+func (x *Message) SetEmbeds(v []*Embed) {
+	x.xxx_hidden_Embeds = &v
+}
+
+func (x *Message) SetReactions(v []*Reaction) {
+	x.xxx_hidden_Reactions = &v
+}
+
+func (x *Message) SetPinned(v bool) {
+	x.xxx_hidden_Pinned = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 22)
+}
+
+func (x *Message) SetType(v MessageType) {
+	x.xxx_hidden_Type = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 22)
+}
+
+func (x *Message) SetWebhookId(v string) {
+	x.xxx_hidden_WebhookId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 22)
+}
+
+func (x *Message) SetApplicationId(v string) {
+	x.xxx_hidden_ApplicationId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 17, 22)
+}
+
+func (x *Message) SetReferencedMessageId(v string) {
+	x.xxx_hidden_ReferencedMessageId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 22)
+}
+
+func (x *Message) SetFlags(v int64) {
+	x.xxx_hidden_Flags = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 22)
+}
+
+func (x *Message) SetThreadId(v string) {
+	x.xxx_hidden_ThreadId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 22)
+}
+
+func (x *Message) SetPosition(v int32) {
+	x.xxx_hidden_Position = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 21, 22)
+}
+
+func (x *Message) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Message) HasChannelId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Message) HasAuthorId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Message) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *Message) HasTimestamp() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Timestamp != nil
+}
+
+func (x *Message) HasEditedTimestamp() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_EditedTimestamp != nil
+}
+
+func (x *Message) HasTts() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *Message) HasMentionEveryone() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
+func (x *Message) HasPinned() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 14)
+}
+
+func (x *Message) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 15)
+}
+
+func (x *Message) HasWebhookId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 16)
+}
+
+func (x *Message) HasApplicationId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 17)
+}
+
+func (x *Message) HasReferencedMessageId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 18)
+}
+
+func (x *Message) HasFlags() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 19)
+}
+
+func (x *Message) HasThreadId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 20)
+}
+
+func (x *Message) HasPosition() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 21)
+}
+
+func (x *Message) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = nil
+}
+
+func (x *Message) ClearChannelId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ChannelId = nil
+}
+
+func (x *Message) ClearAuthorId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_AuthorId = nil
+}
+
+func (x *Message) ClearContent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Content = nil
+}
+
+func (x *Message) ClearTimestamp() {
+	x.xxx_hidden_Timestamp = nil
+}
+
+func (x *Message) ClearEditedTimestamp() {
+	x.xxx_hidden_EditedTimestamp = nil
+}
+
+func (x *Message) ClearTts() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_Tts = false
+}
+
+func (x *Message) ClearMentionEveryone() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_MentionEveryone = false
+}
+
+func (x *Message) ClearPinned() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 14)
+	x.xxx_hidden_Pinned = false
+}
+
+func (x *Message) ClearType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 15)
+	x.xxx_hidden_Type = MessageType_MESSAGE_TYPE_UNSPECIFIED
+}
+
+func (x *Message) ClearWebhookId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 16)
+	x.xxx_hidden_WebhookId = nil
+}
+
+func (x *Message) ClearApplicationId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 17)
+	x.xxx_hidden_ApplicationId = nil
+}
+
+func (x *Message) ClearReferencedMessageId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 18)
+	x.xxx_hidden_ReferencedMessageId = nil
+}
+
+func (x *Message) ClearFlags() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 19)
+	x.xxx_hidden_Flags = 0
+}
+
+func (x *Message) ClearThreadId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 20)
+	x.xxx_hidden_ThreadId = nil
+}
+
+func (x *Message) ClearPosition() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 21)
+	x.xxx_hidden_Position = 0
+}
+
+type Message_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id                  *string
+	ChannelId           *string
+	AuthorId            *string
+	Content             *string
+	Timestamp           *timestamppb.Timestamp
+	EditedTimestamp     *timestamppb.Timestamp
+	Tts                 *bool
+	MentionEveryone     *bool
+	MentionUserIds      []string
+	MentionRoleIds      []string
+	MentionChannels     []*MentionChannel
+	Attachments         []*Attachment
+	Embeds              []*Embed
+	Reactions           []*Reaction
+	Pinned              *bool
+	Type                *MessageType
+	WebhookId           *string
+	ApplicationId       *string
+	ReferencedMessageId *string
+	Flags               *int64
+	ThreadId            *string
+	Position            *int32
+}
+
+func (b0 Message_builder) Build() *Message {
+	m0 := &Message{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 22)
+		x.xxx_hidden_Id = b.Id
+	}
+	if b.ChannelId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 22)
+		x.xxx_hidden_ChannelId = b.ChannelId
+	}
+	if b.AuthorId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 22)
+		x.xxx_hidden_AuthorId = b.AuthorId
+	}
+	if b.Content != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 22)
+		x.xxx_hidden_Content = b.Content
+	}
+	x.xxx_hidden_Timestamp = b.Timestamp
+	x.xxx_hidden_EditedTimestamp = b.EditedTimestamp
+	if b.Tts != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 22)
+		x.xxx_hidden_Tts = *b.Tts
+	}
+	if b.MentionEveryone != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 22)
+		x.xxx_hidden_MentionEveryone = *b.MentionEveryone
+	}
+	x.xxx_hidden_MentionUserIds = b.MentionUserIds
+	x.xxx_hidden_MentionRoleIds = b.MentionRoleIds
+	x.xxx_hidden_MentionChannels = &b.MentionChannels
+	x.xxx_hidden_Attachments = &b.Attachments
+	x.xxx_hidden_Embeds = &b.Embeds
+	x.xxx_hidden_Reactions = &b.Reactions
+	if b.Pinned != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 22)
+		x.xxx_hidden_Pinned = *b.Pinned
+	}
+	if b.Type != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 22)
+		x.xxx_hidden_Type = *b.Type
+	}
+	if b.WebhookId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 22)
+		x.xxx_hidden_WebhookId = b.WebhookId
+	}
+	if b.ApplicationId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 17, 22)
+		x.xxx_hidden_ApplicationId = b.ApplicationId
+	}
+	if b.ReferencedMessageId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 22)
+		x.xxx_hidden_ReferencedMessageId = b.ReferencedMessageId
+	}
+	if b.Flags != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 22)
+		x.xxx_hidden_Flags = *b.Flags
+	}
+	if b.ThreadId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 22)
+		x.xxx_hidden_ThreadId = b.ThreadId
+	}
+	if b.Position != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 21, 22)
+		x.xxx_hidden_Position = *b.Position
+	}
+	return m0
+}
+
 // ChannelMessages groups messages belonging to a single channel.
 type ChannelMessages struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     *string                `protobuf:"bytes,1,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	Messages      []*Message             `protobuf:"bytes,2,rep,name=messages" json:"messages,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ChannelId   *string                `protobuf:"bytes,1,opt,name=channel_id,json=channelId"`
+	xxx_hidden_Messages    *[]*Message            `protobuf:"bytes,2,rep,name=messages"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ChannelMessages) Reset() {
@@ -1217,23 +3163,63 @@ func (x *ChannelMessages) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ChannelMessages.ProtoReflect.Descriptor instead.
-func (*ChannelMessages) Descriptor() ([]byte, []int) {
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *ChannelMessages) GetChannelId() string {
-	if x != nil && x.ChannelId != nil {
-		return *x.ChannelId
+	if x != nil {
+		if x.xxx_hidden_ChannelId != nil {
+			return *x.xxx_hidden_ChannelId
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *ChannelMessages) GetMessages() []*Message {
 	if x != nil {
-		return x.Messages
+		if x.xxx_hidden_Messages != nil {
+			return *x.xxx_hidden_Messages
+		}
 	}
 	return nil
+}
+
+func (x *ChannelMessages) SetChannelId(v string) {
+	x.xxx_hidden_ChannelId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *ChannelMessages) SetMessages(v []*Message) {
+	x.xxx_hidden_Messages = &v
+}
+
+func (x *ChannelMessages) HasChannelId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ChannelMessages) ClearChannelId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_ChannelId = nil
+}
+
+type ChannelMessages_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ChannelId *string
+	Messages  []*Message
+}
+
+func (b0 ChannelMessages_builder) Build() *ChannelMessages {
+	m0 := &ChannelMessages{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.ChannelId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_ChannelId = b.ChannelId
+	}
+	x.xxx_hidden_Messages = &b.Messages
+	return m0
 }
 
 var File_dev_unmango_discord_backup_v1alpha1_message_proto protoreflect.FileDescriptor
@@ -1351,20 +3337,8 @@ const file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDesc = "" +
 	"\x0fChannelMessages\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12H\n" +
-	"\bmessages\x18\x02 \x03(\v2,.dev.unmango.discord.backup.v1alpha1.MessageR\bmessagesB\x95\x02\n" +
-	"'com.dev.unmango.discord.backup.v1alpha1B\fMessageProtoP\x01Z+github.com/UnstoppableMango/slacker-bot/gen\xa2\x02\x04DUDB\xaa\x02#Dev.Unmango.Discord.Backup.V1alpha1\xca\x02#Dev\\Unmango\\Discord\\Backup\\V1alpha1\xe2\x02/Dev\\Unmango\\Discord\\Backup\\V1alpha1\\GPBMetadata\xea\x02'Dev::Unmango::Discord::Backup::V1alpha1b\beditionsp\xe8\a"
-
-var (
-	file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescOnce sync.Once
-	file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescData []byte
-)
-
-func file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescGZIP() []byte {
-	file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescOnce.Do(func() {
-		file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDesc), len(file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDesc)))
-	})
-	return file_dev_unmango_discord_backup_v1alpha1_message_proto_rawDescData
-}
+	"\bmessages\x18\x02 \x03(\v2,.dev.unmango.discord.backup.v1alpha1.MessageR\bmessagesB\xa9\x02\n" +
+	"'com.dev.unmango.discord.backup.v1alpha1B\fMessageProtoP\x01Z?github.com/UnstoppableMango/slacker-bot/gen/dev/unmango/discord\xa2\x02\x04DUDB\xaa\x02#Dev.Unmango.Discord.Backup.V1alpha1\xca\x02#Dev\\Unmango\\Discord\\Backup\\V1alpha1\xe2\x02/Dev\\Unmango\\Discord\\Backup\\V1alpha1\\GPBMetadata\xea\x02'Dev::Unmango::Discord::Backup::V1alpha1b\beditionsp\xe8\a"
 
 var file_dev_unmango_discord_backup_v1alpha1_message_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_dev_unmango_discord_backup_v1alpha1_message_proto_goTypes = []any{
