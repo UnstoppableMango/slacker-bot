@@ -73,13 +73,13 @@ var _ = Describe("Create", func() {
 		})
 
 		It("returns a non-nil backup", func() {
-			backup, err := Create(context.Background(), rest, guildID, nil)
+			backup, err := Create(context.Background(), rest, guildID)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(backup).NotTo(BeNil())
 		})
 
 		It("maps the guild name", func() {
-			backup, err := Create(context.Background(), rest, guildID, nil)
+			backup, err := Create(context.Background(), rest, guildID)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(backup.GetGuild().GetName()).To(Equal("Test Guild"))
 		})
@@ -97,13 +97,13 @@ var _ = Describe("Create", func() {
 		})
 
 		It("maps members", func() {
-			backup, err := Create(context.Background(), rest, guildID, nil)
+			backup, err := Create(context.Background(), rest, guildID)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(backup.GetMembers()).To(HaveLen(1))
 		})
 
 		It("maps users from members", func() {
-			backup, err := Create(context.Background(), rest, guildID, nil)
+			backup, err := Create(context.Background(), rest, guildID)
 			Expect(err).NotTo(HaveOccurred())
 			Expect(backup.GetUsers()).To(HaveLen(1))
 			Expect(backup.GetUsers()[0].GetUsername()).To(Equal("testuser"))
@@ -113,7 +113,7 @@ var _ = Describe("Create", func() {
 	DescribeTable("propagates API errors",
 		func(setup func()) {
 			setup()
-			_, err := Create(context.Background(), rest, guildID, nil)
+			_, err := Create(context.Background(), rest, guildID)
 			Expect(errors.Is(err, errTest)).To(BeTrue())
 		},
 		Entry("GetGuild", func() {

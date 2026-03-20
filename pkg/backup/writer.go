@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/disgoorg/disgo/rest"
 	"github.com/unmango/go/fopt"
 	"github.com/unstoppablemango/ihfs"
 	pb "github.com/unstoppablemango/slacker-bot/gen/pb/dev/unmango/discord/backup/v1alpha1"
@@ -22,16 +21,13 @@ type HttpClient interface {
 
 type Writer struct {
 	fs   ihfs.FS
-	rest rest.Rest
 	http HttpClient
 }
 
-// NewWriter creates a new Writer making requests using
-// the given [rest.Rest] and writing to the given ihfs.FS.
-func NewWriter(fs ihfs.FS, rest rest.Rest, options ...WriterOpt) *Writer {
+// NewWriter creates a new Writer writing to the given ihfs.FS.
+func NewWriter(fs ihfs.FS, options ...WriterOpt) *Writer {
 	w := &Writer{
 		fs:   fs,
-		rest: rest,
 		http: http.DefaultClient,
 	}
 	fopt.ApplyAll(w, options)
@@ -123,4 +119,8 @@ func WithHTTPClient(client *http.Client) WriterOpt {
 	return func(w *Writer) {
 		w.http = client
 	}
+}
+
+func Write(b *pb.ServerBackup, fsys ihfs.FS) error {
+	return NewWriter(fsys).Write(b)
 }

@@ -2,7 +2,6 @@ package backup
 
 import (
 	"context"
-	"io/fs"
 
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/disgo/rest"
@@ -19,7 +18,7 @@ func optID(id *snowflake.ID) *string {
 	return new(id.String())
 }
 
-func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID, fsys fs.FS) (*pb.ServerBackup, error) {
+func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID) (*pb.ServerBackup, error) {
 	opts := []rest.RequestOpt{rest.WithCtx(ctx)}
 
 	guild, err := r.GetGuild(guildId, false, opts...)

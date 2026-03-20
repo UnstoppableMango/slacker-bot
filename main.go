@@ -27,9 +27,9 @@ func main() {
 	ctx := log.WithContext(context.Background(), logger)
 	id := snowflake.GetEnv("DISCORD_GUILD_ID")
 	fsys := osfs.New()
-	b := backup.New(id)
+	b, err := backup.Create(ctx, client.Rest, id)
 
-	if err := b.Write(ctx, client.Rest, fsys); err != nil {
+	if err := backup.Write(b, fsys); err != nil {
 		cli.Fail(err)
 	}
 }
