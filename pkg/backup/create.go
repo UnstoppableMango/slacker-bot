@@ -349,6 +349,7 @@ func mapUsers(members []discord.Member) []*pb.User {
 		seen[m.User.ID] = true
 		result = append(result, mapUser(m.User))
 	}
+
 	return result
 }
 
@@ -507,30 +508,16 @@ func mapAutoModRules(rules []discord.AutoModerationRule) []*pb.AutoModRule {
 }
 
 func mapAutoModRule(r discord.AutoModerationRule) *pb.AutoModRule {
-	exemptRoles := make([]string, len(r.ExemptRoles))
-	for i, er := range r.ExemptRoles {
-		exemptRoles[i] = er.String()
-	}
-	exemptChannels := make([]string, len(r.ExemptChannels))
-	for i, ec := range r.ExemptChannels {
-		exemptChannels[i] = ec.String()
-	}
-	actions := make([]*pb.AutoModAction, len(r.Actions))
-	for i, a := range r.Actions {
-		actions[i] = mapAutoModAction(a)
-	}
-	presets := make([]int32, len(r.TriggerMetadata.Presets))
-	for i, p := range r.TriggerMetadata.Presets {
-		presets[i] = int32(p)
-	}
-
 	tmb := &pb.AutoModTriggerMetadata_builder{
 		KeywordFilter:                r.TriggerMetadata.KeywordFilter,
 		RegexPatterns:                r.TriggerMetadata.RegexPatterns,
-		Presets:                      presets,
+		Presets:                      make([]int32, len(r.TriggerMetadata.Presets)),
 		AllowList:                    r.TriggerMetadata.AllowList,
 		MentionTotalLimit:            new(int32(r.TriggerMetadata.MentionTotalLimit)),
 		MentionRaidProtectionEnabled: new(r.TriggerMetadata.MentionRaidProtectionEnabled),
+	}
+	for i, p := range r.TriggerMetadata.Presets {
+		tmb.Presets[i] = int32(p)
 	}
 
 	b := &pb.AutoModRule_builder{
@@ -541,10 +528,19 @@ func mapAutoModRule(r discord.AutoModerationRule) *pb.AutoModRule {
 		EventType:        new(pb.AutoModEventType(int32(r.EventType))),
 		TriggerType:      new(mapAutoModTriggerType(r.TriggerType)),
 		TriggerMetadata:  tmb.Build(),
-		Actions:          actions,
+		Actions:          make([]*pb.AutoModAction, len(r.Actions)),
 		Enabled:          new(r.Enabled),
-		ExemptRoleIds:    exemptRoles,
-		ExemptChannelIds: exemptChannels,
+		ExemptRoleIds:    make([]string, len(r.ExemptRoles)),
+		ExemptChannelIds: make([]string, len(r.ExemptChannels)),
+	}
+	for i, er := range r.ExemptRoles {
+		b.ExemptRoleIds[i] = er.String()
+	}
+	for i, ec := range r.ExemptChannels {
+		b.ExemptChannelIds[i] = ec.String()
+	}
+	for i, a := range r.Actions {
+		b.Actions[i] = mapAutoModAction(a)
 	}
 
 	return b.Build()
