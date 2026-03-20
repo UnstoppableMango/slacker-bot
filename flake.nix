@@ -52,6 +52,12 @@
             go = pkgs.go_1_26;
             src = lib.cleanSource ./.;
             modules = ./gomod2nix.toml;
+
+            nativeBuildInputs = [ pkgs.ginkgo ];
+
+            checkPhase = ''
+              ginkgo run -r
+            '';
           };
 
           ctr = pkgs.dockerTools.streamLayeredImage {
@@ -82,10 +88,12 @@
             slacker-bot = {
               type = "app";
               program = "${slacker-bot}/bin/slacker-bot";
+              meta.description = "A Discord bot for the Slackers";
             };
             gopls = {
               type = "app";
               program = "${pkgs.gopls}/bin/gopls";
+              meta.description = "Language server for Go";
             };
           };
 
@@ -107,6 +115,7 @@
 
             BUF = "${pkgs.buf}/bin/buf";
             FIND = "${pkgs.uutils-findutils}/bin/find";
+            GINKGO = "${pkgs.ginkgo}/bin/ginkgo";
             GO = "${pkgs.go_1_26}/bin/go";
             GOMOD2NIX = "${gomod2nix}/bin/gomod2nix";
             MOCKGEN = "${pkgs.mockgen}/bin/mockgen";

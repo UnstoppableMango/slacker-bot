@@ -2,7 +2,12 @@
   "mcpServers": {
     "gopls": {
       "command": "nix",
-      "args": ["run", ".#gopls", "--", "mcp"]
+      "args": [
+        "run",
+        ".#gopls",
+        "--",
+        "mcp"
+      ]
     }
   }
 }

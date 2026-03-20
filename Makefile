@@ -1,5 +1,6 @@
 BUF       ?= buf
 FIND      ?= find
+GINKGO    ?= ginkgo
 GO        ?= go
 GOMOD2NIX ?= gomod2nix
 PODMAN    ?= podman
@@ -17,6 +18,9 @@ load: bin/stream-image.sh
 
 up: load
 	$(PODMAN) compose up --force-recreate
+
+test:
+	$(GINKGO) run -r
 
 format fmt:
 	nix fmt
