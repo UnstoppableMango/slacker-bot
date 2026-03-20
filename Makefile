@@ -21,7 +21,10 @@ up: load
 format fmt:
 	nix fmt
 
-generate gen: .github/gopls.instructions.md
+generate gen: .github/gopls.instructions.md mocks
+
+mocks:
+	$(GO) generate ./pkg/mocks/...
 
 check:
 	nix flake check
