@@ -1,3 +1,4 @@
+BUF       ?= buf
 FIND      ?= find
 GO        ?= go
 GOMOD2NIX ?= gomod2nix

@@ -6,6 +6,16 @@
     systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    apis = {
+      url = "github:unmango/apis";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        flake-parts.follows = "flake-parts";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
     gomod2nix = {
       url = "github:nix-community/gomod2nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -70,6 +80,7 @@
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
+              buf
               gnumake
               go_1_26
               gomod2nix
@@ -80,6 +91,7 @@
               uutils-findutils
             ];
 
+            BUF = "${pkgs.buf}/bin/buf";
             FIND = "${pkgs.uutils-findutils}/bin/find";
             GO = "${pkgs.go_1_26}/bin/go";
             GOMOD2NIX = "${gomod2nix}/bin/gomod2nix";

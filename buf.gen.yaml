@@ -1,0 +1,17 @@
+version: v2
+clean: true
+managed:
+  enabled: true
+  override:
+    - file_option: go_package
+      value: github.com/UnstoppableMango/slacker-bot/gen
+plugins:
+  - out: gen
+    remote: buf.build/protocolbuffers/go:v1.36.11
+    opt:
+      - paths=source_relative
+      - default_api_level=API_OPAQUE
+inputs:
+  - module: buf.build/unmango/apis
+    paths:
+      - dev/unmango/discord
