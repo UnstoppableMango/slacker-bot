@@ -16,14 +16,13 @@ func optID(id *snowflake.ID) *string {
 	if id == nil {
 		return nil
 	}
-	s := id.String()
-	return &s
+	return new(id.String())
 }
 
 func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID, fsys fs.FS) (*pb.ServerBackup, error) {
 	opts := []rest.RequestOpt{rest.WithCtx(ctx)}
 
-	g, err := r.GetGuild(guildId, true, opts...)
+	guild, err := r.GetGuild(guildId, false, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -33,6 +32,8 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID, fsys fs.FS) 
 		return nil, err
 	}
 
+	// after defaults to 0, but disgo requires it
+	// https://docs.discord.com/developers/resources/guild#list-guild-members
 	members, err := r.GetMembers(guildId, 1000, snowflake.ID(0), opts...)
 	if err != nil {
 		return nil, err
@@ -58,62 +59,57 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID, fsys fs.FS) 
 		return nil, err
 	}
 
-	return (&pb.ServerBackup_builder{
-		Guild:           mapGuild(g.Guild),
+	backup := &pb.ServerBackup_builder{
+		Guild:           mapGuild(guild.Guild),
 		Channels:        mapChannels(channels),
-		Roles:           mapRoles(g.Roles),
+		Roles:           mapRoles(guild.Roles),
 		Members:         mapMembers(members),
 		Users:           mapUsers(members),
-		Emojis:          mapEmojis(g.Emojis),
-		Stickers:        mapStickers(g.Stickers),
+		Emojis:          mapEmojis(guild.Emojis),
+		Stickers:        mapStickers(guild.Stickers),
 		Webhooks:        mapWebhooks(webhooks),
 		ScheduledEvents: mapScheduledEvents(scheduledEvents),
 		AutoModRules:    mapAutoModRules(autoModRules),
 		Invites:         mapInvites(invites),
-	}).Build(), nil
+	}
+
+	return backup.Build(), nil
 }
 
 func mapGuild(g discord.Guild) *pb.Guild {
-	id := g.ID.String()
-	ownerID := g.OwnerID.String()
-	preferredLocale := g.PreferredLocale
-	premiumCount := int32(g.PremiumSubscriptionCount)
-	maxMembers := int32(g.MaxMembers)
-	maxVideoUsers := int32(g.MaxVideoChannelUsers)
-	approxMembers := int32(g.ApproximateMemberCount)
-	approxPresence := int32(g.ApproximatePresenceCount)
-
 	features := make([]string, len(g.Features))
 	for i, f := range g.Features {
 		features[i] = string(f)
 	}
 
 	b := &pb.Guild_builder{
-		Id:                          &id,
-		Name:                        &g.Name,
-		Description:                 g.Description,
-		IconUrl:                     g.IconURL(),
-		BannerUrl:                   g.BannerURL(),
-		SplashUrl:                   g.SplashURL(),
-		DiscoverySplashUrl:          g.DiscoverySplashURL(),
-		OwnerId:                     &ownerID,
-		AfkChannelId:                optID(g.AfkChannelID),
-		AfkTimeout:                  new(int32(g.AfkTimeout)),
-		SystemChannelId:             optID(g.SystemChannelID),
-		SystemChannelFlags:          new(int64(g.SystemChannelFlags)),
-		RulesChannelId:              optID(g.RulesChannelID),
-		PublicUpdatesChannelId:      optID(g.PublicUpdatesChannelID),
-		SafetyAlertsChannelId:       optID(g.SafetyAlertsChannelID),
-		MaxMembers:                  &maxMembers,
-		MaxVideoChannelUsers:        &maxVideoUsers,
-		WidgetEnabled:               new(g.WidgetEnabled),
-		ApproximateMemberCount:      &approxMembers,
-		ApproximatePresenceCount:    &approxPresence,
-		PreferredLocale:             &preferredLocale,
-		PremiumSubscriptionCount:    &premiumCount,
-		VanityUrlCode:               g.VanityURLCode,
-		JoinedAt:                    timestamppb.New(g.JoinedAt),
-		Features:                    features,
+		Id:                       new(g.ID.String()),
+		Name:                     &g.Name,
+		Description:              g.Description,
+		IconUrl:                  g.IconURL(),
+		BannerUrl:                g.BannerURL(),
+		SplashUrl:                g.SplashURL(),
+		DiscoverySplashUrl:       g.DiscoverySplashURL(),
+		OwnerId:                  new(g.OwnerID.String()),
+		AfkChannelId:             optID(g.AfkChannelID),
+		AfkTimeout:               new(int32(g.AfkTimeout)),
+		SystemChannelId:          optID(g.SystemChannelID),
+		SystemChannelFlags:       new(int64(g.SystemChannelFlags)),
+		RulesChannelId:           optID(g.RulesChannelID),
+		PublicUpdatesChannelId:   optID(g.PublicUpdatesChannelID),
+		SafetyAlertsChannelId:    optID(g.SafetyAlertsChannelID),
+		MaxMembers:               new(int32(g.MaxMembers)),
+		MaxVideoChannelUsers:     new(int32(g.MaxVideoChannelUsers)),
+		WidgetEnabled:            new(g.WidgetEnabled),
+		ApproximateMemberCount:   new(int32(g.ApproximateMemberCount)),
+		ApproximatePresenceCount: new(int32(g.ApproximatePresenceCount)),
+		PreferredLocale:          new(g.PreferredLocale),
+		PremiumSubscriptionCount: new(int32(g.PremiumSubscriptionCount)),
+		VanityUrlCode:            g.VanityURLCode,
+		JoinedAt:                 timestamppb.New(g.JoinedAt),
+		Features:                 features,
+
+		// Discord's enumerations start at 0, but protobuf's "unspecified" convention means we need to shift them to start at 1
 		VerificationLevel:           new(pb.VerificationLevel(int32(g.VerificationLevel) + 1)),
 		ExplicitContentFilter:       new(pb.ExplicitContentFilter(int32(g.ExplicitContentFilter) + 1)),
 		DefaultMessageNotifications: new(pb.DefaultMessageNotifications(int32(g.DefaultMessageNotifications) + 1)),
@@ -126,8 +122,7 @@ func mapGuild(g discord.Guild) *pb.Guild {
 	}
 
 	if g.WidgetChannelID != 0 {
-		wid := g.WidgetChannelID.String()
-		b.WidgetChannelId = &wid
+		b.WidgetChannelId = new(g.WidgetChannelID.String())
 	}
 
 	return b.Build()
@@ -142,16 +137,13 @@ func mapChannels(channels []discord.GuildChannel) []*pb.Channel {
 }
 
 func mapChannel(ch discord.GuildChannel) *pb.Channel {
-	id := ch.ID().String()
-	name := ch.Name()
 	ct := mapChannelType(ch.Type())
-	pos := int32(ch.Position())
 
 	b := &pb.Channel_builder{
-		Id:                   &id,
-		Name:                 &name,
+		Id:                   new(ch.ID().String()),
+		Name:                 new(ch.Name()),
 		Type:                 &ct,
-		Position:             &pos,
+		Position:             new(int32(ch.Position())),
 		ParentId:             optID(ch.ParentID()),
 		PermissionOverwrites: mapPermissionOverwrites(ch.PermissionOverwrites()),
 	}
@@ -207,6 +199,7 @@ func mapPermissionOverwrites(overwrites discord.PermissionOverwrites) []*pb.Perm
 	if overwrites == nil {
 		return nil
 	}
+
 	result := make([]*pb.PermissionOverwrite, len(overwrites))
 	for i, ow := range overwrites {
 		id := ow.ID().String()
@@ -229,36 +222,41 @@ func mapPermissionOverwrites(overwrites discord.PermissionOverwrites) []*pb.Perm
 }
 
 func mapThreadMetadata(tm discord.ThreadMetadata) *pb.ThreadMetadata {
-	return (&pb.ThreadMetadata_builder{
+	b := &pb.ThreadMetadata_builder{
 		Archived:            new(tm.Archived),
 		AutoArchiveDuration: new(int32(tm.AutoArchiveDuration)),
 		ArchiveTimestamp:    timestamppb.New(tm.ArchiveTimestamp),
 		Locked:              new(tm.Locked),
 		Invitable:           new(tm.Invitable),
 		CreateTimestamp:     timestamppb.New(tm.CreateTimestamp),
-	}).Build()
+	}
+
+	return b.Build()
 }
 
 func mapForumTags(tags []discord.ChannelTag) []*pb.ForumTag {
 	result := make([]*pb.ForumTag, len(tags))
 	for i, t := range tags {
-		id := t.ID.String()
-		result[i] = (&pb.ForumTag_builder{
-			Id:        &id,
+		b := &pb.ForumTag_builder{
+			Id:        new(t.ID.String()),
 			Name:      &t.Name,
 			Moderated: new(t.Moderated),
 			EmojiId:   optID(t.EmojiID),
 			EmojiName: t.EmojiName,
-		}).Build()
+		}
+
+		result[i] = b.Build()
 	}
 	return result
 }
 
 func mapDefaultReaction(dr *discord.DefaultReactionEmoji) *pb.DefaultReaction {
-	return (&pb.DefaultReaction_builder{
+	b := &pb.DefaultReaction_builder{
 		EmojiId:   optID(dr.EmojiID),
 		EmojiName: dr.EmojiName,
-	}).Build()
+	}
+
+	return b.Build()
 }
 
 func mapRoles(roles []discord.Role) []*pb.Role {
@@ -270,25 +268,18 @@ func mapRoles(roles []discord.Role) []*pb.Role {
 }
 
 func mapRole(r discord.Role) *pb.Role {
-	id := r.ID.String()
-	name := r.Name
-	color := uint32(r.Color)
-	pos := int32(r.Position)
-	perms := int64(r.Permissions)
-	flags := int64(r.Flags)
-
 	b := &pb.Role_builder{
-		Id:           &id,
-		Name:         &name,
-		Color:        &color,
+		Id:           new(r.ID.String()),
+		Name:         &r.Name,
+		Color:        new(uint32(r.Color)),
 		Hoist:        new(r.Hoist),
 		IconUrl:      r.IconURL(),
 		UnicodeEmoji: r.Emoji,
-		Position:     &pos,
-		Permissions:  &perms,
+		Position:     new(int32(r.Position)),
+		Permissions:  new(int64(r.Permissions)),
 		Managed:      new(r.Managed),
 		Mentionable:  new(r.Mentionable),
-		Flags:        &flags,
+		Flags:        new(int64(r.Flags)),
 	}
 
 	if r.Tags != nil {
@@ -299,14 +290,16 @@ func mapRole(r discord.Role) *pb.Role {
 }
 
 func mapRoleTag(t *discord.RoleTag) *pb.RoleTag {
-	return (&pb.RoleTag_builder{
+	b := &pb.RoleTag_builder{
 		BotId:                 optID(t.BotID),
 		IntegrationId:         optID(t.IntegrationID),
 		SubscriptionListingId: optID(t.SubscriptionListingID),
 		PremiumSubscriber:     new(t.PremiumSubscriber),
 		AvailableForPurchase:  new(t.AvailableForPurchase),
 		GuildConnections:      new(t.GuildConnections),
-	}).Build()
+	}
+
+	return b.Build()
 }
 
 func mapMembers(members []discord.Member) []*pb.Member {
@@ -318,14 +311,13 @@ func mapMembers(members []discord.Member) []*pb.Member {
 }
 
 func mapMember(m discord.Member) *pb.Member {
-	userId := m.User.ID.String()
 	roleIds := make([]string, len(m.RoleIDs))
 	for i, r := range m.RoleIDs {
 		roleIds[i] = r.String()
 	}
 
 	b := &pb.Member_builder{
-		UserId:         &userId,
+		UserId:         new(m.User.ID.String()),
 		Nickname:       m.Nick,
 		GuildAvatarUrl: m.AvatarURL(),
 		RoleIds:        roleIds,
@@ -362,18 +354,17 @@ func mapUsers(members []discord.Member) []*pb.User {
 }
 
 func mapUser(u discord.User) *pb.User {
-	id := u.ID.String()
-	username := u.Username
-	discriminator := u.Discriminator
-	return (&pb.User_builder{
-		Id:            &id,
-		Username:      &username,
-		Discriminator: &discriminator,
+	b := &pb.User_builder{
+		Id:            new(u.ID.String()),
+		Username:      new(u.Username),
+		Discriminator: new(u.Discriminator),
 		GlobalName:    u.GlobalName,
 		AvatarUrl:     u.AvatarURL(),
 		Bot:           new(u.Bot),
 		System:        new(u.System),
-	}).Build()
+	}
+
+	return b.Build()
 }
 
 func mapEmojis(emojis []discord.Emoji) []*pb.Emoji {
@@ -385,16 +376,14 @@ func mapEmojis(emojis []discord.Emoji) []*pb.Emoji {
 }
 
 func mapEmoji(e discord.Emoji) *pb.Emoji {
-	id := e.ID.String()
-	name := e.Name
 	roleIds := make([]string, len(e.Roles))
 	for i, r := range e.Roles {
 		roleIds[i] = r.String()
 	}
 
 	b := &pb.Emoji_builder{
-		Id:            &id,
-		Name:          &name,
+		Id:            new(e.ID.String()),
+		Name:          new(e.Name),
 		RoleIds:       roleIds,
 		RequireColons: new(e.RequireColons),
 		Managed:       new(e.Managed),
@@ -403,8 +392,7 @@ func mapEmoji(e discord.Emoji) *pb.Emoji {
 	}
 
 	if e.Creator != nil {
-		userId := e.Creator.ID.String()
-		b.UserId = &userId
+		b.UserId = new(e.Creator.ID.String())
 	}
 
 	return b.Build()
@@ -419,28 +407,20 @@ func mapStickers(stickers []discord.Sticker) []*pb.Sticker {
 }
 
 func mapSticker(s discord.Sticker) *pb.Sticker {
-	id := s.ID.String()
-	name := s.Name
-	description := s.Description
-	tags := s.Tags
-	formatType := pb.StickerFormatType(int32(s.FormatType))
-
 	b := &pb.Sticker_builder{
-		Id:          &id,
-		Name:        &name,
-		Description: &description,
-		Tags:        &tags,
-		FormatType:  &formatType,
+		Id:          new(s.ID.String()),
+		Name:        new(s.Name),
+		Description: new(s.Description),
+		Tags:        new(s.Tags),
+		FormatType:  new(pb.StickerFormatType(int32(s.FormatType))),
 		PackId:      optID(s.PackID),
 		GuildId:     optID(s.GuildID),
 		Available:   s.Available,
 	}
 
 	if s.User != nil {
-		userId := s.User.ID.String()
-		b.UserId = &userId
+		b.UserId = new(s.User.ID.String())
 	}
-
 	if s.SortValue != nil {
 		b.SortValue = new(int32(*s.SortValue))
 	}
@@ -457,30 +437,23 @@ func mapWebhooks(webhooks []discord.Webhook) []*pb.Webhook {
 }
 
 func mapWebhook(w discord.Webhook) *pb.Webhook {
-	id := w.ID().String()
-	name := w.Name()
-	wType := pb.WebhookType(int32(w.Type()))
-
 	b := &pb.Webhook_builder{
-		Id:        &id,
-		Name:      &name,
-		Type:      &wType,
+		Id:        new(w.ID().String()),
+		Name:      new(w.Name()),
+		Type:      new(pb.WebhookType(int32(w.Type()))),
 		AvatarUrl: w.AvatarURL(),
 	}
 
 	if wh, ok := w.(discord.IncomingWebhook); ok {
-		guildId := wh.GuildID.String()
-		channelId := wh.ChannelID.String()
-		userId := wh.User.ID.String()
-		b.GuildId = &guildId
-		b.ChannelId = &channelId
-		b.UserId = &userId
+		b.GuildId = new(wh.GuildID.String())
+		b.ChannelId = new(wh.ChannelID.String())
+		b.UserId = new(wh.User.ID.String())
+
 		if wh.Token != "" {
 			b.Token = &wh.Token
 		}
 		if wh.ApplicationID != nil {
-			appId := wh.ApplicationID.String()
-			b.ApplicationId = &appId
+			b.ApplicationId = new(wh.ApplicationID.String())
 		}
 	}
 
@@ -496,29 +469,19 @@ func mapScheduledEvents(events []discord.GuildScheduledEvent) []*pb.ScheduledEve
 }
 
 func mapScheduledEvent(e discord.GuildScheduledEvent) *pb.ScheduledEvent {
-	id := e.ID.String()
-	guildId := e.GuildID.String()
-	creatorId := e.CreatorID.String()
-	name := e.Name
-	description := e.Description
-	privacyLevel := pb.PrivacyLevel(int32(e.PrivacyLevel))
-	status := pb.ScheduledEventStatus(int32(e.Status))
-	entityType := pb.ScheduledEventEntityType(int32(e.EntityType))
-	userCount := int32(e.UserCount)
-
 	b := &pb.ScheduledEvent_builder{
-		Id:                 &id,
-		GuildId:            &guildId,
+		Id:                 new(e.ID.String()),
+		GuildId:            new(e.GuildID.String()),
 		ChannelId:          optID(e.ChannelID),
-		CreatorId:          &creatorId,
-		Name:               &name,
-		Description:        &description,
+		CreatorId:          new(e.CreatorID.String()),
+		Name:               new(e.Name),
+		Description:        new(e.Description),
 		ScheduledStartTime: timestamppb.New(e.ScheduledStartTime),
-		PrivacyLevel:       &privacyLevel,
-		Status:             &status,
-		EntityType:         &entityType,
+		PrivacyLevel:       new(pb.PrivacyLevel(int32(e.PrivacyLevel))),
+		Status:             new(pb.ScheduledEventStatus(int32(e.Status))),
+		EntityType:         new(pb.ScheduledEventEntityType(int32(e.EntityType))),
 		EntityId:           optID(e.EntityID),
-		UserCount:          &userCount,
+		UserCount:          new(int32(e.UserCount)),
 		ImageUrl:           e.Image,
 	}
 
@@ -527,9 +490,10 @@ func mapScheduledEvent(e discord.GuildScheduledEvent) *pb.ScheduledEvent {
 	}
 
 	if e.EntityMetaData != nil {
-		b.EntityMetadata = (&pb.ScheduledEventEntityMetadata_builder{
+		mb := &pb.ScheduledEventEntityMetadata_builder{
 			Location: new(e.EntityMetaData.Location),
-		}).Build()
+		}
+		b.EntityMetadata = mb.Build()
 	}
 
 	return b.Build()
@@ -544,13 +508,6 @@ func mapAutoModRules(rules []discord.AutoModerationRule) []*pb.AutoModRule {
 }
 
 func mapAutoModRule(r discord.AutoModerationRule) *pb.AutoModRule {
-	id := r.ID.String()
-	guildId := r.GuildID.String()
-	name := r.Name
-	creatorId := r.CreatorID.String()
-	eventType := pb.AutoModEventType(int32(r.EventType))
-	triggerType := mapAutoModTriggerType(r.TriggerType)
-
 	exemptRoles := make([]string, len(r.ExemptRoles))
 	for i, er := range r.ExemptRoles {
 		exemptRoles[i] = er.String()
@@ -568,26 +525,30 @@ func mapAutoModRule(r discord.AutoModerationRule) *pb.AutoModRule {
 		presets[i] = int32(p)
 	}
 
-	return (&pb.AutoModRule_builder{
-		Id:          &id,
-		GuildId:     &guildId,
-		Name:        &name,
-		CreatorId:   &creatorId,
-		EventType:   &eventType,
-		TriggerType: &triggerType,
-		TriggerMetadata: (&pb.AutoModTriggerMetadata_builder{
-			KeywordFilter:                r.TriggerMetadata.KeywordFilter,
-			RegexPatterns:                r.TriggerMetadata.RegexPatterns,
-			Presets:                      presets,
-			AllowList:                    r.TriggerMetadata.AllowList,
-			MentionTotalLimit:            new(int32(r.TriggerMetadata.MentionTotalLimit)),
-			MentionRaidProtectionEnabled: new(r.TriggerMetadata.MentionRaidProtectionEnabled),
-		}).Build(),
+	tmb := &pb.AutoModTriggerMetadata_builder{
+		KeywordFilter:                r.TriggerMetadata.KeywordFilter,
+		RegexPatterns:                r.TriggerMetadata.RegexPatterns,
+		Presets:                      presets,
+		AllowList:                    r.TriggerMetadata.AllowList,
+		MentionTotalLimit:            new(int32(r.TriggerMetadata.MentionTotalLimit)),
+		MentionRaidProtectionEnabled: new(r.TriggerMetadata.MentionRaidProtectionEnabled),
+	}
+
+	b := &pb.AutoModRule_builder{
+		Id:               new(r.ID.String()),
+		GuildId:          new(r.GuildID.String()),
+		Name:             new(r.Name),
+		CreatorId:        new(r.CreatorID.String()),
+		EventType:        new(pb.AutoModEventType(int32(r.EventType))),
+		TriggerType:      new(mapAutoModTriggerType(r.TriggerType)),
+		TriggerMetadata:  tmb.Build(),
 		Actions:          actions,
 		Enabled:          new(r.Enabled),
 		ExemptRoleIds:    exemptRoles,
 		ExemptChannelIds: exemptChannels,
-	}).Build()
+	}
+
+	return b.Build()
 }
 
 func mapAutoModTriggerType(t discord.AutoModerationTriggerType) pb.AutoModTriggerType {
@@ -608,16 +569,17 @@ func mapAutoModTriggerType(t discord.AutoModerationTriggerType) pb.AutoModTrigge
 }
 
 func mapAutoModAction(a discord.AutoModerationAction) *pb.AutoModAction {
-	actionType := pb.AutoModActionType(int32(a.Type))
 	b := &pb.AutoModAction_builder{
-		Type: &actionType,
+		Type: new(pb.AutoModActionType(int32(a.Type))),
 	}
+
 	if a.Metadata != nil {
 		channelId := a.Metadata.ChannelID.String()
 		b.ChannelId = &channelId
 		b.DurationSeconds = new(int32(a.Metadata.DurationSeconds))
 		b.CustomMessage = a.Metadata.CustomMessage
 	}
+
 	return b.Build()
 }
 
@@ -630,28 +592,20 @@ func mapInvites(invites []discord.ExtendedInvite) []*pb.Invite {
 }
 
 func mapInvite(inv discord.ExtendedInvite) *pb.Invite {
-	code := inv.Code
-	maxAge := int32(inv.MaxAge)
-	maxUses := int32(inv.MaxUses)
-	uses := int32(inv.Uses)
-
 	b := &pb.Invite_builder{
-		Code:      &code,
-		MaxAge:    &maxAge,
-		MaxUses:   &maxUses,
+		Code:      &inv.Code,
+		MaxAge:    new(int32(inv.MaxAge)),
+		MaxUses:   new(int32(inv.MaxUses)),
 		Temporary: new(inv.Temporary),
-		Uses:      &uses,
+		Uses:      new(int32(inv.Uses)),
 		CreatedAt: timestamppb.New(inv.CreatedAt),
 	}
 
 	if inv.Channel != nil {
-		channelId := inv.Channel.ID.String()
-		b.ChannelId = &channelId
+		b.ChannelId = new(inv.Channel.ID.String())
 	}
-
 	if inv.Inviter != nil {
-		inviterId := inv.Inviter.ID.String()
-		b.InviterId = &inviterId
+		b.InviterId = new(inv.Inviter.ID.String())
 	}
 
 	return b.Build()
