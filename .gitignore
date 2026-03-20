@@ -4,3 +4,4 @@ bin/
 /result
 .vscode/*
 !.vscode/extensions.json
+.claude/*
