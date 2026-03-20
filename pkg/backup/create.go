@@ -12,10 +12,6 @@ import (
 	pb "github.com/unstoppablemango/slacker-bot/gen/dev/unmango/discord/backup/v1alpha1"
 )
 
-func ptr[T any](v T) *T {
-	return &v
-}
-
 func optID(id *snowflake.ID) *string {
 	if id == nil {
 		return nil
@@ -102,15 +98,15 @@ func mapGuild(g discord.Guild) *pb.Guild {
 		DiscoverySplashUrl:          g.DiscoverySplashURL(),
 		OwnerId:                     &ownerID,
 		AfkChannelId:                optID(g.AfkChannelID),
-		AfkTimeout:                  ptr(int32(g.AfkTimeout)),
+		AfkTimeout:                  new(int32(g.AfkTimeout)),
 		SystemChannelId:             optID(g.SystemChannelID),
-		SystemChannelFlags:          ptr(int64(g.SystemChannelFlags)),
+		SystemChannelFlags:          new(int64(g.SystemChannelFlags)),
 		RulesChannelId:              optID(g.RulesChannelID),
 		PublicUpdatesChannelId:      optID(g.PublicUpdatesChannelID),
 		SafetyAlertsChannelId:       optID(g.SafetyAlertsChannelID),
 		MaxMembers:                  &maxMembers,
 		MaxVideoChannelUsers:        &maxVideoUsers,
-		WidgetEnabled:               ptr(g.WidgetEnabled),
+		WidgetEnabled:               new(g.WidgetEnabled),
 		ApproximateMemberCount:      &approxMembers,
 		ApproximatePresenceCount:    &approxPresence,
 		PreferredLocale:             &preferredLocale,
@@ -118,15 +114,15 @@ func mapGuild(g discord.Guild) *pb.Guild {
 		VanityUrlCode:               g.VanityURLCode,
 		JoinedAt:                    timestamppb.New(g.JoinedAt),
 		Features:                    features,
-		VerificationLevel:           ptr(pb.VerificationLevel(int32(g.VerificationLevel) + 1)),
-		ExplicitContentFilter:       ptr(pb.ExplicitContentFilter(int32(g.ExplicitContentFilter) + 1)),
-		DefaultMessageNotifications: ptr(pb.DefaultMessageNotifications(int32(g.DefaultMessageNotifications) + 1)),
-		NsfwLevel:                   ptr(pb.NsfwLevel(int32(g.NSFWLevel) + 1)),
-		PremiumTier:                 ptr(pb.PremiumTier(int32(g.PremiumTier) + 1)),
+		VerificationLevel:           new(pb.VerificationLevel(int32(g.VerificationLevel) + 1)),
+		ExplicitContentFilter:       new(pb.ExplicitContentFilter(int32(g.ExplicitContentFilter) + 1)),
+		DefaultMessageNotifications: new(pb.DefaultMessageNotifications(int32(g.DefaultMessageNotifications) + 1)),
+		NsfwLevel:                   new(pb.NsfwLevel(int32(g.NSFWLevel) + 1)),
+		PremiumTier:                 new(pb.PremiumTier(int32(g.PremiumTier) + 1)),
 	}
 
 	if g.MaxPresences != nil {
-		b.MaxPresences = ptr(int32(*g.MaxPresences))
+		b.MaxPresences = new(int32(*g.MaxPresences))
 	}
 
 	if g.WidgetChannelID != 0 {
@@ -162,27 +158,27 @@ func mapChannel(ch discord.GuildChannel) *pb.Channel {
 
 	if mc, ok := ch.(discord.GuildMessageChannel); ok {
 		b.Topic = mc.Topic()
-		b.Nsfw = ptr(mc.NSFW())
-		b.RateLimitPerUser = ptr(int32(mc.RateLimitPerUser()))
-		b.DefaultAutoArchiveDuration = ptr(int32(mc.DefaultAutoArchiveDuration()))
+		b.Nsfw = new(mc.NSFW())
+		b.RateLimitPerUser = new(int32(mc.RateLimitPerUser()))
+		b.DefaultAutoArchiveDuration = new(int32(mc.DefaultAutoArchiveDuration()))
 	}
 
 	if ac, ok := ch.(discord.GuildAudioChannel); ok {
-		b.Bitrate = ptr(int32(ac.Bitrate()))
+		b.Bitrate = new(int32(ac.Bitrate()))
 	}
 
 	switch c := ch.(type) {
 	case discord.GuildThread:
 		b.ThreadMetadata = mapThreadMetadata(c.ThreadMetadata)
 	case discord.GuildVoiceChannel:
-		b.UserLimit = ptr(int32(c.UserLimit))
+		b.UserLimit = new(int32(c.UserLimit))
 		vqm := pb.VideoQualityMode(int32(c.VideoQualityMode))
 		b.VideoQualityMode = &vqm
 	case discord.GuildStageVoiceChannel:
 		vqm := pb.VideoQualityMode(int32(c.VideoQualityMode))
 		b.VideoQualityMode = &vqm
 	case discord.GuildForumChannel:
-		b.Flags = ptr(int64(c.Flags))
+		b.Flags = new(int64(c.Flags))
 		fl := pb.ForumLayout(int32(c.DefaultForumLayout) + 1)
 		b.DefaultForumLayout = &fl
 		if c.DefaultSortOrder != nil {
@@ -193,7 +189,7 @@ func mapChannel(ch discord.GuildChannel) *pb.Channel {
 		if c.DefaultReactionEmoji != nil {
 			b.DefaultReactionEmoji = mapDefaultReaction(c.DefaultReactionEmoji)
 		}
-		b.DefaultThreadRateLimitPerUser = ptr(int32(c.DefaultThreadRateLimitPerUser))
+		b.DefaultThreadRateLimitPerUser = new(int32(c.DefaultThreadRateLimitPerUser))
 	}
 
 	return b.Build()
@@ -221,11 +217,11 @@ func mapPermissionOverwrites(overwrites discord.PermissionOverwrites) []*pb.Perm
 		}
 		switch o := ow.(type) {
 		case discord.RolePermissionOverwrite:
-			b.Allow = ptr(int64(o.Allow))
-			b.Deny = ptr(int64(o.Deny))
+			b.Allow = new(int64(o.Allow))
+			b.Deny = new(int64(o.Deny))
 		case discord.MemberPermissionOverwrite:
-			b.Allow = ptr(int64(o.Allow))
-			b.Deny = ptr(int64(o.Deny))
+			b.Allow = new(int64(o.Allow))
+			b.Deny = new(int64(o.Deny))
 		}
 		result[i] = b.Build()
 	}
@@ -234,11 +230,11 @@ func mapPermissionOverwrites(overwrites discord.PermissionOverwrites) []*pb.Perm
 
 func mapThreadMetadata(tm discord.ThreadMetadata) *pb.ThreadMetadata {
 	return (&pb.ThreadMetadata_builder{
-		Archived:            ptr(tm.Archived),
-		AutoArchiveDuration: ptr(int32(tm.AutoArchiveDuration)),
+		Archived:            new(tm.Archived),
+		AutoArchiveDuration: new(int32(tm.AutoArchiveDuration)),
 		ArchiveTimestamp:    timestamppb.New(tm.ArchiveTimestamp),
-		Locked:              ptr(tm.Locked),
-		Invitable:           ptr(tm.Invitable),
+		Locked:              new(tm.Locked),
+		Invitable:           new(tm.Invitable),
 		CreateTimestamp:     timestamppb.New(tm.CreateTimestamp),
 	}).Build()
 }
@@ -250,7 +246,7 @@ func mapForumTags(tags []discord.ChannelTag) []*pb.ForumTag {
 		result[i] = (&pb.ForumTag_builder{
 			Id:        &id,
 			Name:      &t.Name,
-			Moderated: ptr(t.Moderated),
+			Moderated: new(t.Moderated),
 			EmojiId:   optID(t.EmojiID),
 			EmojiName: t.EmojiName,
 		}).Build()
@@ -285,13 +281,13 @@ func mapRole(r discord.Role) *pb.Role {
 		Id:           &id,
 		Name:         &name,
 		Color:        &color,
-		Hoist:        ptr(r.Hoist),
+		Hoist:        new(r.Hoist),
 		IconUrl:      r.IconURL(),
 		UnicodeEmoji: r.Emoji,
 		Position:     &pos,
 		Permissions:  &perms,
-		Managed:      ptr(r.Managed),
-		Mentionable:  ptr(r.Mentionable),
+		Managed:      new(r.Managed),
+		Mentionable:  new(r.Mentionable),
 		Flags:        &flags,
 	}
 
@@ -307,9 +303,9 @@ func mapRoleTag(t *discord.RoleTag) *pb.RoleTag {
 		BotId:                 optID(t.BotID),
 		IntegrationId:         optID(t.IntegrationID),
 		SubscriptionListingId: optID(t.SubscriptionListingID),
-		PremiumSubscriber:     ptr(t.PremiumSubscriber),
-		AvailableForPurchase:  ptr(t.AvailableForPurchase),
-		GuildConnections:      ptr(t.GuildConnections),
+		PremiumSubscriber:     new(t.PremiumSubscriber),
+		AvailableForPurchase:  new(t.AvailableForPurchase),
+		GuildConnections:      new(t.GuildConnections),
 	}).Build()
 }
 
@@ -333,10 +329,10 @@ func mapMember(m discord.Member) *pb.Member {
 		Nickname:       m.Nick,
 		GuildAvatarUrl: m.AvatarURL(),
 		RoleIds:        roleIds,
-		Deaf:           ptr(m.Deaf),
-		Mute:           ptr(m.Mute),
-		Pending:        ptr(m.Pending),
-		Flags:          ptr(int64(m.Flags)),
+		Deaf:           new(m.Deaf),
+		Mute:           new(m.Mute),
+		Pending:        new(m.Pending),
+		Flags:          new(int64(m.Flags)),
 	}
 
 	if m.JoinedAt != nil {
@@ -375,8 +371,8 @@ func mapUser(u discord.User) *pb.User {
 		Discriminator: &discriminator,
 		GlobalName:    u.GlobalName,
 		AvatarUrl:     u.AvatarURL(),
-		Bot:           ptr(u.Bot),
-		System:        ptr(u.System),
+		Bot:           new(u.Bot),
+		System:        new(u.System),
 	}).Build()
 }
 
@@ -400,10 +396,10 @@ func mapEmoji(e discord.Emoji) *pb.Emoji {
 		Id:            &id,
 		Name:          &name,
 		RoleIds:       roleIds,
-		RequireColons: ptr(e.RequireColons),
-		Managed:       ptr(e.Managed),
-		Animated:      ptr(e.Animated),
-		Available:     ptr(e.Available),
+		RequireColons: new(e.RequireColons),
+		Managed:       new(e.Managed),
+		Animated:      new(e.Animated),
+		Available:     new(e.Available),
 	}
 
 	if e.Creator != nil {
@@ -446,7 +442,7 @@ func mapSticker(s discord.Sticker) *pb.Sticker {
 	}
 
 	if s.SortValue != nil {
-		b.SortValue = ptr(int32(*s.SortValue))
+		b.SortValue = new(int32(*s.SortValue))
 	}
 
 	return b.Build()
@@ -532,7 +528,7 @@ func mapScheduledEvent(e discord.GuildScheduledEvent) *pb.ScheduledEvent {
 
 	if e.EntityMetaData != nil {
 		b.EntityMetadata = (&pb.ScheduledEventEntityMetadata_builder{
-			Location: ptr(e.EntityMetaData.Location),
+			Location: new(e.EntityMetaData.Location),
 		}).Build()
 	}
 
@@ -584,11 +580,11 @@ func mapAutoModRule(r discord.AutoModerationRule) *pb.AutoModRule {
 			RegexPatterns:                r.TriggerMetadata.RegexPatterns,
 			Presets:                      presets,
 			AllowList:                    r.TriggerMetadata.AllowList,
-			MentionTotalLimit:            ptr(int32(r.TriggerMetadata.MentionTotalLimit)),
-			MentionRaidProtectionEnabled: ptr(r.TriggerMetadata.MentionRaidProtectionEnabled),
+			MentionTotalLimit:            new(int32(r.TriggerMetadata.MentionTotalLimit)),
+			MentionRaidProtectionEnabled: new(r.TriggerMetadata.MentionRaidProtectionEnabled),
 		}).Build(),
 		Actions:          actions,
-		Enabled:          ptr(r.Enabled),
+		Enabled:          new(r.Enabled),
 		ExemptRoleIds:    exemptRoles,
 		ExemptChannelIds: exemptChannels,
 	}).Build()
@@ -619,7 +615,7 @@ func mapAutoModAction(a discord.AutoModerationAction) *pb.AutoModAction {
 	if a.Metadata != nil {
 		channelId := a.Metadata.ChannelID.String()
 		b.ChannelId = &channelId
-		b.DurationSeconds = ptr(int32(a.Metadata.DurationSeconds))
+		b.DurationSeconds = new(int32(a.Metadata.DurationSeconds))
 		b.CustomMessage = a.Metadata.CustomMessage
 	}
 	return b.Build()
@@ -643,7 +639,7 @@ func mapInvite(inv discord.ExtendedInvite) *pb.Invite {
 		Code:      &code,
 		MaxAge:    &maxAge,
 		MaxUses:   &maxUses,
-		Temporary: ptr(inv.Temporary),
+		Temporary: new(inv.Temporary),
 		Uses:      &uses,
 		CreatedAt: timestamppb.New(inv.CreatedAt),
 	}
