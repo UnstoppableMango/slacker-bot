@@ -94,9 +94,10 @@
               buf
               gnumake
               go_1_26
-              mockgen
+              ginkgo
               gomod2nix
               gopls
+              mockgen
               nixfmt
               podman
               podman-compose
