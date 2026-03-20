@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/unstoppablemango/ihfs"
-	pb "github.com/unstoppablemango/slacker-bot/gen/dev/unmango/discord/backup/v1alpha1"
+	pb "github.com/unstoppablemango/slacker-bot/gen/pb/dev/unmango/discord/backup/v1alpha1"
 	"google.golang.org/protobuf/proto"
 )
 

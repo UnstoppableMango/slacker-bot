@@ -9,7 +9,7 @@ import (
 	"github.com/disgoorg/snowflake/v2"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	pb "github.com/unstoppablemango/slacker-bot/gen/dev/unmango/discord/backup/v1alpha1"
+	pb "github.com/unstoppablemango/slacker-bot/gen/pb/dev/unmango/discord/backup/v1alpha1"
 )
 
 func optID(id *snowflake.ID) *string {

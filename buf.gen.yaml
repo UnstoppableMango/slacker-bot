@@ -4,9 +4,9 @@ managed:
   enabled: true
   override:
     - file_option: go_package
-      value: github.com/UnstoppableMango/slacker-bot/gen/dev/unmango/discord
+      value: github.com/UnstoppableMango/slacker-bot/gen/pb/dev/unmango/discord
 plugins:
-  - out: gen
+  - out: gen/pb
     remote: buf.build/protocolbuffers/go:v1.36.11
     opt:
       - paths=source_relative

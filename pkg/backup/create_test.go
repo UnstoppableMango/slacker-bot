@@ -10,8 +10,8 @@ import (
 	"github.com/disgoorg/snowflake/v2"
 	"go.uber.org/mock/gomock"
 
-	pb "github.com/unstoppablemango/slacker-bot/gen/dev/unmango/discord/backup/v1alpha1"
-	"github.com/unstoppablemango/slacker-bot/pkg/mocks"
+	pb "github.com/unstoppablemango/slacker-bot/gen/pb/dev/unmango/discord/backup/v1alpha1"
+	"github.com/unstoppablemango/slacker-bot/gen/mocks"
 )
 
 var (

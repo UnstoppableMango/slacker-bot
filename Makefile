@@ -24,7 +24,7 @@ format fmt:
 generate gen: .github/gopls.instructions.md mocks
 
 mocks:
-	$(GO) generate ./pkg/mocks/...
+	$(GO) generate ./gen/mocks/...
 
 check:
 	nix flake check
