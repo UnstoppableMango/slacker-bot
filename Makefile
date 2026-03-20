@@ -21,6 +21,8 @@ up: load
 format fmt:
 	nix fmt
 
+generate gen: .github/gopls.instructions.md
+
 check:
 	nix flake check
 
@@ -50,3 +52,6 @@ go.sum: go.mod ${GO_SRC}
 
 result: ${GO_SRC}
 	nix build .#slacker-bot
+
+.github/gopls.instructions.md: flake.lock
+	nix run .#gopls -- mcp -instructions > $@

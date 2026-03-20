@@ -78,12 +78,24 @@
             default = slacker-bot;
           };
 
+          apps = {
+            slacker-bot = {
+              type = "app";
+              program = "${slacker-bot}/bin/slacker-bot";
+            };
+            gopls = {
+              type = "app";
+              program = "${pkgs.gopls}/bin/gopls";
+            };
+          };
+
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
               buf
               gnumake
               go_1_26
               gomod2nix
+              gopls
               nixfmt
               podman
               podman-compose
