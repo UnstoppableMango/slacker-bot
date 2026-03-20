@@ -94,6 +94,7 @@
               buf
               gnumake
               go_1_26
+              mockgen
               gomod2nix
               gopls
               nixfmt
@@ -107,6 +108,7 @@
             FIND = "${pkgs.uutils-findutils}/bin/find";
             GO = "${pkgs.go_1_26}/bin/go";
             GOMOD2NIX = "${gomod2nix}/bin/gomod2nix";
+            MOCKGEN = "${pkgs.mockgen}/bin/mockgen";
             PODMAN = "${pkgs.podman}/bin/podman";
 
             PODMAN_COMPOSE_WARNING_LOGS = "false";

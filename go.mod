@@ -9,6 +9,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/unmango/go v0.15.1
 	github.com/unstoppablemango/ihfs v0.0.2
+	go.uber.org/mock v0.6.0
 	google.golang.org/protobuf v1.36.11
 )
 
@@ -36,5 +37,6 @@ require (
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	golang.org/x/crypto v0.49.0 // indirect
 	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
+	golang.org/x/net v0.52.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
 )
