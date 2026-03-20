@@ -32,7 +32,7 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID, fsys fs.FS) 
 		return nil, err
 	}
 
-	// after defaults to 0, but disgo requires it
+	// the `after` parameter defaults to 0, but disgo requires it
 	// https://docs.discord.com/developers/resources/guild#list-guild-members
 	members, err := r.GetMembers(guildId, 1000, snowflake.ID(0), opts...)
 	if err != nil {
@@ -84,7 +84,7 @@ func mapGuild(g discord.Guild) *pb.Guild {
 
 	b := &pb.Guild_builder{
 		Id:                       new(g.ID.String()),
-		Name:                     &g.Name,
+		Name:                     new(g.Name),
 		Description:              g.Description,
 		IconUrl:                  g.IconURL(),
 		BannerUrl:                g.BannerURL(),
@@ -137,12 +137,10 @@ func mapChannels(channels []discord.GuildChannel) []*pb.Channel {
 }
 
 func mapChannel(ch discord.GuildChannel) *pb.Channel {
-	ct := mapChannelType(ch.Type())
-
 	b := &pb.Channel_builder{
 		Id:                   new(ch.ID().String()),
 		Name:                 new(ch.Name()),
-		Type:                 &ct,
+		Type:                 new(mapChannelType(ch.Type())),
 		Position:             new(int32(ch.Position())),
 		ParentId:             optID(ch.ParentID()),
 		PermissionOverwrites: mapPermissionOverwrites(ch.PermissionOverwrites()),
@@ -154,7 +152,6 @@ func mapChannel(ch discord.GuildChannel) *pb.Channel {
 		b.RateLimitPerUser = new(int32(mc.RateLimitPerUser()))
 		b.DefaultAutoArchiveDuration = new(int32(mc.DefaultAutoArchiveDuration()))
 	}
-
 	if ac, ok := ch.(discord.GuildAudioChannel); ok {
 		b.Bitrate = new(int32(ac.Bitrate()))
 	}
@@ -188,6 +185,7 @@ func mapChannel(ch discord.GuildChannel) *pb.Channel {
 }
 
 func mapChannelType(ct discord.ChannelType) pb.ChannelType {
+	// TODO: document why this is necessary
 	v := int32(ct)
 	if v >= 0 && v <= 5 {
 		return pb.ChannelType(v + 1)
@@ -202,12 +200,11 @@ func mapPermissionOverwrites(overwrites discord.PermissionOverwrites) []*pb.Perm
 
 	result := make([]*pb.PermissionOverwrite, len(overwrites))
 	for i, ow := range overwrites {
-		id := ow.ID().String()
-		owType := pb.OverwriteType(int32(ow.Type()) + 1)
 		b := &pb.PermissionOverwrite_builder{
-			Id:   &id,
-			Type: &owType,
+			Id:   new(ow.ID().String()),
+			Type: new(pb.OverwriteType(int32(ow.Type()) + 1)),
 		}
+
 		switch o := ow.(type) {
 		case discord.RolePermissionOverwrite:
 			b.Allow = new(int64(o.Allow))
@@ -218,6 +215,7 @@ func mapPermissionOverwrites(overwrites discord.PermissionOverwrites) []*pb.Perm
 		}
 		result[i] = b.Build()
 	}
+
 	return result
 }
 
@@ -239,7 +237,7 @@ func mapForumTags(tags []discord.ChannelTag) []*pb.ForumTag {
 	for i, t := range tags {
 		b := &pb.ForumTag_builder{
 			Id:        new(t.ID.String()),
-			Name:      &t.Name,
+			Name:      new(t.Name),
 			Moderated: new(t.Moderated),
 			EmojiId:   optID(t.EmojiID),
 			EmojiName: t.EmojiName,
@@ -247,6 +245,7 @@ func mapForumTags(tags []discord.ChannelTag) []*pb.ForumTag {
 
 		result[i] = b.Build()
 	}
+
 	return result
 }
 
@@ -270,7 +269,7 @@ func mapRoles(roles []discord.Role) []*pb.Role {
 func mapRole(r discord.Role) *pb.Role {
 	b := &pb.Role_builder{
 		Id:           new(r.ID.String()),
-		Name:         &r.Name,
+		Name:         new(r.Name),
 		Color:        new(uint32(r.Color)),
 		Hoist:        new(r.Hoist),
 		IconUrl:      r.IconURL(),
@@ -450,7 +449,7 @@ func mapWebhook(w discord.Webhook) *pb.Webhook {
 		b.UserId = new(wh.User.ID.String())
 
 		if wh.Token != "" {
-			b.Token = &wh.Token
+			b.Token = new(wh.Token)
 		}
 		if wh.ApplicationID != nil {
 			b.ApplicationId = new(wh.ApplicationID.String())
@@ -574,8 +573,7 @@ func mapAutoModAction(a discord.AutoModerationAction) *pb.AutoModAction {
 	}
 
 	if a.Metadata != nil {
-		channelId := a.Metadata.ChannelID.String()
-		b.ChannelId = &channelId
+		b.ChannelId = new(a.Metadata.ChannelID.String())
 		b.DurationSeconds = new(int32(a.Metadata.DurationSeconds))
 		b.CustomMessage = a.Metadata.CustomMessage
 	}
@@ -593,7 +591,7 @@ func mapInvites(invites []discord.ExtendedInvite) []*pb.Invite {
 
 func mapInvite(inv discord.ExtendedInvite) *pb.Invite {
 	b := &pb.Invite_builder{
-		Code:      &inv.Code,
+		Code:      new(inv.Code),
 		MaxAge:    new(int32(inv.MaxAge)),
 		MaxUses:   new(int32(inv.MaxUses)),
 		Temporary: new(inv.Temporary),
