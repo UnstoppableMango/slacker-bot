@@ -1,6 +1,7 @@
 package backup
 
 import (
+	"context"
 	"io/fs"
 	"net/http"
 	"net/http/httptest"
@@ -59,23 +60,21 @@ var _ = Describe("Writer", func() {
 		It("writes the proto file named after the guild", func() {
 			backup := testBackup("MyGuild")
 
-			Expect(writer.Write(backup)).To(Succeed())
+			Expect(writer.Write(context.Background(), backup)).To(Succeed())
 			Expect(tfs.files).To(HaveKey("MyGuild.binpb"))
 		})
 
 		It("writes proto content to the file", func() {
 			backup := testBackup("MyGuild")
 
-			Expect(writer.Write(backup)).To(Succeed())
+			Expect(writer.Write(context.Background(), backup)).To(Succeed())
 			Expect(string(tfs.files["MyGuild.binpb"])).To(Equal(backup.String()))
 		})
 
 		It("returns an error when the FS write fails", func() {
-			tfs.files = nil // causes WriteFile to panic/nil map — use a failing FS instead
-			failFS := &failingWriteFS{}
-			w := NewWriter(failFS)
+			w := NewWriter(&failingWriteFS{})
 
-			err := w.Write(testBackup("MyGuild"))
+			err := w.Write(context.Background(), testBackup("MyGuild"))
 			Expect(err).To(HaveOccurred())
 		})
 
@@ -98,7 +97,7 @@ var _ = Describe("Writer", func() {
 					}).Build(),
 				}).Build()
 
-				Expect(writer.Write(backup)).To(Succeed())
+				Expect(writer.Write(context.Background(), backup)).To(Succeed())
 				Expect(tfs.files).To(HaveKey("avatars/123/abc.png"))
 				Expect(string(tfs.files["avatars/123/abc.png"])).To(Equal("asset-content"))
 			})
@@ -112,14 +111,14 @@ var _ = Describe("Writer", func() {
 					}).Build(),
 				}).Build()
 
-				Expect(writer.Write(backup)).To(Succeed())
+				Expect(writer.Write(context.Background(), backup)).To(Succeed())
 				Expect(tfs.dirs).To(HaveKey("avatars/123"))
 			})
 
 			It("skips empty URL fields", func() {
 				backup := testBackup("Guild")
 
-				Expect(writer.Write(backup)).To(Succeed())
+				Expect(writer.Write(context.Background(), backup)).To(Succeed())
 				// Only the proto file should be written
 				Expect(tfs.files).To(HaveLen(1))
 			})
@@ -133,7 +132,7 @@ var _ = Describe("Writer", func() {
 					}).Build(),
 				}).Build()
 
-				Expect(writer.Write(backup)).NotTo(Succeed())
+				Expect(writer.Write(context.Background(), backup)).NotTo(Succeed())
 			})
 		})
 
@@ -150,7 +149,7 @@ var _ = Describe("Writer", func() {
 			DescribeTable("fetches asset URLs from all backup fields",
 				func(build func(url string) *pb.ServerBackup, path string) {
 					url := server.URL + "/" + path
-					Expect(writer.Write(build(url))).To(Succeed())
+					Expect(writer.Write(context.Background(), build(url))).To(Succeed())
 					Expect(tfs.files).To(HaveKey(path))
 				},
 				Entry("guild icon", func(u string) *pb.ServerBackup {
@@ -275,7 +274,7 @@ var _ = Describe("Write (package-level)", func() {
 		tfs := newTestFS()
 		backup := testBackup("MyGuild")
 
-		Expect(Write(backup, tfs)).To(Succeed())
+		Expect(Write(context.Background(), backup, tfs)).To(Succeed())
 		Expect(tfs.files).To(HaveKey("MyGuild.binpb"))
 		Expect(string(tfs.files["MyGuild.binpb"])).To(Equal(backup.String()))
 	})

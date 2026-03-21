@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/charmbracelet/log"
+	"charm.land/log/v2"
 	"github.com/disgoorg/disgo"
 	"github.com/disgoorg/disgo/bot"
 	"github.com/disgoorg/snowflake/v2"
@@ -29,7 +29,7 @@ func main() {
 	fsys := osfs.New()
 	b, err := backup.Create(ctx, client.Rest, id)
 
-	if err := backup.Write(b, fsys); err != nil {
+	if err := backup.Write(ctx, b, fsys); err != nil {
 		cli.Fail(err)
 	}
 }

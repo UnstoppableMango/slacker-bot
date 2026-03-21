@@ -3,6 +3,7 @@ package backup
 import (
 	"context"
 
+	"charm.land/log/v2"
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/disgo/rest"
 	"github.com/disgoorg/snowflake/v2"
@@ -19,44 +20,59 @@ func optID(id *snowflake.ID) *string {
 }
 
 func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID) (*pb.ServerBackup, error) {
+	logger := log.FromContext(ctx).With("guild_id", guildId)
 	opts := []rest.RequestOpt{rest.WithCtx(ctx)}
 
+	logger.Info("fetching guild")
 	guild, err := r.GetGuild(guildId, false, opts...)
 	if err != nil {
 		return nil, err
 	}
+	logger.Info("fetched guild", "name", guild.Name)
 
+	logger.Debug("fetching channels")
 	channels, err := r.GetGuildChannels(guildId, opts...)
 	if err != nil {
 		return nil, err
 	}
+	logger.Debug("fetched channels", "count", len(channels))
 
 	// the `after` parameter defaults to 0, but disgo requires it
 	// https://docs.discord.com/developers/resources/guild#list-guild-members
+	logger.Debug("fetching members")
 	members, err := r.GetMembers(guildId, 1000, snowflake.ID(0), opts...)
 	if err != nil {
 		return nil, err
 	}
+	logger.Debug("fetched members", "count", len(members))
 
+	logger.Debug("fetching webhooks")
 	webhooks, err := r.GetAllWebhooks(guildId, opts...)
 	if err != nil {
 		return nil, err
 	}
+	logger.Debug("fetched webhooks", "count", len(webhooks))
 
+	logger.Debug("fetching scheduled events")
 	scheduledEvents, err := r.GetGuildScheduledEvents(guildId, false, opts...)
 	if err != nil {
 		return nil, err
 	}
+	logger.Debug("fetched scheduled events", "count", len(scheduledEvents))
 
+	logger.Debug("fetching auto-moderation rules")
 	autoModRules, err := r.GetAutoModerationRules(guildId, opts...)
 	if err != nil {
 		return nil, err
 	}
+	logger.Debug("fetched auto-moderation rules", "count", len(autoModRules))
 
+	logger.Debug("fetching invites")
 	invites, err := r.GetGuildInvites(guildId, opts...)
 	if err != nil {
 		return nil, err
 	}
+	logger.Debug("fetched invites", "count", len(invites))
 
 	backup := &pb.ServerBackup_builder{
 		Guild:           mapGuild(guild.Guild),
