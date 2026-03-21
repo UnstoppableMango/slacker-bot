@@ -5,3 +5,4 @@ bin/
 .vscode/*
 !.vscode/extensions.json
 .claude/*
+*cover*

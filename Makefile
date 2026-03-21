@@ -9,6 +9,7 @@ GO_SRC != $(FIND) . -path '*.go' -printf '%P\n'
 
 build: bin/slacker-bot
 docker: bin/image.tar.gz
+tidy: go.sum gomod2nix.toml
 
 run:
 	$(GO) run .
@@ -25,15 +26,14 @@ test:
 format fmt:
 	nix fmt
 
-generate gen: .github/gopls.instructions.md mocks
-
-mocks:
+generate gen: .github/gopls.instructions.md
 	$(GO) generate ./gen/mocks/...
 
 check:
 	nix flake check
 
-tidy: go.sum gomod2nix.toml
+cover: coverprofile.out
+	$(GO) tool cover -func=$<
 
 import:
 	$(GOMOD2NIX) import
@@ -59,6 +59,9 @@ go.sum: go.mod ${GO_SRC}
 
 result: ${GO_SRC}
 	nix build .#slacker-bot
+
+coverprofile.out: ${GO_SRC}
+	$(GINKGO) run --cover -r
 
 .github/gopls.instructions.md: flake.lock
 	nix run .#gopls -- mcp -instructions > $@
