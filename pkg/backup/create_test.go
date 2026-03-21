@@ -2,6 +2,7 @@ package backup
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"time"
 
@@ -315,5 +316,206 @@ var _ = Describe("mapInvite", func() {
 		Expect(result.GetCode()).To(Equal("abc123"))
 		Expect(result.GetChannelId()).To(Equal(testChanID.String()))
 		Expect(result.GetInviterId()).To(Equal(testUserID.String()))
+	})
+})
+
+func unmarshalChannel[T discord.GuildChannel](data string) T {
+	var ch T
+	ExpectWithOffset(1, json.Unmarshal([]byte(data), &ch)).To(Succeed())
+	return ch
+}
+
+var _ = Describe("mapChannel", func() {
+	Describe("common fields", func() {
+		It("maps ID, name, type, and position", func() {
+			ch := unmarshalChannel[discord.GuildTextChannel](`{
+				"id": "111", "guild_id": "999", "type": 0,
+				"name": "general", "position": 3
+			}`)
+
+			result := mapChannel(ch)
+
+			Expect(result.GetId()).To(Equal("111"))
+			Expect(result.GetName()).To(Equal("general"))
+			Expect(result.GetType()).To(Equal(pb.ChannelType(1))) // type 0 gets +1 offset
+			Expect(result.GetPosition()).To(BeEquivalentTo(3))
+		})
+
+		It("maps parent ID when set", func() {
+			ch := unmarshalChannel[discord.GuildTextChannel](`{
+				"id": "111", "guild_id": "999", "type": 0,
+				"name": "general", "parent_id": "222"
+			}`)
+
+			Expect(mapChannel(ch).GetParentId()).To(Equal("222"))
+		})
+
+		It("leaves parent ID unset when absent", func() {
+			ch := unmarshalChannel[discord.GuildTextChannel](`{
+				"id": "111", "guild_id": "999", "type": 0, "name": "general"
+			}`)
+
+			Expect(mapChannel(ch).HasParentId()).To(BeFalse())
+		})
+	})
+
+	Describe("GuildTextChannel (GuildMessageChannel)", func() {
+		It("maps topic, nsfw, rate limit, and default auto-archive duration", func() {
+			ch := unmarshalChannel[discord.GuildTextChannel](`{
+				"id": "111", "guild_id": "999", "type": 0, "name": "general",
+				"topic": "hello", "nsfw": true,
+				"rate_limit_per_user": 5,
+				"default_auto_archive_duration": 1440
+			}`)
+
+			result := mapChannel(ch)
+
+			Expect(result.GetTopic()).To(Equal("hello"))
+			Expect(result.GetNsfw()).To(BeTrue())
+			Expect(result.GetRateLimitPerUser()).To(BeEquivalentTo(5))
+			Expect(result.GetDefaultAutoArchiveDuration()).To(BeEquivalentTo(1440))
+		})
+	})
+
+	Describe("GuildVoiceChannel (GuildMessageChannel + GuildAudioChannel)", func() {
+		It("maps bitrate from GuildAudioChannel", func() {
+			ch := unmarshalChannel[discord.GuildVoiceChannel](`{
+				"id": "111", "guild_id": "999", "type": 2, "name": "voice",
+				"bitrate": 64000
+			}`)
+
+			Expect(mapChannel(ch).GetBitrate()).To(BeEquivalentTo(64000))
+		})
+
+		It("maps user limit and video quality mode", func() {
+			ch := unmarshalChannel[discord.GuildVoiceChannel](`{
+				"id": "111", "guild_id": "999", "type": 2, "name": "voice",
+				"user_limit": 10, "video_quality_mode": 2
+			}`)
+
+			result := mapChannel(ch)
+
+			Expect(result.GetUserLimit()).To(BeEquivalentTo(10))
+			Expect(result.GetVideoQualityMode()).To(Equal(pb.VideoQualityMode(2)))
+		})
+	})
+
+	Describe("GuildStageVoiceChannel (GuildAudioChannel)", func() {
+		It("maps bitrate from GuildAudioChannel", func() {
+			ch := unmarshalChannel[discord.GuildStageVoiceChannel](`{
+				"id": "111", "guild_id": "999", "type": 13, "name": "stage",
+				"bitrate": 128000
+			}`)
+
+			Expect(mapChannel(ch).GetBitrate()).To(BeEquivalentTo(128000))
+		})
+
+		It("maps video quality mode", func() {
+			ch := unmarshalChannel[discord.GuildStageVoiceChannel](`{
+				"id": "111", "guild_id": "999", "type": 13, "name": "stage",
+				"video_quality_mode": 1
+			}`)
+
+			Expect(mapChannel(ch).GetVideoQualityMode()).To(Equal(pb.VideoQualityMode(1)))
+		})
+	})
+
+	Describe("GuildThread", func() {
+		It("maps thread metadata", func() {
+			archiveTime := time.Now().UTC().Format(time.RFC3339Nano)
+			ch := unmarshalChannel[discord.GuildThread](`{
+				"id": "111", "guild_id": "999", "type": 11,
+				"name": "my-thread", "owner_id": "555", "parent_id": "222",
+				"thread_metadata": {
+					"archived": true,
+					"auto_archive_duration": 1440,
+					"archive_timestamp": "` + archiveTime + `",
+					"locked": true,
+					"invitable": false,
+					"create_timestamp": "` + archiveTime + `"
+				}
+			}`)
+
+			result := mapChannel(ch)
+
+			Expect(result.GetThreadMetadata()).NotTo(BeNil())
+			Expect(result.GetThreadMetadata().GetArchived()).To(BeTrue())
+			Expect(result.GetThreadMetadata().GetLocked()).To(BeTrue())
+			Expect(result.GetThreadMetadata().GetAutoArchiveDuration()).To(BeEquivalentTo(1440))
+		})
+	})
+
+	Describe("GuildForumChannel", func() {
+		It("maps flags and default forum layout with +1 offset", func() {
+			ch := unmarshalChannel[discord.GuildForumChannel](`{
+				"id": "111", "guild_id": "999", "type": 15, "name": "forum",
+				"flags": 16, "default_forum_layout": 1
+			}`)
+
+			result := mapChannel(ch)
+
+			Expect(result.GetFlags()).To(BeEquivalentTo(16))
+			Expect(result.GetDefaultForumLayout()).To(Equal(pb.ForumLayout(2))) // 1 + 1 offset
+		})
+
+		It("maps default sort order with +1 offset when set", func() {
+			ch := unmarshalChannel[discord.GuildForumChannel](`{
+				"id": "111", "guild_id": "999", "type": 15, "name": "forum",
+				"default_sort_order": 0
+			}`)
+
+			Expect(mapChannel(ch).GetDefaultSortOrder()).To(Equal(pb.SortOrder(1))) // 0 + 1 offset
+		})
+
+		It("leaves default sort order unset when absent", func() {
+			ch := unmarshalChannel[discord.GuildForumChannel](`{
+				"id": "111", "guild_id": "999", "type": 15, "name": "forum"
+			}`)
+
+			Expect(mapChannel(ch).HasDefaultSortOrder()).To(BeFalse())
+		})
+
+		It("maps available tags", func() {
+			ch := unmarshalChannel[discord.GuildForumChannel](`{
+				"id": "111", "guild_id": "999", "type": 15, "name": "forum",
+				"available_tags": [
+					{"id": "333", "name": "bug", "moderated": false}
+				]
+			}`)
+
+			result := mapChannel(ch)
+
+			Expect(result.GetAvailableTags()).To(HaveLen(1))
+			Expect(result.GetAvailableTags()[0].GetName()).To(Equal("bug"))
+		})
+
+		It("maps default reaction emoji when set", func() {
+			ch := unmarshalChannel[discord.GuildForumChannel](`{
+				"id": "111", "guild_id": "999", "type": 15, "name": "forum",
+				"default_reaction_emoji": {"emoji_name": "👍"}
+			}`)
+
+			result := mapChannel(ch)
+
+			Expect(result.GetDefaultReactionEmoji()).NotTo(BeNil())
+			Expect(result.GetDefaultReactionEmoji().GetEmojiName()).To(Equal("👍"))
+		})
+
+		It("leaves default reaction emoji unset when absent", func() {
+			ch := unmarshalChannel[discord.GuildForumChannel](`{
+				"id": "111", "guild_id": "999", "type": 15, "name": "forum"
+			}`)
+
+			Expect(mapChannel(ch).GetDefaultReactionEmoji()).To(BeNil())
+		})
+
+		It("maps default thread rate limit per user", func() {
+			ch := unmarshalChannel[discord.GuildForumChannel](`{
+				"id": "111", "guild_id": "999", "type": 15, "name": "forum",
+				"default_thread_rate_limit_per_user": 30
+			}`)
+
+			Expect(mapChannel(ch).GetDefaultThreadRateLimitPerUser()).To(BeEquivalentTo(30))
+		})
 	})
 })
