@@ -99,6 +99,7 @@
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
+              bashInteractive
               buf
               gnumake
               go_1_26
