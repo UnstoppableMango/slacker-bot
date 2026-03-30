@@ -2,8 +2,8 @@ schema = 3
 
 [mod]
   [mod.'charm.land/lipgloss/v2']
-    version = 'v2.0.1'
-    hash = 'sha256-W0N53P08vNGYbk2nSt5iePFvwTEUpHzEIU+HHtWx2yE='
+    version = 'v2.0.2'
+    hash = 'sha256-b9t+NjParxoubrUwHUqiFUrebsq4H7NDUptJ3Jmx+m0='
 
   [mod.'charm.land/log/v2']
     version = 'v2.0.0'
@@ -18,8 +18,8 @@ schema = 3
     hash = 'sha256-y+QDUxGOKhugEMQLRUTZYT2C+wKqYHnMLJ44jbh7+JA='
 
   [mod.'github.com/charmbracelet/ultraviolet']
-    version = 'v0.0.0-20251205161215-1948445e3318'
-    hash = 'sha256-6aKQPruU01181J4ZMf+5ipyAPIbjm2T+sjQxiEPRHEU='
+    version = 'v0.0.0-20260316091819-b93f6a3b8502'
+    hash = 'sha256-y+5/L0yN2MbX1ktcoXZ70N4drIxWkHX+K1ce8a7OlEc='
 
   [mod.'github.com/charmbracelet/x/ansi']
     version = 'v0.11.6'
@@ -90,8 +90,8 @@ schema = 3
     hash = 'sha256-vTIGEFMEi+30ZdO6ffMNJ/kId6pZs5bbyqov8xe9BM0='
 
   [mod.'github.com/klauspost/compress']
-    version = 'v1.18.4'
-    hash = 'sha256-swwNE6xKz4ZAOUHPWFlHYiqFeZLRZuuKYhLQ34aYnAU='
+    version = 'v1.18.5'
+    hash = 'sha256-H9b5iFJf4XbEnkGQCjGQAJ3aYhVDiolKrDewTbhuzQo='
 
   [mod.'github.com/lucasb-eyer/go-colorful']
     version = 'v1.3.0'
@@ -126,8 +126,8 @@ schema = 3
     hash = 'sha256-iaw6AuhEYu7LdLQnOL6Zmu9kp41nRwaz+lpeZ5ihRww='
 
   [mod.'github.com/unstoppablemango/ihfs']
-    version = 'v0.0.2'
-    hash = 'sha256-QjIfIxWhEY3bvV81fNokccLOvaUBfT8W909yCjgR0hw='
+    version = 'v0.0.3'
+    hash = 'sha256-ZlpsKfFMV+LW0etx6Y0jrTSIhESMChIcLi1dHnHOZlg='
 
   [mod.'github.com/xo/terminfo']
     version = 'v0.0.0-20220910002029-abceb7e1c41e'
