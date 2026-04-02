@@ -11,6 +11,7 @@ import (
 	"github.com/disgoorg/disgo/bot"
 	"github.com/disgoorg/snowflake/v2"
 	"github.com/unmango/go/cli"
+	"github.com/unstoppablemango/ihfs"
 	"github.com/unstoppablemango/ihfs/osfs"
 	"github.com/unstoppablemango/ihfs/tarfs"
 	"github.com/unstoppablemango/slacker-bot/pkg/backup"
@@ -37,25 +38,21 @@ func main() {
 		cli.Fail(err)
 	}
 
+	var fsys ihfs.FS = osfs.New()
 	if *tarPath != "" {
 		f, err := os.Create(*tarPath)
 		if err != nil {
 			cli.Fail(err)
 		}
+
 		tw := tarfs.NewWriter(f)
-		if err := backup.Write(ctx, b, tw); err != nil {
-			cli.Fail(err)
-		}
-		if err := tw.Close(); err != nil {
-			cli.Fail(err)
-		}
-		if err := f.Close(); err != nil {
-			cli.Fail(err)
-		}
-		return
+		defer tw.Close()
+		defer f.Close()
+
+		fsys = tw
 	}
 
-	if err := backup.Write(ctx, b, osfs.New()); err != nil {
+	if err := backup.Write(ctx, b, fsys); err != nil {
 		cli.Fail(err)
 	}
 }

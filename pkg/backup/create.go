@@ -28,9 +28,10 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID) (*pb.ServerB
 	if err != nil {
 		return nil, err
 	}
-	logger.Info("fetched guild", "name", guild.Name)
+	logger.Debug("fetched guild", "name", guild.Name)
+	logger = logger.With("guild_name", guild.Name)
 
-	logger.Debug("fetching channels")
+	logger.Info("fetching channels")
 	channels, err := r.GetGuildChannels(guildId, opts...)
 	if err != nil {
 		return nil, err
@@ -39,35 +40,41 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID) (*pb.ServerB
 
 	// the `after` parameter defaults to 0, but disgo requires it
 	// https://docs.discord.com/developers/resources/guild#list-guild-members
-	logger.Debug("fetching members")
+	logger.Info("fetching members")
 	members, err := r.GetMembers(guildId, 1000, snowflake.ID(0), opts...)
 	if err != nil {
 		return nil, err
 	}
 	logger.Debug("fetched members", "count", len(members))
 
-	logger.Debug("fetching webhooks")
+	logger.Info("fetching webhooks")
 	webhooks, err := r.GetAllWebhooks(guildId, opts...)
 	if err != nil {
-		return nil, err
+		if rest.IsJSONErrorCode(err, rest.JSONErrorCodeMissingAccess) {
+			return nil, err
+		}
+		logger.Error("missing webhook permission, skipping", "err", err)
 	}
 	logger.Debug("fetched webhooks", "count", len(webhooks))
 
-	logger.Debug("fetching scheduled events")
+	logger.Info("fetching scheduled events")
 	scheduledEvents, err := r.GetGuildScheduledEvents(guildId, false, opts...)
 	if err != nil {
 		return nil, err
 	}
 	logger.Debug("fetched scheduled events", "count", len(scheduledEvents))
 
-	logger.Debug("fetching auto-moderation rules")
+	logger.Info("fetching auto-moderation rules")
 	autoModRules, err := r.GetAutoModerationRules(guildId, opts...)
 	if err != nil {
-		return nil, err
+		if rest.IsJSONErrorCode(err, rest.JSONErrorCodeMissingAccess) {
+			return nil, err
+		}
+		logger.Error("missing auto-moderation permission, skipping", "err", err)
 	}
 	logger.Debug("fetched auto-moderation rules", "count", len(autoModRules))
 
-	logger.Debug("fetching invites")
+	logger.Info("fetching invites")
 	invites, err := r.GetGuildInvites(guildId, opts...)
 	if err != nil {
 		return nil, err
@@ -87,7 +94,6 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID) (*pb.ServerB
 		AutoModRules:    mapAutoModRules(autoModRules),
 		Invites:         mapInvites(invites),
 	}
-
 	return backup.Build(), nil
 }
 
