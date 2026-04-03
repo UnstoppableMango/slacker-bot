@@ -126,8 +126,8 @@ schema = 3
     hash = 'sha256-iaw6AuhEYu7LdLQnOL6Zmu9kp41nRwaz+lpeZ5ihRww='
 
   [mod.'github.com/unstoppablemango/ihfs']
-    version = 'v0.0.3'
-    hash = 'sha256-ZlpsKfFMV+LW0etx6Y0jrTSIhESMChIcLi1dHnHOZlg='
+    version = 'v0.0.6'
+    hash = 'sha256-thNRqxh/XRH7DdXJR63Zu3ulB1FB9TG4XhgSCOh/qts='
 
   [mod.'github.com/xo/terminfo']
     version = 'v0.0.0-20220910002029-abceb7e1c41e'
