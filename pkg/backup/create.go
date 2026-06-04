@@ -53,7 +53,7 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID) (*pb.ServerB
 		if rest.IsJSONErrorCode(err, rest.JSONErrorCodeMissingAccess) {
 			return nil, err
 		}
-		logger.Error("missing webhook permission, skipping", "err", err)
+		logger.Warn("skipping webhooks", "err", err)
 	}
 	logger.Debug("fetched webhooks", "count", len(webhooks))
 
@@ -70,7 +70,7 @@ func Create(ctx context.Context, r rest.Rest, guildId snowflake.ID) (*pb.ServerB
 		if rest.IsJSONErrorCode(err, rest.JSONErrorCodeMissingAccess) {
 			return nil, err
 		}
-		logger.Error("missing auto-moderation permission, skipping", "err", err)
+		logger.Warn("skipping auto-moderation rules", "err", err)
 	}
 	logger.Debug("fetched auto-moderation rules", "count", len(autoModRules))
 

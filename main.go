@@ -38,27 +38,17 @@ func main() {
 		cli.Fail(err)
 	}
 
-	var fsys ihfs.FS = osfs.New()
+	var fsys ihfs.CloserFS = ihfs.NopCloser(osfs.New())
 	if *tarPath != "" {
-		tf, err := tarfs.Create(*tarPath)
-		if err != nil {
+		if fsys, err = tarfs.Create(*tarPath); err != nil {
 			cli.Fail(err)
 		}
-		fsys = tf
-		defer tf.Close()
-
-		// f, err := os.Create(*tarPath)
-		// if err != nil {
-		// 	cli.Fail(err)
-		// }
-
-		// tw := tarfs.NewWriter(f)
-		// defer f.Close()
-		// defer tw.Close()
-		// fsys = tw
 	}
 
 	if err := backup.Write(ctx, b, fsys); err != nil {
+		cli.Fail(err)
+	}
+	if err := fsys.Close(); err != nil {
 		cli.Fail(err)
 	}
 }
